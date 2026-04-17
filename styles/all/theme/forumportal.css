@@ -30,7 +30,6 @@
 
 .forumportal-topbar--minimal .forumportal-page__title {
     font-size: 2.25em;
-        margin: 0 10px 0;
 }
 
 .forumportal-topbar__actions {
@@ -83,6 +82,7 @@
     font-size: 2.55em;
     line-height: 1.02;
     font-weight: 700;
+    margin: 0 10px;
 }
 
 .forumportal-topbar__button,
@@ -288,9 +288,8 @@
 }
 
 .forumportal-section-head__title {
-    margin: 0;
+    margin: 0 10px;
     color: #1e2125;
-    margin: 0 10px 0;
 }
 
 .forumportal-grid--news {
@@ -438,9 +437,31 @@
     margin-bottom: 12px;
 }
 
+.forumportal-posting-fields dt .explain {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.85em;
+    line-height: 1.35;
+}
+
+.forumportal-posting-fields dd label {
+    font-size: 0.9em;
+}
+
 .forumportal-posting-fields textarea,
 .forumportal-posting-fields input[type="url"] {
     max-width: 100%;
+    box-sizing: border-box;
+}
+
+.forumportal-posting-fields textarea {
+    width: 100%;
+    max-width: 36em;
+}
+
+.forumportal-posting-fields input[type="url"] {
+    width: 100%;
+    max-width: 36em;
 }
 
 @media (max-width: 1240px) {
