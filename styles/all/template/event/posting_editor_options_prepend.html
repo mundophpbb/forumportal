@@ -1,0 +1,66 @@
+<!-- IF S_FORUMPORTAL_FIELDS -->
+<fieldset class="fields2 forumportal-posting-fields">
+	<legend>{L_FORUMPORTAL_POST_OPTIONS}</legend>
+	<!-- IF S_FORUMPORTAL_CAN_PUBLISH -->
+	<dl>
+		<dt>
+			<label for="forumportal_enabled">{L_FORUMPORTAL_ENABLE_LABEL}{L_COLON}</label><br>
+			<span>{L_FORUMPORTAL_ENABLE_EXPLAIN}</span>
+		</dt>
+		<dd>
+			<label><input type="checkbox" class="radio" name="forumportal_enabled" id="forumportal_enabled" value="1"<!-- IF S_FORUMPORTAL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<label for="forumportal_image">{L_FORUMPORTAL_IMAGE_LABEL}{L_COLON}</label><br>
+			<span>{L_FORUMPORTAL_IMAGE_EXPLAIN}</span>
+		</dt>
+		<dd><input type="url" name="forumportal_image" id="forumportal_image" value="{FORUMPORTAL_IMAGE}" maxlength="500" size="60" /></dd>
+	</dl>
+	<dl>
+		<dt>
+			<label for="forumportal_excerpt">{L_FORUMPORTAL_EXCERPT_LABEL}{L_COLON}</label><br>
+			<span>{L_FORUMPORTAL_EXCERPT_EXPLAIN}</span>
+		</dt>
+		<dd><textarea name="forumportal_excerpt" id="forumportal_excerpt" rows="4" cols="60">{FORUMPORTAL_EXCERPT}</textarea></dd>
+	</dl>
+	<dl>
+		<dt>
+			<label for="forumportal_no_image">{L_FORUMPORTAL_NO_IMAGE_LABEL}{L_COLON}</label><br>
+			<span>{L_FORUMPORTAL_NO_IMAGE_EXPLAIN}</span>
+		</dt>
+		<dd>
+			<label><input type="checkbox" class="radio" name="forumportal_no_image" id="forumportal_no_image" value="1"<!-- IF S_FORUMPORTAL_NO_IMAGE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<label for="forumportal_order">{L_FORUMPORTAL_ORDER_LABEL}{L_COLON}</label><br>
+			<span>{L_FORUMPORTAL_ORDER_EXPLAIN}</span>
+		</dt>
+		<dd><input type="number" name="forumportal_order" id="forumportal_order" value="{FORUMPORTAL_ORDER}" min="0" max="9999" /></dd>
+	</dl>
+	<!-- ENDIF -->
+	<!-- IF S_FORUMPORTAL_CAN_FEATURE -->
+	<dl>
+		<dt>
+			<label for="forumportal_featured">{L_FORUMPORTAL_FEATURED_LABEL}{L_COLON}</label><br>
+			<span>{L_FORUMPORTAL_FEATURED_EXPLAIN}</span>
+		</dt>
+		<dd>
+			<label><input type="checkbox" class="radio" name="forumportal_featured" id="forumportal_featured" value="1"<!-- IF S_FORUMPORTAL_FEATURED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<label for="forumportal_fixed_headline">{L_FORUMPORTAL_FIXED_HEADLINE_LABEL}{L_COLON}</label><br>
+			<span>{L_FORUMPORTAL_FIXED_HEADLINE_EXPLAIN}</span>
+		</dt>
+		<dd>
+			<label><input type="checkbox" class="radio" name="forumportal_fixed_headline" id="forumportal_fixed_headline" value="1"<!-- IF S_FORUMPORTAL_FIXED_HEADLINE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		</dd>
+	</dl>
+	<!-- ENDIF -->
+</fieldset>
+<!-- ENDIF -->

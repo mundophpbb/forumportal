@@ -1,0 +1,171 @@
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal.css' %}
+<!-- INCLUDE overall_header.html -->
+
+<div class="forumportal-page page-body">
+	<div class="forumportal-shell">
+		<div class="forumportal-topbar forumportal-topbar--minimal">
+			<div class="forumportal-topbar__main">
+				<h1 class="forumportal-page__title">{PORTAL_PAGE_TITLE}</h1>
+			</div>
+			<div class="forumportal-topbar__actions">
+				<a class="forumportal-topbar__link" href="{U_FORUM_INDEX}">{L_FORUMPORTAL_GO_TO_FORUM}</a>
+			</div>
+		</div>
+
+
+		<div class="forumportal-layout<!-- IF not S_HAS_SIDEBAR --> forumportal-layout--no-sidebar<!-- ENDIF -->">
+			<div class="forumportal-main<!-- IF not S_HAS_SIDEBAR --> forumportal-main--full<!-- ENDIF -->">
+				<!-- IF S_HAS_HERO_TOPIC -->
+				<div class="forumportal-lead">
+					<article class="forumportal-hero<!-- IF HERO_S_FEATURED --> forumportal-hero--featured<!-- ENDIF --><!-- IF not HERO_IMAGE --> forumportal-hero--no-image<!-- ENDIF -->">
+						<!-- IF HERO_IMAGE -->
+						<div class="forumportal-hero__media">
+							<a href="{U_HERO_VIEW_TOPIC}">
+								<img src="{HERO_IMAGE}" alt="{HERO_TITLE}" loading="lazy" />
+							</a>
+						</div>
+						<!-- ENDIF -->
+						<div class="forumportal-hero__content">
+							<div class="forumportal-hero__labels">
+								<p class="forumportal-hero__kicker">{L_FORUMPORTAL_EDITORIAL_HIGHLIGHT}</p>
+								<!-- IF HERO_S_FEATURED --><span class="forumportal-card__badge">{L_FORUMPORTAL_FEATURED}</span><!-- ENDIF -->
+							</div>
+							<h2 class="forumportal-hero__title"><a href="{U_HERO_VIEW_TOPIC}">{HERO_TITLE}</a></h2>
+							<!-- IF S_FORUMPORTAL_SHOW_AUTHOR or S_FORUMPORTAL_SHOW_DATE --><p class="forumportal-card__meta"><!-- IF S_FORUMPORTAL_SHOW_AUTHOR -->{HERO_AUTHOR_FULL}<!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_AUTHOR and S_FORUMPORTAL_SHOW_DATE --> &bull; <!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_DATE -->{HERO_DATE}<!-- ENDIF --></p><!-- ENDIF -->
+							<!-- IF S_FORUMPORTAL_SHOW_HERO_EXCERPT and HERO_EXCERPT --><p class="forumportal-hero__excerpt">{HERO_EXCERPT}</p><!-- ENDIF -->
+							<div class="forumportal-hero__footer">
+								<a class="button button-secondary forumportal-hero__cta" href="{U_HERO_VIEW_TOPIC}">{L_FORUMPORTAL_READ_MORE}</a>
+								<!-- IF S_FORUMPORTAL_SHOW_VIEWS --><span class="forumportal-card__stats">{L_FORUMPORTAL_STATS_VIEWS}{L_COLON} {HERO_VIEWS}</span><!-- ENDIF -->
+							</div>
+						</div>
+					</article>
+				</div>
+				<!-- ENDIF -->
+
+				<!-- IF .topics -->
+				<div class="forumportal-section-head">
+					<h3 class="forumportal-section-head__title">{L_FORUMPORTAL_LATEST_STORIES}</h3>
+				</div>
+				<div class="forumportal-grid forumportal-grid--news">
+					<!-- BEGIN topics -->
+					<article class="forumportal-card<!-- IF topics.S_FEATURED --> forumportal-card--featured<!-- ENDIF --><!-- IF not topics.IMAGE --> forumportal-card--no-image<!-- ENDIF -->">
+						<!-- IF topics.IMAGE -->
+						<div class="forumportal-card__media">
+							<a href="{topics.U_VIEW_TOPIC}">
+								<img src="{topics.IMAGE}" alt="{topics.TITLE}" loading="lazy" />
+							</a>
+						</div>
+						<!-- ENDIF -->
+						<div class="forumportal-card__content">
+							<div class="forumportal-card__header">
+								<!-- IF topics.S_FEATURED --><span class="forumportal-card__badge">{L_FORUMPORTAL_FEATURED}</span><!-- ENDIF -->
+								<h3 class="forumportal-card__title"><a href="{topics.U_VIEW_TOPIC}">{topics.TITLE}</a></h3>
+							</div>
+							<!-- IF S_FORUMPORTAL_SHOW_AUTHOR or S_FORUMPORTAL_SHOW_DATE --><p class="forumportal-card__meta"><!-- IF S_FORUMPORTAL_SHOW_AUTHOR -->{topics.AUTHOR_FULL}<!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_AUTHOR and S_FORUMPORTAL_SHOW_DATE --> &bull; <!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_DATE -->{topics.DATE}<!-- ENDIF --></p><!-- ENDIF -->
+							<!-- IF topics.EXCERPT --><p class="forumportal-card__excerpt">{topics.EXCERPT}</p><!-- ENDIF -->
+							<div class="forumportal-card__footer">
+								<a class="button button-secondary button-sm forumportal-card__cta" href="{topics.U_VIEW_TOPIC}">{L_FORUMPORTAL_READ_MORE}</a>
+								<!-- IF S_FORUMPORTAL_SHOW_VIEWS --><span class="forumportal-card__stats">{L_FORUMPORTAL_STATS_VIEWS}{L_COLON} {topics.VIEWS}</span><!-- ENDIF -->
+							</div>
+						</div>
+					</article>
+					<!-- END topics -->
+				</div>
+				<!-- ELSE IF not S_HAS_HERO_TOPIC -->
+				<div class="panel">
+					<div class="inner">
+						<p>{L_FORUMPORTAL_EMPTY}</p>
+					</div>
+				</div>
+				<!-- ENDIF -->
+			</div>
+
+			<!-- IF S_HAS_SIDEBAR -->
+			<aside class="forumportal-sidebar">
+				<!-- IF S_FORUMPORTAL_SHOW_NOTICES and .notices -->
+				<div class="forumportal-sidecard forumportal-sidecard--notices forumportal-sidecard--rail">
+					<h3 class="forumportal-sidecard__title">{L_FORUMPORTAL_NOTICES}</h3>
+					<ul class="forumportal-notices">
+						<!-- BEGIN notices -->
+						<li class="forumportal-notices__item">
+							<span class="forumportal-notices__type">{notices.TYPE}</span>
+							<a class="forumportal-notices__link" href="{notices.U_VIEW_TOPIC}">{notices.TITLE}</a>
+							<!-- IF S_FORUMPORTAL_SHOW_DATE --><span class="forumportal-notices__meta">{notices.DATE}</span><!-- ENDIF -->
+						</li>
+						<!-- END notices -->
+					</ul>
+				</div>
+				<!-- ENDIF -->
+
+				<!-- IF S_FORUMPORTAL_SHOW_HEADLINES and .headlines -->
+				<div class="forumportal-sidecard forumportal-sidecard--headlines forumportal-sidecard--rail">
+					<h3 class="forumportal-sidecard__title">{L_FORUMPORTAL_HEADLINES}</h3>
+					<ul class="forumportal-headlines">
+						<!-- BEGIN headlines -->
+						<li class="forumportal-headlines__item<!-- IF headlines.S_FEATURED --> forumportal-headlines__item--featured<!-- ENDIF -->">
+							<a class="forumportal-headlines__link" href="{headlines.U_VIEW_TOPIC}">{headlines.TITLE}</a>
+							<!-- IF S_FORUMPORTAL_SHOW_DATE --><span class="forumportal-headlines__meta">{headlines.DATE}</span><!-- ENDIF -->
+						</li>
+						<!-- END headlines -->
+					</ul>
+				</div>
+				<!-- ENDIF -->
+
+				<!-- IF S_FORUMPORTAL_SHOW_MOST_READ and .most_read -->
+				<div class="forumportal-sidecard forumportal-sidecard--most-read">
+					<h3 class="forumportal-sidecard__title">{L_FORUMPORTAL_MOST_READ}</h3>
+					<ol class="forumportal-mostread">
+						<!-- BEGIN most_read -->
+						<li class="forumportal-mostread__item<!-- IF most_read.S_FEATURED --> forumportal-mostread__item--featured<!-- ENDIF -->">
+							<a class="forumportal-mostread__link" href="{most_read.U_VIEW_TOPIC}">{most_read.TITLE}</a>
+							<!-- IF S_FORUMPORTAL_SHOW_VIEWS or S_FORUMPORTAL_SHOW_DATE --><span class="forumportal-mostread__meta"><!-- IF S_FORUMPORTAL_SHOW_VIEWS -->{L_FORUMPORTAL_STATS_VIEWS}{L_COLON} {most_read.VIEWS}<!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_VIEWS and S_FORUMPORTAL_SHOW_DATE --> &bull; <!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_DATE -->{most_read.DATE}<!-- ENDIF --></span><!-- ENDIF -->
+						</li>
+						<!-- END most_read -->
+					</ol>
+				</div>
+				<!-- ENDIF -->
+
+
+				<!-- IF S_FORUMPORTAL_SHOW_MOST_COMMENTED and .most_commented -->
+				<div class="forumportal-sidecard forumportal-sidecard--most-commented">
+					<h3 class="forumportal-sidecard__title">{L_FORUMPORTAL_MOST_COMMENTED}</h3>
+					<ol class="forumportal-mostread forumportal-mostcommented">
+						<!-- BEGIN most_commented -->
+						<li class="forumportal-mostread__item forumportal-mostcommented__item<!-- IF most_commented.S_FEATURED --> forumportal-mostread__item--featured forumportal-mostcommented__item--featured<!-- ENDIF -->">
+							<a class="forumportal-mostread__link forumportal-mostcommented__link" href="{most_commented.U_VIEW_TOPIC}">{most_commented.TITLE}</a>
+							<!-- IF S_FORUMPORTAL_SHOW_DATE or most_commented.COMMENTS --><span class="forumportal-mostread__meta forumportal-mostcommented__meta">{L_FORUMPORTAL_STATS_COMMENTS}{L_COLON} {most_commented.COMMENTS}<!-- IF S_FORUMPORTAL_SHOW_DATE --> &bull; {most_commented.DATE}<!-- ENDIF --></span><!-- ENDIF -->
+						</li>
+						<!-- END most_commented -->
+					</ol>
+				</div>
+				<!-- ENDIF -->
+
+				<!-- IF S_PORTAL_CUSTOM_HTML_TOP -->
+				<div class="forumportal-sidecard forumportal-sidecard--html">
+					<h3 class="forumportal-sidecard__title">{PORTAL_CUSTOM_HTML_TITLE}</h3>
+					<div class="forumportal-custom-html forumportal-custom-html--sidebar">{PORTAL_CUSTOM_HTML}</div>
+				</div>
+				<!-- ENDIF -->
+			</aside>
+			<!-- ENDIF -->
+		</div>
+
+		<!-- IF S_PORTAL_CUSTOM_HTML_BOTTOM -->
+		<div class="forumportal-custom-html-wrap forumportal-custom-html-wrap--bottom"><h3 class="forumportal-custom-html__title">{PORTAL_CUSTOM_HTML_TITLE}</h3><div class="forumportal-custom-html forumportal-custom-html--bottom">{PORTAL_CUSTOM_HTML}</div></div>
+		<!-- ENDIF -->
+
+		<!-- IF S_HAS_PAGINATION -->
+		<div class="action-bar bar-bottom forumportal-bottombar">
+			<div class="pagination">
+				{TOTAL_TOPICS} {L_TOPICS}
+				<!-- IF PAGINATION -->
+				 &bull; {PAGE_NUMBER}
+				 &bull; <span>{PAGINATION}</span>
+				<!-- ENDIF -->
+			</div>
+		</div>
+		<!-- ENDIF -->
+	</div>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

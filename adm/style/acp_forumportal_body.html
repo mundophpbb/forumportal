@@ -1,0 +1,187 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_FORUMPORTAL_SETTINGS}</h1>
+<p>{L_ACP_FORUMPORTAL_SETTINGS_EXPLAIN}</p>
+
+<style>
+.forumportal-acp-nav { margin: 0 0 14px; padding: 10px 12px; border: 1px solid #d9d9d9; background: #fff; }
+.forumportal-acp-nav a { display: inline-block; margin: 0 10px 6px 0; font-weight: 700; text-decoration: none; }
+</style>
+
+
+<!-- IF S_ERROR -->
+<div class="errorbox">
+	<h3>{L_WARNING}</h3>
+	<p>{ERROR_MSG}</p>
+</div>
+<!-- ENDIF -->
+
+<form id="acp_forumportal" method="post" action="{U_ACTION}">
+	<div class="forumportal-acp-nav">
+		<a href="#forumportal-general">{L_ACP_FORUMPORTAL_GENERAL}</a>
+		<a href="#forumportal-display">{L_ACP_FORUMPORTAL_DISPLAY}</a>
+		<a href="#forumportal-editorial">{L_ACP_FORUMPORTAL_EDITORIAL}</a>
+		<a href="#forumportal-custom-html">{L_ACP_FORUMPORTAL_CUSTOM_HTML}</a>
+	</div>
+
+	<fieldset id="forumportal-general">
+		<legend>{L_ACP_FORUMPORTAL_GENERAL}</legend>
+		<dl>
+			<dt><label for="forumportal_enabled">{L_ACP_FORUMPORTAL_ENABLED}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_ENABLED_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_enabled" value="1"<!-- IF S_FORUMPORTAL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_enabled" value="0"<!-- IF not S_FORUMPORTAL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_home_enabled">{L_ACP_FORUMPORTAL_HOME_ENABLED}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_HOME_ENABLED_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_home_enabled" value="1"<!-- IF S_FORUMPORTAL_HOME_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_home_enabled" value="0"<!-- IF not S_FORUMPORTAL_HOME_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_source_forum">{L_ACP_FORUMPORTAL_SOURCE_FORUM}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SOURCE_FORUM_EXPLAIN}</span></dt>
+			<dd>
+				<select id="forumportal_source_forum" name="forumportal_source_forum[]" multiple="multiple" size="12">{FORUMPORTAL_SOURCE_FORUM_OPTIONS}</select>
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset id="forumportal-display">
+		<legend>{L_ACP_FORUMPORTAL_DISPLAY}</legend>
+		<p>{L_ACP_FORUMPORTAL_DISPLAY_EXPLAIN}</p>
+		<dl>
+			<dt><label for="forumportal_page_title">{L_ACP_FORUMPORTAL_PAGE_TITLE}{L_COLON}</label></dt>
+			<dd><input type="text" id="forumportal_page_title" name="forumportal_page_title" value="{FORUMPORTAL_PAGE_TITLE}" maxlength="255" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_nav_title">{L_ACP_FORUMPORTAL_NAV_TITLE}{L_COLON}</label></dt>
+			<dd><input type="text" id="forumportal_nav_title" name="forumportal_nav_title" value="{FORUMPORTAL_NAV_TITLE}" maxlength="255" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_topics_per_page">{L_ACP_FORUMPORTAL_TOPICS_PER_PAGE}{L_COLON}</label></dt>
+			<dd><input type="number" id="forumportal_topics_per_page" name="forumportal_topics_per_page" value="{FORUMPORTAL_TOPICS_PER_PAGE}" min="1" max="50" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_excerpt_limit">{L_ACP_FORUMPORTAL_EXCERPT_LIMIT}{L_COLON}</label></dt>
+			<dd><input type="number" id="forumportal_excerpt_limit" name="forumportal_excerpt_limit" value="{FORUMPORTAL_EXCERPT_LIMIT}" min="80" max="1200" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_default_image">{L_ACP_FORUMPORTAL_DEFAULT_IMAGE}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_DEFAULT_IMAGE_EXPLAIN}</span></dt>
+			<dd><input type="url" id="forumportal_default_image" name="forumportal_default_image" value="{FORUMPORTAL_DEFAULT_IMAGE}" size="60" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_fixed_topic_id">{L_ACP_FORUMPORTAL_FIXED_TOPIC_ID}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_FIXED_TOPIC_ID_EXPLAIN}</span></dt>
+			<dd><input type="number" id="forumportal_fixed_topic_id" name="forumportal_fixed_topic_id" value="{FORUMPORTAL_FIXED_TOPIC_ID}" min="0" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_date_format">{L_ACP_FORUMPORTAL_DATE_FORMAT}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_DATE_FORMAT_EXPLAIN}</span></dt>
+			<dd><select id="forumportal_date_format" name="forumportal_date_format">{FORUMPORTAL_DATE_FORMAT_OPTIONS}</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_headlines_limit">{L_ACP_FORUMPORTAL_HEADLINES_LIMIT}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_HEADLINES_LIMIT_EXPLAIN}</span></dt>
+			<dd><input type="number" id="forumportal_headlines_limit" name="forumportal_headlines_limit" value="{FORUMPORTAL_HEADLINES_LIMIT}" min="1" max="15" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_most_read_limit">{L_ACP_FORUMPORTAL_MOST_READ_LIMIT}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_MOST_READ_LIMIT_EXPLAIN}</span></dt>
+			<dd><input type="number" id="forumportal_most_read_limit" name="forumportal_most_read_limit" value="{FORUMPORTAL_MOST_READ_LIMIT}" min="1" max="15" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_most_commented_limit">{L_ACP_FORUMPORTAL_MOST_COMMENTED_LIMIT}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_MOST_COMMENTED_LIMIT_EXPLAIN}</span></dt>
+			<dd><input type="number" id="forumportal_most_commented_limit" name="forumportal_most_commented_limit" value="{FORUMPORTAL_MOST_COMMENTED_LIMIT}" min="1" max="15" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_notices_limit">{L_ACP_FORUMPORTAL_NOTICES_LIMIT}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_NOTICES_LIMIT_EXPLAIN}</span></dt>
+			<dd><input type="number" id="forumportal_notices_limit" name="forumportal_notices_limit" value="{FORUMPORTAL_NOTICES_LIMIT}" min="1" max="15" /></dd>
+		</dl>
+	</fieldset>
+
+	<fieldset id="forumportal-editorial">
+		<legend>{L_ACP_FORUMPORTAL_EDITORIAL}</legend>
+		<p>{L_ACP_FORUMPORTAL_EDITORIAL_EXPLAIN}</p>
+		<dl>
+			<dt><label for="forumportal_show_author">{L_ACP_FORUMPORTAL_SHOW_AUTHOR}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SHOW_AUTHOR_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_show_author" value="1"<!-- IF S_FORUMPORTAL_SHOW_AUTHOR --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_show_author" value="0"<!-- IF not S_FORUMPORTAL_SHOW_AUTHOR --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_show_date">{L_ACP_FORUMPORTAL_SHOW_DATE}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SHOW_DATE_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_show_date" value="1"<!-- IF S_FORUMPORTAL_SHOW_DATE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_show_date" value="0"<!-- IF not S_FORUMPORTAL_SHOW_DATE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_show_views">{L_ACP_FORUMPORTAL_SHOW_VIEWS}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SHOW_VIEWS_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_show_views" value="1"<!-- IF S_FORUMPORTAL_SHOW_VIEWS --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_show_views" value="0"<!-- IF not S_FORUMPORTAL_SHOW_VIEWS --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_show_hero_excerpt">{L_ACP_FORUMPORTAL_SHOW_HERO_EXCERPT}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SHOW_HERO_EXCERPT_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_show_hero_excerpt" value="1"<!-- IF S_FORUMPORTAL_SHOW_HERO_EXCERPT --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_show_hero_excerpt" value="0"<!-- IF not S_FORUMPORTAL_SHOW_HERO_EXCERPT --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_show_headlines">{L_ACP_FORUMPORTAL_SHOW_HEADLINES}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SHOW_HEADLINES_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_show_headlines" value="1"<!-- IF S_FORUMPORTAL_SHOW_HEADLINES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_show_headlines" value="0"<!-- IF not S_FORUMPORTAL_SHOW_HEADLINES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_show_most_read">{L_ACP_FORUMPORTAL_SHOW_MOST_READ}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SHOW_MOST_READ_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_show_most_read" value="1"<!-- IF S_FORUMPORTAL_SHOW_MOST_READ --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_show_most_read" value="0"<!-- IF not S_FORUMPORTAL_SHOW_MOST_READ --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_show_most_commented">{L_ACP_FORUMPORTAL_SHOW_MOST_COMMENTED}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SHOW_MOST_COMMENTED_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_show_most_commented" value="1"<!-- IF S_FORUMPORTAL_SHOW_MOST_COMMENTED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_show_most_commented" value="0"<!-- IF not S_FORUMPORTAL_SHOW_MOST_COMMENTED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_show_notices">{L_ACP_FORUMPORTAL_SHOW_NOTICES}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SHOW_NOTICES_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_show_notices" value="1"<!-- IF S_FORUMPORTAL_SHOW_NOTICES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_show_notices" value="0"<!-- IF not S_FORUMPORTAL_SHOW_NOTICES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset id="forumportal-custom-html">
+		<legend>{L_ACP_FORUMPORTAL_CUSTOM_HTML}</legend>
+		<p>{L_ACP_FORUMPORTAL_CUSTOM_HTML_SECTION_EXPLAIN}</p>
+		<dl>
+			<dt><label for="forumportal_custom_html_position">{L_ACP_FORUMPORTAL_HTML_POSITION}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_custom_html_position" value="top"<!-- IF S_FORUMPORTAL_HTML_TOP --> checked="checked"<!-- ENDIF --> /> {L_ACP_FORUMPORTAL_HTML_TOP}</label>
+				<label><input type="radio" class="radio" name="forumportal_custom_html_position" value="bottom"<!-- IF S_FORUMPORTAL_HTML_BOTTOM --> checked="checked"<!-- ENDIF --> /> {L_ACP_FORUMPORTAL_HTML_BOTTOM}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_custom_html_title">{L_ACP_FORUMPORTAL_CUSTOM_HTML_TITLE}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_CUSTOM_HTML_TITLE_EXPLAIN}</span></dt>
+			<dd><input type="text" id="forumportal_custom_html_title" name="forumportal_custom_html_title" value="{FORUMPORTAL_CUSTOM_HTML_TITLE}" maxlength="255" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_custom_html">{L_ACP_FORUMPORTAL_CUSTOM_HTML}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_CUSTOM_HTML_EXPLAIN}</span></dt>
+			<dd><textarea id="forumportal_custom_html" name="forumportal_custom_html" rows="10" cols="70">{FORUMPORTAL_CUSTOM_HTML}</textarea></dd>
+		</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+</form>
+
+<!-- INCLUDE overall_footer.html -->

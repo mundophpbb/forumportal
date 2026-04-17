@@ -1,0 +1,17 @@
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal.css' %}
+<!-- IF S_FORUMPORTAL_HOME_ENABLED -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var forumIndexUrl = '{{ U_FORUM_INDEX_BYPASS|e('js') }}';
+    if (!forumIndexUrl) {
+        return;
+    }
+
+    document.querySelectorAll('.breadcrumbs a[href*="index."]').forEach(function (link) {
+        if (link.href.indexOf('forumportal_bypass=1') === -1) {
+            link.href = forumIndexUrl;
+        }
+    });
+});
+</script>
+<!-- ENDIF -->

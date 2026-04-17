@@ -1,0 +1,31 @@
+services:
+    mundophpbb.forumportal.controller:
+        class: mundophpbb\forumportal\controller\main
+        arguments:
+            - '@auth'
+            - '@config'
+            - '@controller.helper'
+            - '@dbal.conn'
+            - '@dispatcher'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '%core.table_prefix%'
+
+    mundophpbb.forumportal.listener:
+        class: mundophpbb\forumportal\event\listener
+        arguments:
+            - '@auth'
+            - '@config'
+            - '@controller.helper'
+            - '@dbal.conn'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '%core.table_prefix%'
+        tags:
+            - { name: event.listener }
