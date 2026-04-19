@@ -75,4 +75,9 @@ $lang = array_merge($lang, array(
     'ACP_FORUMPORTAL_SHOW_HERO_EXCERPT'         => 'Mostrar resumo na manchete principal',
     'ACP_FORUMPORTAL_SHOW_HERO_EXCERPT_EXPLAIN' => 'Quando desativado, a manchete principal mostra apenas título, meta e link.',
 
+
+    'ACP_FORUMPORTAL_AUTO_INCLUDE_SOURCE' => 'Incluir automaticamente tópicos dos fóruns de origem',
+    'ACP_FORUMPORTAL_AUTO_INCLUDE_SOURCE_EXPLAIN' => 'Quando ativado, tópicos aprovados dos fóruns de origem selecionados aparecem automaticamente no portal. Você ainda pode desmarcar um tópico nas opções da primeira mensagem para ocultá-lo.',
+    'ACP_FORUMPORTAL_SYNC_EXISTING' => 'Sincronizar tópicos existentes',
+    'ACP_FORUMPORTAL_SYNCED' => 'Tópicos de origem existentes sincronizados: %1$d',
 ));

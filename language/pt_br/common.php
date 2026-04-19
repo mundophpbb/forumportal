@@ -62,4 +62,6 @@ $lang = array_merge($lang, array(
     'ACL_F_FORUMPORTAL_PUBLISH'          => 'Pode publicar tópicos no portal e editar os dados do portal nas Opções da primeira mensagem',
     'ACL_M_FORUMPORTAL_EDIT'             => 'Pode editar a publicação no portal nas Opções da primeira mensagem',
     'ACL_M_FORUMPORTAL_FEATURE'          => 'Pode destacar ou remover destaque de tópicos no portal',
+
+    'FORUMPORTAL_ENABLE_EXPLAIN_AUTO' => 'Os tópicos dos fóruns de origem selecionados podem ser incluídos automaticamente. Desmarque esta opção para manter o tópico fora do portal.',
 ));

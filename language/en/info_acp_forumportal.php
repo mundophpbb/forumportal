@@ -75,4 +75,9 @@ $lang = array_merge($lang, array(
     'ACP_FORUMPORTAL_SHOW_HERO_EXCERPT'         => 'Show excerpt in main headline',
     'ACP_FORUMPORTAL_SHOW_HERO_EXCERPT_EXPLAIN' => 'When disabled, the main headline shows only title, meta and link.',
 
+
+    'ACP_FORUMPORTAL_AUTO_INCLUDE_SOURCE' => 'Automatically include topics from source forums',
+    'ACP_FORUMPORTAL_AUTO_INCLUDE_SOURCE_EXPLAIN' => 'When enabled, approved topics from the selected source forums are shown on the portal automatically. You can still uncheck a topic from the first-post portal options to hide it.',
+    'ACP_FORUMPORTAL_SYNC_EXISTING' => 'Sync existing topics',
+    'ACP_FORUMPORTAL_SYNCED' => 'Existing source topics synchronized: %1$d',
 ));

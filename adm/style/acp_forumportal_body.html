@@ -46,6 +46,14 @@
 				<select id="forumportal_source_forum" name="forumportal_source_forum[]" multiple="multiple" size="12">{FORUMPORTAL_SOURCE_FORUM_OPTIONS}</select>
 			</dd>
 		</dl>
+
+		<dl>
+			<dt><label for="forumportal_auto_include_source">{L_ACP_FORUMPORTAL_AUTO_INCLUDE_SOURCE}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_AUTO_INCLUDE_SOURCE_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_auto_include_source" value="1"<!-- IF S_FORUMPORTAL_AUTO_INCLUDE_SOURCE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_auto_include_source" value="0"<!-- IF not S_FORUMPORTAL_AUTO_INCLUDE_SOURCE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
 	</fieldset>
 
 	<fieldset id="forumportal-display">
@@ -180,6 +188,7 @@
 
 	<fieldset class="submit-buttons">
 		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />
+		<input class="button2" type="submit" name="sync_existing" value="{L_ACP_FORUMPORTAL_SYNC_EXISTING}" />
 		{S_FORM_TOKEN}
 	</fieldset>
 </form>

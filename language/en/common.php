@@ -62,4 +62,6 @@ $lang = array_merge($lang, array(
     'ACL_F_FORUMPORTAL_PUBLISH'          => 'Can publish topics on the portal and edit portal data in the first post options',
     'ACL_M_FORUMPORTAL_EDIT'             => 'Can edit portal publication data in the first post options',
     'ACL_M_FORUMPORTAL_FEATURE'          => 'Can feature or unfeature topics on the portal',
+
+    'FORUMPORTAL_ENABLE_EXPLAIN_AUTO' => 'Topics from the selected source forums can be included automatically. Uncheck this option to keep the topic out of the portal.',
 ));

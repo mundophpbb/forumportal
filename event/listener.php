@@ -172,6 +172,7 @@ class listener implements EventSubscriberInterface
             && ($can_publish || $can_feature);
 
         $portal_enabled = false;
+        $auto_include_source = $this->is_auto_include_enabled();
         $portal_image = '';
         $portal_excerpt = '';
         $portal_featured = false;
@@ -181,6 +182,11 @@ class listener implements EventSubscriberInterface
 
         if ($show_fields)
         {
+            if ($auto_include_source)
+            {
+                $portal_enabled = true;
+            }
+
             $topic_id = 0;
             if (!empty($post_data['topic_id']))
             {
@@ -207,6 +213,10 @@ class listener implements EventSubscriberInterface
                         $portal_image = '';
                     }
                 }
+                else if ($auto_include_source)
+                {
+                    $portal_enabled = true;
+                }
 
                 $portal_fixed_headline = ((int) (isset($this->config['forumportal_fixed_topic_id']) ? $this->config['forumportal_fixed_topic_id'] : 0) === $topic_id);
             }
@@ -223,6 +233,7 @@ class listener implements EventSubscriberInterface
             'S_FORUMPORTAL_FIXED_HEADLINE' => $portal_fixed_headline,
             'S_FORUMPORTAL_NO_IMAGE'       => $portal_no_image,
             'FORUMPORTAL_ORDER'            => $portal_order,
+            'S_FORUMPORTAL_AUTO_INCLUDE'   => $auto_include_source,
         ));
     }
 
@@ -264,7 +275,7 @@ class listener implements EventSubscriberInterface
         }
 
         $existing = $this->get_portal_topic_row($topic_id);
-        $portal_enabled = $can_publish ? (int) $this->request->variable('forumportal_enabled', 0) : (int) (!empty($existing['portal_enabled']));
+        $portal_enabled = $can_publish ? (int) $this->request->is_set_post('forumportal_enabled') : (int) (!empty($existing['portal_enabled']));
         $portal_image = $can_publish ? trim((string) $this->request->variable('forumportal_image', '', true)) : (string) (!empty($existing['portal_image']) ? $existing['portal_image'] : '');
         $portal_excerpt = $can_publish ? trim((string) $this->request->variable('forumportal_excerpt', '', true)) : (string) (!empty($existing['portal_excerpt']) ? $existing['portal_excerpt'] : '');
         $portal_no_image = $can_publish ? (int) $this->request->variable('forumportal_no_image', 0) : (int) ((isset($existing['portal_image']) && (string) $existing['portal_image'] === '__FORUMPORTAL_NO_IMAGE__') ? 1 : 0);
@@ -293,7 +304,9 @@ class listener implements EventSubscriberInterface
             $portal_order = 0;
         }
 
-        if (!$portal_enabled && $portal_image === '' && $portal_excerpt === '' && !$portal_featured && $portal_order <= 0)
+        $preserve_disabled_override = $this->is_auto_include_enabled() && !$portal_enabled;
+
+        if (!$preserve_disabled_override && !$portal_enabled && $portal_image === '' && $portal_excerpt === '' && !$portal_featured && $portal_order <= 0)
         {
             $sql = 'DELETE FROM ' . $this->portal_topics_table . '
                 WHERE topic_id = ' . (int) $topic_id;
@@ -340,6 +353,11 @@ class listener implements EventSubscriberInterface
                 $this->config->set('forumportal_fixed_topic_id', 0);
             }
         }
+    }
+
+    protected function is_auto_include_enabled()
+    {
+        return !empty($this->config['forumportal_auto_include_source']);
     }
 
     protected function get_source_forum_ids()

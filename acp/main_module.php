@@ -24,9 +24,10 @@ class main_module
         add_form_key('mundophpbb_forumportal');
 
         $submit = $request->is_set_post('submit');
+        $sync_existing = $request->is_set_post('sync_existing');
         $errors = array();
 
-        if ($submit)
+        if ($submit || $sync_existing)
         {
             if (!check_form_key('mundophpbb_forumportal'))
             {
@@ -34,6 +35,7 @@ class main_module
             }
 
             $source_forums = $this->normalise_forum_ids($request->variable('forumportal_source_forum', array(0)));
+            $auto_include_source = (int) $request->variable('forumportal_auto_include_source', 0);
             $topics_per_page = max(1, min(50, (int) $request->variable('forumportal_topics_per_page', 8)));
             $excerpt_limit = max(80, min(1200, (int) $request->variable('forumportal_excerpt_limit', 320)));
             $enabled = (int) $request->variable('forumportal_enabled', 0);
@@ -79,6 +81,7 @@ class main_module
                 set_config('forumportal_enabled', $enabled);
                 set_config('forumportal_home_enabled', $home_enabled);
                 set_config('forumportal_source_forum', implode(',', $source_forums));
+                set_config('forumportal_auto_include_source', $auto_include_source);
                 set_config('forumportal_topics_per_page', $topics_per_page);
                 set_config('forumportal_excerpt_limit', $excerpt_limit);
                 set_config('forumportal_page_title', $page_title);
@@ -103,6 +106,12 @@ class main_module
 
                 $this->save_custom_html($db, $table_prefix, $custom_html);
 
+                if ($sync_existing)
+                {
+                    $synced_topics = $this->sync_existing_topics($db, $table_prefix, $source_forums);
+                    trigger_error($user->lang('ACP_FORUMPORTAL_SYNCED', (int) $synced_topics) . adm_back_link($this->u_action));
+                }
+
                 trigger_error($user->lang('ACP_FORUMPORTAL_SAVED') . adm_back_link($this->u_action));
             }
         }
@@ -115,6 +124,7 @@ class main_module
             'S_ERROR'                            => !empty($errors),
             'S_FORUMPORTAL_ENABLED'              => (int) $config['forumportal_enabled'],
             'S_FORUMPORTAL_HOME_ENABLED'         => (int) $config['forumportal_home_enabled'],
+            'S_FORUMPORTAL_AUTO_INCLUDE_SOURCE'  => $this->config_bool($config, 'forumportal_auto_include_source', false),
             'FORUMPORTAL_SOURCE_FORUM_OPTIONS'   => $this->build_forum_options($db, $this->parse_source_forums((string) $config['forumportal_source_forum'])),
             'FORUMPORTAL_TOPICS_PER_PAGE'        => (int) $config['forumportal_topics_per_page'],
             'FORUMPORTAL_EXCERPT_LIMIT'          => (int) $config['forumportal_excerpt_limit'],
@@ -240,6 +250,58 @@ class main_module
         }
 
         return array_values($normalised);
+    }
+
+    protected function portal_topics_table($table_prefix)
+    {
+        return $table_prefix . 'forumportal_topics';
+    }
+
+    protected function sync_existing_topics($db, $table_prefix, array $forum_ids)
+    {
+        $forum_ids = $this->normalise_forum_ids($forum_ids);
+        if (empty($forum_ids))
+        {
+            return 0;
+        }
+
+        $sql = 'SELECT t.topic_id
+            FROM ' . TOPICS_TABLE . ' t
+            LEFT JOIN ' . $this->portal_topics_table($table_prefix) . ' fp
+                ON fp.topic_id = t.topic_id
+            WHERE ' . $db->sql_in_set('t.forum_id', $forum_ids) . '
+                AND t.topic_visibility = ' . ITEM_APPROVED . '
+                AND fp.topic_id IS NULL';
+        $result = $db->sql_query($sql);
+
+        $topic_ids = array();
+        while ($row = $db->sql_fetchrow($result))
+        {
+            $topic_ids[] = (int) $row['topic_id'];
+        }
+        $db->sql_freeresult($result);
+
+        if (empty($topic_ids))
+        {
+            return 0;
+        }
+
+        $now = time();
+        foreach ($topic_ids as $topic_id)
+        {
+            $sql = 'INSERT INTO ' . $this->portal_topics_table($table_prefix) . ' ' . $db->sql_build_array('INSERT', array(
+                'topic_id'        => $topic_id,
+                'portal_enabled'  => 1,
+                'portal_image'    => '',
+                'portal_excerpt'  => '',
+                'portal_featured' => 0,
+                'portal_order'    => 0,
+                'portal_updated'  => $now,
+            ));
+            $db->sql_query($sql);
+        }
+
+        return count($topic_ids);
     }
 
     protected function get_custom_html($db, $table_prefix)

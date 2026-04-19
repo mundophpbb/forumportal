@@ -154,11 +154,10 @@ class main
 
         $count_sql = 'SELECT COUNT(t.topic_id) AS total_topics
                 FROM ' . TOPICS_TABLE . ' t
-                INNER JOIN ' . $this->portal_topics_table . ' fp
-                    ON fp.topic_id = t.topic_id
+                ' . $this->get_portal_topic_join_sql() . '
                 WHERE ' . $forum_sql . '
                     AND t.topic_visibility = ' . ITEM_APPROVED . '
-                    AND fp.portal_enabled = 1';
+                    AND ' . $this->get_portal_topic_visibility_sql();
         $result = $this->db->sql_query($count_sql);
         $total_topics = (int) $this->db->sql_fetchfield('total_topics');
         $this->db->sql_freeresult($result);
@@ -202,12 +201,11 @@ class main
                     ON p.post_id = t.topic_first_post_id
                 INNER JOIN ' . USERS_TABLE . ' u
                     ON u.user_id = t.topic_poster
-                INNER JOIN ' . $this->portal_topics_table . ' fp
-                    ON fp.topic_id = t.topic_id
+                ' . $this->get_portal_topic_join_sql() . '
                 WHERE ' . $forum_sql . '
                     AND t.topic_visibility = ' . ITEM_APPROVED . '
-                    AND fp.portal_enabled = 1
-                ORDER BY CASE WHEN fp.portal_order > 0 THEN 0 ELSE 1 END ASC, fp.portal_order ASC, fp.portal_featured DESC, t.topic_time DESC';
+                    AND ' . $this->get_portal_topic_visibility_sql() . '
+                ORDER BY CASE WHEN ' . $this->get_portal_order_expression() . ' > 0 THEN 0 ELSE 1 END ASC, ' . $this->get_portal_order_expression() . ' ASC, ' . $this->get_portal_featured_expression() . ' DESC, t.topic_time DESC';
         $result = $this->db->sql_query_limit($sql, $query_limit, $start);
 
         while ($row = $this->db->sql_fetchrow($result))
@@ -338,12 +336,11 @@ class main
                     ON p.post_id = t.topic_first_post_id
                 INNER JOIN ' . USERS_TABLE . ' u
                     ON u.user_id = t.topic_poster
-                INNER JOIN ' . $this->portal_topics_table . ' fp
-                    ON fp.topic_id = t.topic_id
+                ' . $this->get_portal_topic_join_sql() . '
                 WHERE t.topic_id = ' . $topic_id . '
                     AND ' . $this->db->sql_in_set('t.forum_id', $forum_ids) . '
                     AND t.topic_visibility = ' . ITEM_APPROVED . '
-                    AND fp.portal_enabled = 1';
+                    AND ' . $this->get_portal_topic_visibility_sql();
         $result = $this->db->sql_query_limit($sql, 1);
         $row = $this->db->sql_fetchrow($result);
         $this->db->sql_freeresult($result);
@@ -801,12 +798,11 @@ class main
         $field = $metric['field'];
         $sql = 'SELECT t.topic_id, t.topic_title, t.topic_time, t.' . $field . ' AS topic_comment_metric, fp.portal_featured
             FROM ' . TOPICS_TABLE . ' t
-            INNER JOIN ' . $this->portal_topics_table . ' fp
-                ON fp.topic_id = t.topic_id
+            ' . $this->get_portal_topic_join_sql() . '
             WHERE ' . $this->db->sql_in_set('t.forum_id', $forum_ids) . '
                 AND t.topic_visibility = ' . ITEM_APPROVED . '
-                AND fp.portal_enabled = 1
-            ORDER BY t.' . $field . ' DESC, fp.portal_featured DESC, t.topic_time DESC';
+                AND ' . $this->get_portal_topic_visibility_sql() . '
+            ORDER BY t.' . $field . ' DESC, ' . $this->get_portal_featured_expression() . ' DESC, t.topic_time DESC';
         $result = $this->db->sql_query_limit($sql, $limit);
 
         while ($row = $this->db->sql_fetchrow($result))
@@ -837,12 +833,11 @@ class main
 
         $sql = 'SELECT t.topic_id, t.topic_title, t.topic_time, t.topic_views, fp.portal_featured
             FROM ' . TOPICS_TABLE . ' t
-            INNER JOIN ' . $this->portal_topics_table . ' fp
-                ON fp.topic_id = t.topic_id
+            ' . $this->get_portal_topic_join_sql() . '
             WHERE ' . $this->db->sql_in_set('t.forum_id', $forum_ids) . '
                 AND t.topic_visibility = ' . ITEM_APPROVED . '
-                AND fp.portal_enabled = 1
-            ORDER BY t.topic_views DESC, fp.portal_featured DESC, t.topic_time DESC';
+                AND ' . $this->get_portal_topic_visibility_sql() . '
+            ORDER BY t.topic_views DESC, ' . $this->get_portal_featured_expression() . ' DESC, t.topic_time DESC';
         $result = $this->db->sql_query_limit($sql, $limit);
 
         while ($row = $this->db->sql_fetchrow($result))
@@ -873,12 +868,11 @@ class main
 
         $sql = 'SELECT t.topic_id, t.topic_title, t.topic_time, fp.portal_featured
             FROM ' . TOPICS_TABLE . ' t
-            INNER JOIN ' . $this->portal_topics_table . ' fp
-                ON fp.topic_id = t.topic_id
+            ' . $this->get_portal_topic_join_sql() . '
             WHERE ' . $this->db->sql_in_set('t.forum_id', $forum_ids) . '
                 AND t.topic_visibility = ' . ITEM_APPROVED . '
-                AND fp.portal_enabled = 1
-            ORDER BY CASE WHEN fp.portal_order > 0 THEN 0 ELSE 1 END ASC, fp.portal_order ASC, fp.portal_featured DESC, t.topic_time DESC';
+                AND ' . $this->get_portal_topic_visibility_sql() . '
+            ORDER BY CASE WHEN ' . $this->get_portal_order_expression() . ' > 0 THEN 0 ELSE 1 END ASC, ' . $this->get_portal_order_expression() . ' ASC, ' . $this->get_portal_featured_expression() . ' DESC, t.topic_time DESC';
         $result = $this->db->sql_query_limit($sql, $limit);
 
         while ($row = $this->db->sql_fetchrow($result))
@@ -931,6 +925,43 @@ class main
         return array_values($normalised);
     }
 
+
+    protected function is_auto_include_enabled()
+    {
+        return !empty($this->config['forumportal_auto_include_source']);
+    }
+
+    protected function get_portal_topic_join_sql()
+    {
+        if ($this->is_auto_include_enabled())
+        {
+            return 'LEFT JOIN ' . $this->portal_topics_table . ' fp
+                    ON fp.topic_id = t.topic_id';
+        }
+
+        return 'INNER JOIN ' . $this->portal_topics_table . ' fp
+                    ON fp.topic_id = t.topic_id';
+    }
+
+    protected function get_portal_topic_visibility_sql()
+    {
+        if ($this->is_auto_include_enabled())
+        {
+            return '(fp.topic_id IS NULL OR fp.portal_enabled = 1)';
+        }
+
+        return 'fp.portal_enabled = 1';
+    }
+
+    protected function get_portal_order_expression()
+    {
+        return 'COALESCE(fp.portal_order, 0)';
+    }
+
+    protected function get_portal_featured_expression()
+    {
+        return 'COALESCE(fp.portal_featured, 0)';
+    }
 
     protected function get_custom_html()
     {

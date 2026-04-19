@@ -5,7 +5,7 @@
 	<dl>
 		<dt>
 			<label for="forumportal_enabled">{L_FORUMPORTAL_ENABLE_LABEL}{L_COLON}</label><br>
-			<span class="explain">{L_FORUMPORTAL_ENABLE_EXPLAIN}</span>
+			<span class="explain"><!-- IF S_FORUMPORTAL_AUTO_INCLUDE -->{L_FORUMPORTAL_ENABLE_EXPLAIN_AUTO}<!-- ELSE -->{L_FORUMPORTAL_ENABLE_EXPLAIN}<!-- ENDIF --></span>
 		</dt>
 		<dd>
 			<label><input type="checkbox" class="radio" name="forumportal_enabled" id="forumportal_enabled" value="1"<!-- IF S_FORUMPORTAL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
