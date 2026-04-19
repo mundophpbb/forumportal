@@ -143,7 +143,7 @@
 				<!-- IF S_PORTAL_CUSTOM_HTML_TOP -->
 				<div class="forumportal-sidecard forumportal-sidecard--html">
 					<h3 class="forumportal-sidecard__title">{PORTAL_CUSTOM_HTML_TITLE}</h3>
-					<div class="forumportal-custom-html forumportal-custom-html--sidebar">{PORTAL_CUSTOM_HTML}</div>
+					<div class="forumportal-custom-html forumportal-custom-html--sidebar">{{ PORTAL_CUSTOM_HTML|raw }}</div>
 				</div>
 				<!-- ENDIF -->
 			</aside>
@@ -151,7 +151,7 @@
 		</div>
 
 		<!-- IF S_PORTAL_CUSTOM_HTML_BOTTOM -->
-		<div class="forumportal-custom-html-wrap forumportal-custom-html-wrap--bottom"><h3 class="forumportal-custom-html__title">{PORTAL_CUSTOM_HTML_TITLE}</h3><div class="forumportal-custom-html forumportal-custom-html--bottom">{PORTAL_CUSTOM_HTML}</div></div>
+		<div class="forumportal-custom-html-wrap forumportal-custom-html-wrap--bottom"><h3 class="forumportal-custom-html__title">{PORTAL_CUSTOM_HTML_TITLE}</h3><div class="forumportal-custom-html forumportal-custom-html--bottom">{{ PORTAL_CUSTOM_HTML|raw }}</div></div>
 		<!-- ENDIF -->
 
 		<!-- IF S_HAS_PAGINATION -->

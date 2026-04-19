@@ -42,6 +42,9 @@ class main
     /** @var string */
     protected $portal_topics_table;
 
+    /** @var string */
+    protected $forumportal_html_table;
+
     /** @var array|null */
     protected $topic_comment_metric = null;
 
@@ -69,6 +72,7 @@ class main
         $this->phpbb_root_path = $phpbb_root_path;
         $this->php_ext = $php_ext;
         $this->portal_topics_table = $table_prefix . 'forumportal_topics';
+        $this->forumportal_html_table = $table_prefix . 'forumportal_html';
     }
 
     public function handle()
@@ -109,7 +113,7 @@ class main
         $per_page = max(1, min(50, (int) $this->config['forumportal_topics_per_page']));
         $excerpt_limit = max(80, min(1200, (int) $this->config['forumportal_excerpt_limit']));
         $default_image = trim((string) $this->config['forumportal_default_image']);
-        $custom_html = (string) $this->config['forumportal_custom_html'];
+        $custom_html = $this->get_custom_html();
         if (!$this->has_meaningful_markup($custom_html))
         {
             $custom_html = '';
@@ -120,6 +124,15 @@ class main
             $custom_html_title = $this->user->lang('FORUMPORTAL_CUSTOM_BLOCK');
         }
         $custom_html_position = ((string) $this->config['forumportal_custom_html_position'] === 'bottom') ? 'bottom' : 'top';
+
+        $custom_html = strtr($custom_html, array(
+            '{TEXT}'         => $custom_html_title,
+            '{TEXT1}'        => $page_title,
+            '{BOARD_NAME}'   => (string) $this->config['sitename'],
+            '{PORTAL_TITLE}' => $page_title,
+            '{NAV_TITLE}'    => $nav_title,
+        ));
+
         $start = max(0, (int) $this->request->variable('start', 0));
 
         $has_topics = false;
@@ -916,6 +929,19 @@ class main
         }
 
         return array_values($normalised);
+    }
+
+
+    protected function get_custom_html()
+    {
+        $sql = 'SELECT html_value
+            FROM ' . $this->forumportal_html_table . "
+            WHERE html_key = 'forumportal_custom_html'";
+        $result = $this->db->sql_query_limit($sql, 1);
+        $html = (string) $this->db->sql_fetchfield('html_value');
+        $this->db->sql_freeresult($result);
+
+        return html_entity_decode((string) $html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     }
 
     protected function has_meaningful_markup($html)

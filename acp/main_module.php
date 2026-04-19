@@ -13,7 +13,7 @@ class main_module
 
     public function main($id, $mode)
     {
-        global $config, $db, $request, $template, $user;
+        global $config, $db, $request, $template, $user, $table_prefix;
 
         $user->add_lang_ext('mundophpbb/forumportal', 'common');
         $user->add_lang_ext('mundophpbb/forumportal', 'info_acp_forumportal');
@@ -55,7 +55,7 @@ class main_module
             $show_most_commented = (int) $request->variable('forumportal_show_most_commented', 1);
             $show_notices = (int) $request->variable('forumportal_show_notices', 1);
             $show_hero_excerpt = (int) $request->variable('forumportal_show_hero_excerpt', 1);
-            $custom_html = (string) $request->variable('forumportal_custom_html', '', true);
+            $custom_html = html_entity_decode((string) $request->variable('forumportal_custom_html', '', true), ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $custom_html_title = trim((string) $request->variable('forumportal_custom_html_title', '', true));
             $custom_html_position = (string) $request->variable('forumportal_custom_html_position', 'top');
 
@@ -98,13 +98,16 @@ class main_module
                 set_config('forumportal_show_most_commented', $show_most_commented);
                 set_config('forumportal_show_notices', $show_notices);
                 set_config('forumportal_show_hero_excerpt', $show_hero_excerpt);
-                set_config('forumportal_custom_html', $custom_html);
                 set_config('forumportal_custom_html_title', $custom_html_title);
                 set_config('forumportal_custom_html_position', $custom_html_position);
+
+                $this->save_custom_html($db, $table_prefix, $custom_html);
 
                 trigger_error($user->lang('ACP_FORUMPORTAL_SAVED') . adm_back_link($this->u_action));
             }
         }
+
+        $custom_html = $this->get_custom_html($db, $table_prefix);
 
         $template->assign_vars(array(
             'U_ACTION'                           => $this->u_action,
@@ -132,7 +135,7 @@ class main_module
             'S_FORUMPORTAL_SHOW_MOST_COMMENTED'  => $this->config_bool($config, 'forumportal_show_most_commented', true),
             'S_FORUMPORTAL_SHOW_NOTICES'         => $this->config_bool($config, 'forumportal_show_notices', true),
             'S_FORUMPORTAL_SHOW_HERO_EXCERPT'    => $this->config_bool($config, 'forumportal_show_hero_excerpt', true),
-            'FORUMPORTAL_CUSTOM_HTML'            => (string) $config['forumportal_custom_html'],
+            'FORUMPORTAL_CUSTOM_HTML'            => $custom_html,
             'FORUMPORTAL_CUSTOM_HTML_TITLE'      => isset($config['forumportal_custom_html_title']) ? (string) $config['forumportal_custom_html_title'] : '',
             'S_FORUMPORTAL_HTML_TOP'             => ((string) $config['forumportal_custom_html_position'] !== 'bottom'),
             'S_FORUMPORTAL_HTML_BOTTOM'          => ((string) $config['forumportal_custom_html_position'] === 'bottom'),
@@ -237,5 +240,32 @@ class main_module
         }
 
         return array_values($normalised);
+    }
+
+    protected function get_custom_html($db, $table_prefix)
+    {
+        $sql = 'SELECT html_value
+            FROM ' . $table_prefix . "forumportal_html
+            WHERE html_key = 'forumportal_custom_html'";
+        $result = $db->sql_query_limit($sql, 1);
+        $html = (string) $db->sql_fetchfield('html_value');
+        $db->sql_freeresult($result);
+
+        return html_entity_decode((string) $html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+    protected function save_custom_html($db, $table_prefix, $custom_html)
+    {
+        $sql = 'DELETE FROM ' . $table_prefix . "forumportal_html
+            WHERE html_key = 'forumportal_custom_html'";
+        $db->sql_query($sql);
+
+        $sql_ary = array(
+            'html_key'   => 'forumportal_custom_html',
+            'html_value' => (string) $custom_html,
+        );
+
+        $sql = 'INSERT INTO ' . $table_prefix . 'forumportal_html ' . $db->sql_build_array('INSERT', $sql_ary);
+        $db->sql_query($sql);
     }
 }
