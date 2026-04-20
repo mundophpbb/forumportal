@@ -151,6 +151,10 @@ class main
         $show_notices = $this->config_bool('forumportal_show_notices', true);
         $show_hero_excerpt = $this->config_bool('forumportal_show_hero_excerpt', true);
         $fixed_topic_id = isset($this->config['forumportal_fixed_topic_id']) ? (int) $this->config['forumportal_fixed_topic_id'] : 0;
+        $notices = array();
+        $headlines = array();
+        $most_read_topics = array();
+        $most_commented_topics = array();
 
         $count_sql = 'SELECT COUNT(t.topic_id) AS total_topics
                 FROM ' . TOPICS_TABLE . ' t
@@ -162,34 +166,47 @@ class main
         $total_topics = (int) $this->db->sql_fetchfield('total_topics');
         $this->db->sql_freeresult($result);
 
-        $fixed_hero_topic = ($start === 0 && $fixed_topic_id > 0)
+        $fixed_hero_topic = ($fixed_topic_id > 0)
             ? $this->get_fixed_hero_topic($source_forum_ids, $fixed_topic_id, $excerpt_limit, $default_image)
             : array();
 
-        $use_fixed_hero = !empty($fixed_hero_topic);
-        $use_hero_layout = ($start === 0 && ($use_fixed_hero || $total_topics > 1));
+        $auto_hero_topic = (empty($fixed_hero_topic) && $total_topics > 1)
+            ? $this->get_auto_hero_topic($source_forum_ids, $excerpt_limit, $default_image)
+            : array();
 
-        if ($use_fixed_hero)
+        $hero_topic = !empty($fixed_hero_topic) ? $fixed_hero_topic : $auto_hero_topic;
+        $hero_topic_id = !empty($hero_topic['TOPIC_ID']) ? (int) $hero_topic['TOPIC_ID'] : 0;
+        $use_fixed_hero = !empty($fixed_hero_topic);
+        $list_total_topics = max(0, $total_topics - (($hero_topic_id > 0) ? 1 : 0));
+
+        if ($list_total_topics > 0 && $start >= $list_total_topics)
+        {
+            $start = (int) (floor(($list_total_topics - 1) / $per_page) * $per_page);
+        }
+        else if ($list_total_topics === 0)
+        {
+            $start = 0;
+        }
+
+        $use_hero_layout = ($start === 0 && !empty($hero_topic));
+
+        if ($use_hero_layout)
         {
             $has_topics = true;
             $has_hero_topic = true;
-            $has_sidebar = (!empty($notices) || !empty($headlines) || !empty($most_read_topics) || !empty($most_commented_topics) || ($custom_html !== '' && $custom_html_position === 'top'));
 
-        $this->template->assign_vars(array(
+            $this->template->assign_vars(array(
                 'S_HAS_HERO_TOPIC'      => true,
-                'HERO_TITLE'            => $fixed_hero_topic['TITLE'],
-                'HERO_EXCERPT'          => $fixed_hero_topic['EXCERPT'],
-                'HERO_IMAGE'            => $fixed_hero_topic['IMAGE'],
-                'HERO_DATE'             => $fixed_hero_topic['DATE'],
-                'HERO_AUTHOR_FULL'      => $fixed_hero_topic['AUTHOR_FULL'],
-                'HERO_VIEWS'            => $fixed_hero_topic['VIEWS'],
-                'HERO_S_FEATURED'       => true,
-                'U_HERO_VIEW_TOPIC'     => $fixed_hero_topic['U_VIEW_TOPIC'],
+                'HERO_TITLE'            => $hero_topic['TITLE'],
+                'HERO_EXCERPT'          => $hero_topic['EXCERPT'],
+                'HERO_IMAGE'            => $hero_topic['IMAGE'],
+                'HERO_DATE'             => $hero_topic['DATE'],
+                'HERO_AUTHOR_FULL'      => $hero_topic['AUTHOR_FULL'],
+                'HERO_VIEWS'            => $hero_topic['VIEWS'],
+                'HERO_S_FEATURED'       => ($use_fixed_hero ? true : $hero_topic['S_FEATURED']),
+                'U_HERO_VIEW_TOPIC'     => $hero_topic['U_VIEW_TOPIC'],
             ));
         }
-
-        $query_limit = $per_page + (($start === 0 && $use_fixed_hero) ? 1 : 0);
-        $topic_cards_assigned = 0;
 
         $sql = 'SELECT t.topic_id, t.forum_id, t.topic_title, t.topic_time, t.topic_views, t.topic_first_post_id,
                        p.post_text, p.bbcode_uid, p.bbcode_bitfield,
@@ -204,46 +221,17 @@ class main
                 ' . $this->get_portal_topic_join_sql() . '
                 WHERE ' . $forum_sql . '
                     AND t.topic_visibility = ' . ITEM_APPROVED . '
-                    AND ' . $this->get_portal_topic_visibility_sql() . '
+                    AND ' . $this->get_portal_topic_visibility_sql() .
+                    (($hero_topic_id > 0) ? ('
+                    AND t.topic_id <> ' . $hero_topic_id) : '') . '
                 ORDER BY CASE WHEN ' . $this->get_portal_order_expression() . ' > 0 THEN 0 ELSE 1 END ASC, ' . $this->get_portal_order_expression() . ' ASC, ' . $this->get_portal_featured_expression() . ' DESC, t.topic_time DESC';
-        $result = $this->db->sql_query_limit($sql, $query_limit, $start);
+        $result = $this->db->sql_query_limit($sql, $per_page, $start);
 
         while ($row = $this->db->sql_fetchrow($result))
         {
-            if ($use_fixed_hero && (int) $row['topic_id'] === $fixed_topic_id)
-            {
-                continue;
-            }
-
-            if ($topic_cards_assigned >= $per_page)
-            {
-                break;
-            }
-
             $topic_data = $this->build_topic_display_data($row, $excerpt_limit, $default_image);
             $has_topics = true;
-
-            if ($use_hero_layout && !$has_hero_topic)
-            {
-                $has_hero_topic = true;
-                $has_sidebar = (!empty($notices) || !empty($headlines) || !empty($most_read_topics) || !empty($most_commented_topics) || ($custom_html !== '' && $custom_html_position === 'top'));
-
-        $this->template->assign_vars(array(
-                    'S_HAS_HERO_TOPIC'      => true,
-                    'HERO_TITLE'            => $topic_data['TITLE'],
-                    'HERO_EXCERPT'          => $topic_data['EXCERPT'],
-                    'HERO_IMAGE'            => $topic_data['IMAGE'],
-                    'HERO_DATE'             => $topic_data['DATE'],
-                    'HERO_AUTHOR_FULL'      => $topic_data['AUTHOR_FULL'],
-                    'HERO_VIEWS'            => $topic_data['VIEWS'],
-                    'HERO_S_FEATURED'       => $topic_data['S_FEATURED'],
-                    'U_HERO_VIEW_TOPIC'     => $topic_data['U_VIEW_TOPIC'],
-                ));
-                continue;
-            }
-
             $this->template->assign_block_vars('topics', $topic_data);
-            $topic_cards_assigned++;
         }
         $this->db->sql_freeresult($result);
 
@@ -281,7 +269,7 @@ class main
             'S_PORTAL_CUSTOM_HTML_BOTTOM'    => ($custom_html !== '' && $custom_html_position === 'bottom'),
             'S_HAS_PORTAL_TOPICS'            => $has_topics,
             'S_HAS_HERO_TOPIC'               => $has_hero_topic,
-            'S_HAS_PAGINATION'               => ($total_topics > $per_page),
+            'S_HAS_PAGINATION'               => ($list_total_topics > $per_page),
             'S_HAS_HEADLINES'                => !empty($headlines),
             'S_HAS_MOST_READ'                => !empty($most_read_topics),
             'S_HAS_MOST_COMMENTED'           => !empty($most_commented_topics),
@@ -294,9 +282,10 @@ class main
             'S_FORUMPORTAL_SHOW_MOST_COMMENTED' => $show_most_commented,
             'S_FORUMPORTAL_SHOW_NOTICES'     => $show_notices,
             'S_FORUMPORTAL_SHOW_HERO_EXCERPT' => $show_hero_excerpt,
-            'PAGINATION'                     => $this->build_pagination($pagination_base, $total_topics, $per_page, $start),
-            'PAGE_NUMBER'                    => $this->build_page_number($total_topics, $per_page, $start),
+            'PAGINATION'                     => $this->build_pagination($pagination_base, $list_total_topics, $per_page, $start),
+            'PAGE_NUMBER'                    => $this->build_page_number($list_total_topics, $per_page, $start),
             'TOTAL_TOPICS'                   => $total_topics,
+            'TOTAL_PAGINATED_TOPICS'         => $list_total_topics,
             'U_FORUMPORTAL'                  => $pagination_base,
             'U_FORUM_INDEX'                  => append_sid($this->phpbb_root_path . 'index.' . $this->php_ext, 'forumportal_bypass=1'),
             'U_FORUM_INDEX_BYPASS'           => append_sid($this->phpbb_root_path . 'index.' . $this->php_ext, 'forumportal_bypass=1'),
@@ -353,6 +342,42 @@ class main
         return $this->build_topic_display_data($row, $excerpt_limit, $default_image);
     }
 
+    protected function get_auto_hero_topic(array $forum_ids, $excerpt_limit, $default_image)
+    {
+        $forum_ids = $this->normalise_forum_ids($forum_ids);
+
+        if (empty($forum_ids))
+        {
+            return array();
+        }
+
+        $sql = 'SELECT t.topic_id, t.forum_id, t.topic_title, t.topic_time, t.topic_views, t.topic_first_post_id,
+                       p.post_text, p.bbcode_uid, p.bbcode_bitfield,
+                       p.enable_bbcode, p.enable_smilies, p.enable_magic_url,
+                       u.user_id, u.username, u.user_colour,
+                       fp.portal_image, fp.portal_excerpt, fp.portal_featured, fp.portal_order
+                FROM ' . TOPICS_TABLE . ' t
+                INNER JOIN ' . POSTS_TABLE . ' p
+                    ON p.post_id = t.topic_first_post_id
+                INNER JOIN ' . USERS_TABLE . ' u
+                    ON u.user_id = t.topic_poster
+                ' . $this->get_portal_topic_join_sql() . '
+                WHERE ' . $this->db->sql_in_set('t.forum_id', $forum_ids) . '
+                    AND t.topic_visibility = ' . ITEM_APPROVED . '
+                    AND ' . $this->get_portal_topic_visibility_sql() . '
+                ORDER BY CASE WHEN ' . $this->get_portal_order_expression() . ' > 0 THEN 0 ELSE 1 END ASC, ' . $this->get_portal_order_expression() . ' ASC, ' . $this->get_portal_featured_expression() . ' DESC, t.topic_time DESC';
+        $result = $this->db->sql_query_limit($sql, 1);
+        $row = $this->db->sql_fetchrow($result);
+        $this->db->sql_freeresult($result);
+
+        if (!$row)
+        {
+            return array();
+        }
+
+        return $this->build_topic_display_data($row, $excerpt_limit, $default_image);
+    }
+
     protected function build_topic_display_data(array $row, $excerpt_limit, $default_image)
     {
         $bbcode_options = 0;
@@ -387,6 +412,7 @@ class main
         }
 
         return array(
+            'TOPIC_ID'        => (int) $row['topic_id'],
             'TITLE'           => $row['topic_title'],
             'EXCERPT'         => $excerpt,
             'IMAGE'           => $this->resolve_topic_image($row, $rendered, $default_image),
@@ -560,7 +586,7 @@ class main
 
     protected function build_pagination($base_url, $total_items, $per_page, $start)
     {
-        $total_items = (int) $total_items;
+        $total_items = max(0, (int) $total_items);
         $per_page = max(1, (int) $per_page);
         $start = max(0, (int) $start);
 
@@ -570,11 +596,16 @@ class main
         }
 
         $total_pages = (int) ceil($total_items / $per_page);
-        $current_page = (int) floor($start / $per_page) + 1;
+        $current_page = min($total_pages, max(1, (int) floor($start / $per_page) + 1));
         $window = 2;
         $first_page = max(1, $current_page - $window);
         $last_page = min($total_pages, $current_page + $window);
         $links = array();
+
+        if ($current_page > 1)
+        {
+            $links[] = $this->build_page_link($base_url, $current_page - 1, $per_page, $current_page, '&laquo;');
+        }
 
         if ($first_page > 1)
         {
@@ -599,15 +630,21 @@ class main
             $links[] = $this->build_page_link($base_url, $total_pages, $per_page, $current_page);
         }
 
+        if ($current_page < $total_pages)
+        {
+            $links[] = $this->build_page_link($base_url, $current_page + 1, $per_page, $current_page, '&raquo;');
+        }
+
         return implode(' ', $links);
     }
 
-    protected function build_page_link($base_url, $page, $per_page, $current_page)
+    protected function build_page_link($base_url, $page, $per_page, $current_page, $label = null)
     {
         $page = (int) $page;
         $current_page = (int) $current_page;
+        $label = ($label !== null && $label !== '') ? (string) $label : (string) $page;
 
-        if ($page === $current_page)
+        if ($page === $current_page && $label === (string) $page)
         {
             return '<strong>' . $page . '</strong>';
         }
@@ -615,7 +652,7 @@ class main
         $start = ($page - 1) * (int) $per_page;
         $url = ($start > 0) ? ($base_url . '?start=' . $start) : $base_url;
 
-        return '<a href="' . htmlspecialchars($url) . '">' . $page . '</a>';
+        return '<a href="' . htmlspecialchars($url) . '">' . $label . '</a>';
     }
 
     protected function build_page_number($total_items, $per_page, $start)
@@ -626,11 +663,11 @@ class main
 
         if ($total_items === 0)
         {
-            return '1';
+            return '1 / 1';
         }
 
-        $current_page = (int) floor($start / $per_page) + 1;
         $total_pages = (int) ceil($total_items / $per_page);
+        $current_page = min($total_pages, max(1, (int) floor($start / $per_page) + 1));
 
         return $current_page . ' / ' . $total_pages;
     }

@@ -156,11 +156,14 @@
 
 		<!-- IF S_HAS_PAGINATION -->
 		<div class="action-bar bar-bottom forumportal-bottombar">
-			<div class="pagination">
-				{TOTAL_TOPICS} {L_TOPICS}
+			<div class="forumportal-pagination">
+				<div class="forumportal-pagination__summary">
+					<span class="forumportal-pagination__total">{TOTAL_TOPICS} {L_TOPICS}</span>
+					<span class="forumportal-pagination__dot">&bull;</span>
+					<span class="forumportal-pagination__page">{PAGE_NUMBER}</span>
+				</div>
 				<!-- IF PAGINATION -->
-				 &bull; {PAGE_NUMBER}
-				 &bull; <span>{PAGINATION}</span>
+				<div class="forumportal-pagination__links">{PAGINATION}</div>
 				<!-- ENDIF -->
 			</div>
 		</div>
