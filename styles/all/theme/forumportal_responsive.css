@@ -208,3 +208,69 @@
     }
 }
 
+
+/* v1018: let the portal follow the real width of the active phpBB style.
+   Some styles use a wider #wrap than ProSilver; the portal must not stay
+   locked to its old internal max-width. */
+#wrap .forumportal-page,
+#wrap .forumportal-shell,
+.forumportal-page,
+.forumportal-shell {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+#wrap .forumportal-shell,
+.forumportal-shell {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#wrap .forumportal-layout,
+#wrap .forumportal-main,
+#wrap .forumportal-sidebar,
+#wrap .forumportal-topbar,
+#wrap .forumportal-custom-header,
+#wrap .forumportal-custom-html,
+#wrap .forumportal-lead,
+#wrap .forumportal-stream,
+#wrap .forumportal-bottombar,
+.forumportal-layout,
+.forumportal-main,
+.forumportal-sidebar,
+.forumportal-topbar,
+.forumportal-custom-header,
+.forumportal-custom-html,
+.forumportal-lead,
+.forumportal-stream,
+.forumportal-bottombar {
+    box-sizing: border-box;
+}
+
+/* When the sidebar is disabled, do not keep the main column limited to the
+   previous editorial width. It should fill the available forum width. */
+#wrap .forumportal-layout--no-sidebar .forumportal-main,
+#wrap .forumportal-main--full,
+.forumportal-layout--no-sidebar .forumportal-main,
+.forumportal-main--full {
+    width: 100%;
+    max-width: none;
+}
+
+/* Keep media safe inside wider custom styles. */
+#wrap .forumportal-page img,
+.forumportal-page img {
+    max-width: 100%;
+}
+
+#wrap .forumportal-hero__media img,
+#wrap .forumportal-story__media img,
+#wrap .forumportal-card__media img,
+#wrap .forumportal-custom-header__image,
+.forumportal-hero__media img,
+.forumportal-story__media img,
+.forumportal-card__media img,
+.forumportal-custom-header__image {
+    max-width: none;
+}

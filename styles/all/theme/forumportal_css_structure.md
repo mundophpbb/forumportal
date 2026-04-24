@@ -42,3 +42,7 @@ The result bar intentionally follows the ProSilver-style red (`#bc2a4d`) through
 - The poll vote button now follows the ProSilver-style poll red (`#bc2a4d`) instead of the older blue button skin.
 - The topbar `Abrir fórum` button was widened and isolated from the topbar link rules so custom colors do not squeeze the button.
 - Final polish keeps the breadcrumb Portal/Forum links native to the active phpBB style and only styles the portal Open forum button.
+
+## v1018 — largura do tema
+
+O ajuste final em `forumportal_responsive.css` remove limites internos de largura do portal, permitindo que `.forumportal-shell` acompanhe a largura real do `#wrap`/tema ativo. Isso evita que o portal fique preso à largura editorial antiga em estilos mais largos que o ProSilver.
