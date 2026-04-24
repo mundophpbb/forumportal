@@ -1,0 +1,153 @@
+/* Top contributors block */
+.forumportal-contributors {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.forumportal-contributors__item {
+    display: grid;
+    grid-template-columns: 24px 34px minmax(0, 1fr);
+    gap: 9px;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid #e3e6e9;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.forumportal-contributors__item:last-child {
+    border-bottom: 0;
+}
+
+.forumportal-contributors__item:hover {
+    background: #f4f7fa;
+}
+
+.forumportal-contributors__rank {
+    color: #6b7783;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.forumportal-contributors__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #e7edf2;
+    color: #35536e;
+}
+
+.forumportal-contributors__avatar img {
+    display: block;
+    width: 34px !important;
+    height: 34px !important;
+    max-width: 34px !important;
+    max-height: 34px !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.forumportal-contributors__avatar-empty {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
+.forumportal-contributors__body {
+    min-width: 0;
+}
+
+.forumportal-contributors__name {
+    display: block;
+    color: #1a2631;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.forumportal-contributors__name a {
+    color: inherit;
+}
+
+.forumportal-contributors__name a:hover {
+    color: #1f4f7a;
+    text-decoration: underline;
+}
+
+.forumportal-contributors__meta {
+    display: block;
+    margin-top: 2px;
+    color: #6b7783;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+html.dark .forumportal-contributors__item,
+html[data-theme="dark"] .forumportal-contributors__item,
+html[data-color-scheme="dark"] .forumportal-contributors__item,
+body.dark .forumportal-contributors__item,
+body[data-theme="dark"] .forumportal-contributors__item,
+body[data-color-scheme="dark"] .forumportal-contributors__item,
+body.phpbb-dark .forumportal-contributors__item {
+    border-color: #31465a;
+}
+
+html.dark .forumportal-contributors__item:hover,
+html[data-theme="dark"] .forumportal-contributors__item:hover,
+html[data-color-scheme="dark"] .forumportal-contributors__item:hover,
+body.dark .forumportal-contributors__item:hover,
+body[data-theme="dark"] .forumportal-contributors__item:hover,
+body[data-color-scheme="dark"] .forumportal-contributors__item:hover,
+body.phpbb-dark .forumportal-contributors__item:hover {
+    background: #1d2b3a;
+}
+
+html.dark .forumportal-contributors__name,
+html[data-theme="dark"] .forumportal-contributors__name,
+html[data-color-scheme="dark"] .forumportal-contributors__name,
+body.dark .forumportal-contributors__name,
+body[data-theme="dark"] .forumportal-contributors__name,
+body[data-color-scheme="dark"] .forumportal-contributors__name,
+body.phpbb-dark .forumportal-contributors__name {
+    color: #eef4f8;
+}
+
+html.dark .forumportal-contributors__meta,
+html.dark .forumportal-contributors__rank,
+html[data-theme="dark"] .forumportal-contributors__meta,
+html[data-theme="dark"] .forumportal-contributors__rank,
+html[data-color-scheme="dark"] .forumportal-contributors__meta,
+html[data-color-scheme="dark"] .forumportal-contributors__rank,
+body.dark .forumportal-contributors__meta,
+body.dark .forumportal-contributors__rank,
+body[data-theme="dark"] .forumportal-contributors__meta,
+body[data-theme="dark"] .forumportal-contributors__rank,
+body[data-color-scheme="dark"] .forumportal-contributors__meta,
+body[data-color-scheme="dark"] .forumportal-contributors__rank,
+body.phpbb-dark .forumportal-contributors__meta,
+body.phpbb-dark .forumportal-contributors__rank {
+    color: #aebcca;
+}
+
+html.dark .forumportal-contributors__avatar,
+html[data-theme="dark"] .forumportal-contributors__avatar,
+html[data-color-scheme="dark"] .forumportal-contributors__avatar,
+body.dark .forumportal-contributors__avatar,
+body[data-theme="dark"] .forumportal-contributors__avatar,
+body[data-color-scheme="dark"] .forumportal-contributors__avatar,
+body.phpbb-dark .forumportal-contributors__avatar {
+    background: #172331;
+    color: #d7e0e8;
+}
+
+

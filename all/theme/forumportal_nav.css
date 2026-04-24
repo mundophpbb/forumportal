@@ -1,0 +1,21 @@
+/* Forum Portal breadcrumb link intentionally follows the active phpBB style.
+   The Open forum button is styled inside forumportal_reviewer_polish.css. */
+.forumportal-nav-standard .icon {
+	color: inherit;
+}
+
+/* Final polish: keep these links visually native to phpBB while aligning the icon cleanly. */
+.forumportal-nav-standard > a {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.forumportal-nav-standard .icon {
+	line-height: 1;
+	vertical-align: middle;
+}
+
+.forumportal-nav-standard span {
+	vertical-align: middle;
+}

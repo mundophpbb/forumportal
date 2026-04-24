@@ -1,0 +1,200 @@
+/* ACP controlled dark-compatibility fallback.
+   Use this when a third-party dark mode extension changes the board colors with custom classes
+   that the portal cannot detect automatically. */
+.forumportal-page--dark-force {
+    background: #101820;
+    color: #d7e0e8;
+}
+
+.forumportal-page--dark-force .forumportal-custom-html,
+.forumportal-page--dark-force .forumportal-card,
+.forumportal-page--dark-force .forumportal-sidecard,
+.forumportal-page--dark-force .forumportal-story__date,
+.forumportal-page--dark-force .forumportal-story__icon,
+.forumportal-page--dark-force .forumportal-pagination__links a,
+.forumportal-page--dark-force .forumportal-poll__option {
+    border-color: #31465a;
+    background: #172331;
+    color: #d7e0e8;
+}
+
+.forumportal-page--dark-force .forumportal-topbar,
+.forumportal-page--dark-force .forumportal-section-head,
+.forumportal-page--dark-force .forumportal-hero,
+.forumportal-page--dark-force .forumportal-story,
+.forumportal-page--dark-force .forumportal-headlines__item,
+.forumportal-page--dark-force .forumportal-mostread__item,
+.forumportal-page--dark-force .forumportal-notices__item,
+.forumportal-page--dark-force .forumportal-contributors__item,
+.forumportal-page--dark-force .forumportal-poll + .forumportal-poll {
+    border-color: #31465a;
+}
+
+.forumportal-page--dark-force .forumportal-page__title,
+.forumportal-page--dark-force .forumportal-hero__title,
+.forumportal-page--dark-force .forumportal-story__title,
+.forumportal-page--dark-force .forumportal-card__title,
+.forumportal-page--dark-force .forumportal-section-head__title,
+.forumportal-page--dark-force .forumportal-sidecard__title,
+.forumportal-page--dark-force .forumportal-headlines__link,
+.forumportal-page--dark-force .forumportal-mostread__link,
+.forumportal-page--dark-force .forumportal-notices__link,
+.forumportal-page--dark-force .forumportal-contributors__name,
+.forumportal-page--dark-force .forumportal-poll__title,
+.forumportal-page--dark-force .forumportal-poll__question,
+.forumportal-page--dark-force .forumportal-story__day {
+    color: #eef4f8;
+}
+
+.forumportal-page--dark-force .forumportal-topbar__eyebrow,
+.forumportal-page--dark-force .forumportal-section-head__title,
+.forumportal-page--dark-force .forumportal-hero__kicker,
+.forumportal-page--dark-force .forumportal-story__label,
+.forumportal-page--dark-force .forumportal-story__month,
+.forumportal-page--dark-force .forumportal-story__year,
+.forumportal-page--dark-force .forumportal-sidecard__period,
+.forumportal-page--dark-force .forumportal-card__meta,
+.forumportal-page--dark-force .forumportal-card__stats,
+.forumportal-page--dark-force .forumportal-headlines__meta,
+.forumportal-page--dark-force .forumportal-story__meta,
+.forumportal-page--dark-force .forumportal-story__excerpt,
+.forumportal-page--dark-force .forumportal-hero__excerpt,
+.forumportal-page--dark-force .forumportal-card__excerpt,
+.forumportal-page--dark-force .forumportal-mostread__meta,
+.forumportal-page--dark-force .forumportal-notices__meta,
+.forumportal-page--dark-force .forumportal-contributors__meta,
+.forumportal-page--dark-force .forumportal-contributors__rank,
+.forumportal-page--dark-force .forumportal-poll__status,
+.forumportal-page--dark-force .forumportal-poll__hint,
+.forumportal-page--dark-force .forumportal-poll__total,
+.forumportal-page--dark-force .forumportal-poll__result,
+.forumportal-page--dark-force .forumportal-pagination__summary {
+    color: #aebcca;
+}
+
+.forumportal-page--dark-force .forumportal-topbar__link,
+.forumportal-page--dark-force .forumportal-hero__cta,
+.forumportal-page--dark-force .forumportal-card__cta,
+.forumportal-page--dark-force .forumportal-poll__topic-link,
+.forumportal-page--dark-force .forumportal-pagination__links a {
+    color: #9dccff !important;
+}
+
+.forumportal-page--dark-force .forumportal-topbar__link:hover,
+.forumportal-page--dark-force .forumportal-hero__title a:hover,
+.forumportal-page--dark-force .forumportal-story__title a:hover,
+.forumportal-page--dark-force .forumportal-card__title a:hover,
+.forumportal-page--dark-force .forumportal-headlines__link:hover,
+.forumportal-page--dark-force .forumportal-mostread__link:hover,
+.forumportal-page--dark-force .forumportal-notices__link:hover,
+.forumportal-page--dark-force .forumportal-contributors__name a:hover,
+.forumportal-page--dark-force .forumportal-poll__title a:hover,
+.forumportal-page--dark-force .forumportal-poll__topic-link:hover {
+    color: #cfe7ff !important;
+    text-decoration: underline;
+}
+
+.forumportal-page--dark-force .forumportal-headlines__item:hover,
+.forumportal-page--dark-force .forumportal-mostread__item:hover,
+.forumportal-page--dark-force .forumportal-notices__item:hover,
+.forumportal-page--dark-force .forumportal-contributors__item:hover,
+.forumportal-page--dark-force .forumportal-card:hover {
+    background: #1d2b3a;
+    border-color: #46647f;
+}
+
+.forumportal-page--dark-force .forumportal-hero__media,
+.forumportal-page--dark-force .forumportal-card__media,
+.forumportal-page--dark-force .forumportal-card__placeholder,
+.forumportal-page--dark-force .forumportal-story__media,
+.forumportal-page--dark-force .forumportal-authorline__avatar,
+.forumportal-page--dark-force .forumportal-contributors__avatar,
+.forumportal-page--dark-force .forumportal-poll__bar {
+    background: #223243;
+    color: #d7e0e8;
+}
+
+.forumportal-page--dark-force .forumportal-alert {
+    border-color: #6fa8dc;
+    background: rgba(111, 168, 220, 0.12);
+    color: #eef4f8;
+}
+
+.forumportal-page--dark-force .forumportal-poll__option--voted {
+    border-left-color: var(--forumportal-poll-color, #bc2a4d);
+}
+
+.forumportal-page--dark-force .forumportal-pagination__links a:hover,
+.forumportal-page--dark-force .forumportal-pagination__links a:focus {
+    border-color: #6fa8dc;
+    background: #223243;
+    color: #cfe7ff !important;
+}
+
+.forumportal-page--dark-force .forumportal-pagination__links strong {
+    border-color: #6fa8dc;
+    background: #275d8e;
+    color: #fff;
+}
+
+.forumportal-page--dark-force .forumportal-poll__submit {
+    border-color: var(--forumportal-poll-color, #bc2a4d);
+    background: var(--forumportal-poll-color, #bc2a4d);
+    color: #fff;
+}
+
+.forumportal-page--dark-force .forumportal-poll__submit:hover,
+.forumportal-page--dark-force .forumportal-poll__submit:focus {
+    border-color: #e86a8a;
+    background: #a82343;
+    color: #fff;
+}
+
+
+.forumportal-page--dark-force .forumportal-sidecard__period {
+    border-color: #31465a;
+    background: #1c2a37;
+    color: #bac8d5;
+}
+
+/* v1016: forced dark-mode poll polish. */
+.forumportal-page--dark-force .forumportal-sidecard--polls {
+	border-top-color: #6fa8dc;
+}
+
+.forumportal-page--dark-force .forumportal-poll__question {
+	border-left-color: #6fa8dc;
+	background: rgba(111, 168, 220, 0.10);
+}
+
+.forumportal-page--dark-force .forumportal-poll__status {
+	border-color: rgba(157, 204, 255, 0.24);
+	background: rgba(157, 204, 255, 0.10);
+	color: #cfe7ff;
+}
+
+.forumportal-page--dark-force .forumportal-poll__option:hover {
+	border-color: #46647f;
+	background: #1d2b3a;
+}
+
+.forumportal-page--dark-force .forumportal-poll__bar-fill {
+	background: var(--forumportal-poll-color, #bc2a4d);
+	opacity: 0.82;
+}
+
+.forumportal-page--dark-force .forumportal-poll__total,
+.forumportal-page--dark-force .forumportal-poll__title {
+	border-color: #31465a;
+}
+
+
+
+.forumportal-page--dark-force .forumportal-open-board-button,
+.forumportal-page--dark-force .forumportal-open-board-button:hover,
+.forumportal-page--dark-force .forumportal-open-board-button:focus {
+	border-color: var(--forumportal-forum-color, #105289);
+	background: var(--forumportal-forum-color, #105289);
+	color: #ffffff !important;
+	text-decoration: none !important;
+}

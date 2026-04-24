@@ -1,0 +1,263 @@
+/* Reviewer feedback polish: spacing, topic icons, nav colors and poll bars. */
+.forumportal-page {
+	--forumportal-portal-color: #bc2a4d;
+	--forumportal-forum-color: #105289;
+	--forumportal-poll-color: #bc2a4d;
+}
+
+.forumportal-page .forumportal-topbar__actions {
+	flex: 0 0 auto;
+	max-width: 45%;
+	padding-right: 8px;
+	box-sizing: border-box;
+}
+
+.forumportal-page .forumportal-open-board-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 7px;
+	max-width: 100%;
+	min-width: 128px;
+	min-height: 34px;
+	padding: 7px 15px;
+	border: 1px solid var(--forumportal-open-forum-color, #105289);
+	border-radius: 6px;
+	background: var(--forumportal-open-forum-color, #105289);
+	color: #ffffff !important;
+	font-weight: 700;
+	line-height: 1.2;
+	text-align: center;
+	text-decoration: none !important;
+	box-sizing: border-box;
+	white-space: nowrap;
+}
+
+.forumportal-page .forumportal-open-board-button::before {
+	color: inherit;
+	opacity: .95;
+}
+
+.forumportal-page .forumportal-open-board-button:hover,
+.forumportal-page .forumportal-open-board-button:focus {
+	border-color: var(--forumportal-open-forum-color, #105289);
+	background: var(--forumportal-open-forum-color, #105289);
+	color: #ffffff !important;
+	filter: brightness(.95);
+	text-decoration: none !important;
+}
+
+.forumportal-card__stats,
+.forumportal-headlines__meta,
+.forumportal-mostread__meta,
+.forumportal-mostcommented__meta,
+.forumportal-notices__meta,
+.forumportal-contributors__meta,
+.forumportal-poll__result,
+.forumportal-poll__total,
+.forumportal-poll__hint {
+	box-sizing: border-box;
+}
+
+.forumportal-card__stats,
+.forumportal-headlines__meta,
+.forumportal-mostread__meta,
+.forumportal-mostcommented__meta,
+.forumportal-notices__meta {
+	display: inline-flex;
+	align-items: center;
+	max-width: 100%;
+	padding: 3px 6px;
+	background: rgba(16, 82, 137, 0.055);
+	border: 1px solid rgba(16, 82, 137, 0.10);
+	line-height: 1.25;
+	overflow-wrap: anywhere;
+}
+
+.forumportal-contributors__meta {
+	display: inline-block;
+	margin-top: 2px;
+	padding: 2px 5px;
+	background: rgba(16, 82, 137, 0.055);
+	border: 1px solid rgba(16, 82, 137, 0.10);
+	line-height: 1.25;
+}
+
+.forumportal-sidecard__period {
+	padding: 4px 8px;
+}
+
+.forumportal-story__icon img {
+	display: block;
+	max-width: 22px;
+	max-height: 22px;
+	width: auto;
+	height: auto;
+}
+
+.forumportal-story--no-icon .forumportal-story__header {
+	gap: 0;
+}
+
+.forumportal-story--no-icon .forumportal-story__meta,
+.forumportal-story--no-icon .forumportal-story__excerpt,
+.forumportal-story--no-icon .forumportal-story__footer {
+	margin-left: 0;
+}
+
+.forumportal-poll__option--voted {
+	border-left-color: var(--forumportal-poll-color);
+}
+
+.forumportal-poll__bar-fill {
+	background: var(--forumportal-poll-color);
+	opacity: .78;
+}
+
+.forumportal-page--visual-prosilver .forumportal-poll__bar-fill,
+.forumportal-page--visual-editorial .forumportal-poll__bar-fill {
+	background: var(--forumportal-poll-color);
+}
+
+@media (max-width: 700px) {
+	.forumportal-page .forumportal-open-board-button {
+		width: 100%;
+		white-space: normal;
+	}
+
+	.forumportal-card__stats,
+	.forumportal-headlines__meta,
+	.forumportal-mostread__meta,
+	.forumportal-mostcommented__meta,
+	.forumportal-notices__meta {
+		display: inline-flex;
+	}
+}
+
+
+/* v1017: keep the portal vote button on the phpBB/ProSilver poll red instead of the older blue button skin. */
+.forumportal-page:not(.forumportal-page--dark-force) .forumportal-poll__submit {
+	border-color: var(--forumportal-poll-color, #bc2a4d) !important;
+	background: var(--forumportal-poll-color, #bc2a4d) !important;
+	color: #ffffff !important;
+}
+
+.forumportal-page:not(.forumportal-page--dark-force) .forumportal-poll__submit:hover,
+.forumportal-page:not(.forumportal-page--dark-force) .forumportal-poll__submit:focus {
+	border-color: #8f1f3a !important;
+	background: #8f1f3a !important;
+	color: #ffffff !important;
+	text-decoration: none !important;
+}
+
+.forumportal-page:not(.forumportal-page--dark-force) .forumportal-poll__submit:focus-visible {
+	outline: 2px solid rgba(188, 42, 77, 0.35);
+	outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+	.forumportal-page .forumportal-topbar {
+		align-items: stretch;
+	}
+
+	.forumportal-page .forumportal-topbar__actions {
+		max-width: none;
+		width: 100%;
+		padding-right: 0;
+		text-align: left;
+	}
+
+	.forumportal-page .forumportal-open-board-button {
+		width: 100%;
+		min-width: 0;
+		white-space: normal;
+	}
+}
+
+/* Final release polish: small alignment and spacing fixes only. */
+.forumportal-page .forumportal-topbar__main {
+	min-width: 0;
+}
+
+.forumportal-page .forumportal-topbar__actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+.forumportal-page .forumportal-open-board-button {
+	flex: 0 0 auto;
+	max-width: min(100%, 260px);
+	box-shadow: none;
+}
+
+.forumportal-page .forumportal-open-board-button:active {
+	transform: translateY(1px);
+}
+
+.forumportal-sidecard__period,
+.forumportal-card__stats,
+.forumportal-headlines__meta,
+.forumportal-mostread__meta,
+.forumportal-mostcommented__meta,
+.forumportal-notices__meta,
+.forumportal-contributors__meta,
+.forumportal-poll__status,
+.forumportal-poll__total,
+.forumportal-poll__hint {
+	border-radius: 3px;
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
+}
+
+.forumportal-sidecard__period {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	margin: 0 0 10px;
+	max-width: 100%;
+}
+
+.forumportal-contributors__item {
+	align-items: center;
+}
+
+.forumportal-contributors__avatar,
+.forumportal-contributors__avatar img,
+.forumportal-contributors__avatar-empty {
+	flex: 0 0 auto;
+}
+
+.forumportal-story__icon,
+.forumportal-story__icon .icon {
+	line-height: 1;
+}
+
+.forumportal-story__icon img {
+	object-fit: contain;
+}
+
+.forumportal-poll__option {
+	gap: 8px;
+}
+
+.forumportal-poll__bar {
+	margin-top: 5px;
+	overflow: hidden;
+}
+
+.forumportal-poll__result {
+	margin-top: 7px;
+}
+
+@media (max-width: 700px) {
+	.forumportal-page .forumportal-topbar__actions {
+		align-items: stretch;
+		justify-content: flex-start;
+	}
+
+	.forumportal-page .forumportal-open-board-button {
+		max-width: 100%;
+	}
+}

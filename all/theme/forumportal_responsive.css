@@ -1,0 +1,276 @@
+/* v1012: small-screen and long-text polish. */
+.forumportal-page__title,
+.forumportal-hero__title,
+.forumportal-story__title,
+.forumportal-sidecard__title,
+.forumportal-headlines__link,
+.forumportal-mostread__link,
+.forumportal-mostcommented__link,
+.forumportal-notices__link,
+.forumportal-poll__title,
+.forumportal-poll__question,
+.forumportal-contributors__name {
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.forumportal-story__media img,
+.forumportal-hero__media img,
+.forumportal-card__media img,
+.forumportal-custom-header__image {
+    max-width: none;
+}
+
+.forumportal-poll__choice {
+    min-width: 0;
+}
+
+.forumportal-poll__choice span,
+.forumportal-poll__choice-text {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 980px) {
+    .forumportal-shell {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .forumportal-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .forumportal-sidecard {
+        min-width: 0;
+    }
+
+    .forumportal-sidecard--html,
+    .forumportal-sidecard--polls {
+        grid-column: 1 / -1;
+    }
+
+    .forumportal-topbar__actions {
+        max-width: 100%;
+        width: 100%;
+        padding-right: 0;
+        text-align: left;
+    }
+
+    .forumportal-topbar__link {
+        text-align: left;
+    }
+}
+
+@media (max-width: 700px) {
+    .forumportal-shell {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .forumportal-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .forumportal-topbar {
+        gap: 10px;
+        margin-bottom: 14px;
+        padding-top: 10px;
+    }
+
+    .forumportal-topbar--minimal .forumportal-page__title,
+    .forumportal-page__title {
+        font-size: 1.85em;
+        line-height: 1.08;
+    }
+
+    .forumportal-hero {
+        gap: 14px;
+        padding-bottom: 14px;
+    }
+
+    .forumportal-hero__content,
+    .forumportal-hero--no-image .forumportal-hero__content {
+        padding: 0;
+    }
+
+    .forumportal-hero__excerpt,
+    .forumportal-story__excerpt {
+        line-height: 1.55;
+    }
+
+    .forumportal-story {
+        padding: 15px 0;
+    }
+
+    .forumportal-story__date {
+        width: auto;
+        max-width: 112px;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .forumportal-story__media,
+    .forumportal-hero__media,
+    .forumportal-card__media,
+    .forumportal-card__placeholder {
+        min-height: 180px;
+    }
+
+    .forumportal-sidecard {
+        padding: 12px;
+    }
+
+    .forumportal-sidecard__title {
+        font-size: 1.12em;
+    }
+
+    .forumportal-authorline__avatar,
+    .forumportal-authorline__avatar img,
+    .forumportal-authorline__avatar .avatar {
+        width: 22px !important;
+        height: 22px !important;
+        flex-basis: 22px;
+    }
+
+    .forumportal-contributors__item {
+        grid-template-columns: 24px 34px minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .forumportal-contributors__avatar,
+    .forumportal-contributors__avatar img,
+    .forumportal-contributors__avatar .avatar,
+    .forumportal-contributors__avatar-empty {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .forumportal-poll__submit {
+        min-height: 38px;
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+
+    .forumportal-pagination__links a,
+    .forumportal-pagination__links strong {
+        min-width: 34px;
+        height: 34px;
+    }
+}
+
+@media (max-width: 480px) {
+    .forumportal-custom-header {
+        min-height: 160px !important;
+    }
+
+    .forumportal-custom-header__overlay {
+        padding: 16px 14px;
+    }
+
+    .forumportal-custom-header__title {
+        font-size: 1.35em;
+    }
+
+    .forumportal-custom-header__subtitle {
+        font-size: 0.9em;
+    }
+
+    .forumportal-hero__title {
+        font-size: 1.65em;
+    }
+
+    .forumportal-story__header {
+        gap: 8px;
+    }
+
+    .forumportal-story__icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .forumportal-story__media,
+    .forumportal-hero__media,
+    .forumportal-card__media,
+    .forumportal-card__placeholder {
+        min-height: 160px;
+    }
+
+    .forumportal-pagination__summary {
+        display: grid;
+        gap: 3px;
+    }
+
+    .forumportal-pagination__dot {
+        display: none;
+    }
+}
+
+
+/* v1018: let the portal follow the real width of the active phpBB style.
+   Some styles use a wider #wrap than ProSilver; the portal must not stay
+   locked to its old internal max-width. */
+#wrap .forumportal-page,
+#wrap .forumportal-shell,
+.forumportal-page,
+.forumportal-shell {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+#wrap .forumportal-shell,
+.forumportal-shell {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#wrap .forumportal-layout,
+#wrap .forumportal-main,
+#wrap .forumportal-sidebar,
+#wrap .forumportal-topbar,
+#wrap .forumportal-custom-header,
+#wrap .forumportal-custom-html,
+#wrap .forumportal-lead,
+#wrap .forumportal-stream,
+#wrap .forumportal-bottombar,
+.forumportal-layout,
+.forumportal-main,
+.forumportal-sidebar,
+.forumportal-topbar,
+.forumportal-custom-header,
+.forumportal-custom-html,
+.forumportal-lead,
+.forumportal-stream,
+.forumportal-bottombar {
+    box-sizing: border-box;
+}
+
+/* When the sidebar is disabled, do not keep the main column limited to the
+   previous editorial width. It should fill the available forum width. */
+#wrap .forumportal-layout--no-sidebar .forumportal-main,
+#wrap .forumportal-main--full,
+.forumportal-layout--no-sidebar .forumportal-main,
+.forumportal-main--full {
+    width: 100%;
+    max-width: none;
+}
+
+/* Keep media safe inside wider custom styles. */
+#wrap .forumportal-page img,
+.forumportal-page img {
+    max-width: 100%;
+}
+
+#wrap .forumportal-hero__media img,
+#wrap .forumportal-story__media img,
+#wrap .forumportal-card__media img,
+#wrap .forumportal-custom-header__image,
+.forumportal-hero__media img,
+.forumportal-story__media img,
+.forumportal-card__media img,
+.forumportal-custom-header__image {
+    max-width: none;
+}

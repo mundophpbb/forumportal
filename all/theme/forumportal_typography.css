@@ -1,0 +1,40 @@
+.forumportal-page {
+    padding-bottom: 20px;
+    background: #f6f6f4;
+}
+
+.forumportal-page--font-portal {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.forumportal-page--font-forum {
+    font-family: inherit;
+}
+
+.forumportal-page button,
+.forumportal-page input,
+.forumportal-page select,
+.forumportal-page textarea {
+    font-family: inherit;
+}
+
+/* Typography mode
+   - forum mode inherits the active phpBB style
+   - portal mode restores the editorial serif accents used by the original portal design */
+.forumportal-page--font-portal .forumportal-page__title,
+.forumportal-page--font-portal .forumportal-hero__title,
+.forumportal-page--font-portal .forumportal-card__title,
+.forumportal-page--font-portal .forumportal-sidecard__title,
+.forumportal-page--font-portal .forumportal-headlines__link,
+.forumportal-page--font-portal .forumportal-story__title,
+.forumportal-page--font-portal .forumportal-story__day,
+.forumportal-page--font-portal .forumportal-mostread__link,
+.forumportal-page--font-portal .forumportal-mostcommented__link,
+.forumportal-page--font-portal .forumportal-notices__link,
+.forumportal-page--font-portal .forumportal-contributors__name,
+.forumportal-page--font-portal .forumportal-poll__title,
+.forumportal-page--font-portal .forumportal-poll__question,
+.forumportal-page--font-portal .forumportal-mostread__item::before,
+.forumportal-page--font-portal .forumportal-contributors__rank {
+    font-family: Georgia, "Times New Roman", serif;
+}

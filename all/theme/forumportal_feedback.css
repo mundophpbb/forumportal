@@ -1,0 +1,57 @@
+/* Feedback tuning: author avatars, calmer hover states and dark-style compatibility. */
+.forumportal-authorline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.forumportal-authorline__author {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+}
+
+.forumportal-authorline__avatar {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #d9dde1;
+    vertical-align: middle;
+}
+
+.forumportal-authorline__avatar img,
+.forumportal-authorline__avatar .avatar {
+    display: block;
+    width: 24px !important;
+    height: 24px !important;
+    max-width: none !important;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.forumportal-story__title a:hover,
+.forumportal-hero__title a:hover,
+.forumportal-headlines__link:hover,
+.forumportal-mostread__link:hover,
+.forumportal-notices__link:hover {
+    color: #1f4f7a;
+    text-decoration: underline;
+}
+
+.forumportal-headlines__item,
+.forumportal-mostread__item,
+.forumportal-notices__item {
+    transition: background-color .15s ease, border-color .15s ease;
+}
+
+.forumportal-headlines__item:hover,
+.forumportal-mostread__item:hover,
+.forumportal-notices__item:hover {
+    background: #f4f7fa;
+}
+
