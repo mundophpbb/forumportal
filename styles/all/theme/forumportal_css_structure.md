@@ -46,3 +46,8 @@ The result bar intentionally follows the ProSilver-style red (`#bc2a4d`) through
 ## v1018 — largura do tema
 
 O ajuste final em `forumportal_responsive.css` remove limites internos de largura do portal, permitindo que `.forumportal-shell` acompanhe a largura real do `#wrap`/tema ativo. Isso evita que o portal fique preso à largura editorial antiga em estilos mais largos que o ProSilver.
+
+## v1019 — Soft corners
+
+Small radius rules were added to `forumportal_theme_compat.css` using `--forumportal-soft-radius: 4px`.
+This keeps cards and sidebar blocks slightly rounded without changing the portal's layout or PHP logic.

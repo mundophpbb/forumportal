@@ -1,0 +1,169 @@
+/* v1021: final dark-theme hardfix for styles that do not expose a standard dark class.
+   This file is intentionally loaded last. It fixes the light topbar/title area and
+   white story cards when Forum Portal is used with dark phpBB styles. */
+
+/* Standard dark markers and JS-detected dark board. */
+.forumportal-page--dark-force,
+.forumportal-page--detected-dark,
+html[class*="dark" i] .forumportal-page--dark-auto,
+html[data-theme*="dark" i] .forumportal-page--dark-auto,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto,
+body[class*="dark" i] .forumportal-page--dark-auto,
+body[data-theme*="dark" i] .forumportal-page--dark-auto,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto,
+body.phpbb-dark .forumportal-page--dark-auto {
+	background: #101820 !important;
+	color: #d7e0e8 !important;
+	color-scheme: dark;
+}
+
+.forumportal-page--dark-force .forumportal-topbar,
+.forumportal-page--detected-dark .forumportal-topbar,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-topbar,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-topbar,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-topbar,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-topbar,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-topbar,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-topbar,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-topbar,
+.forumportal-page--dark-force .forumportal-story,
+.forumportal-page--detected-dark .forumportal-story,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-story,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-story,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-story,
+.forumportal-page--dark-force .forumportal-stream--grid2 .forumportal-story,
+.forumportal-page--detected-dark .forumportal-stream--grid2 .forumportal-story,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story {
+	background: #172331 !important;
+	border-color: #31465a !important;
+	color: #d7e0e8 !important;
+}
+
+.forumportal-page--dark-force .forumportal-story__content,
+.forumportal-page--detected-dark .forumportal-story__content,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__content,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__content,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__content,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__content,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__content,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__content,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-story__content {
+	background: transparent !important;
+	color: #d7e0e8 !important;
+}
+
+.forumportal-page--dark-force .forumportal-story__date,
+.forumportal-page--detected-dark .forumportal-story__date,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__date,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__date,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__date,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__date,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__date,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__date,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-story__date,
+.forumportal-page--dark-force .forumportal-story__icon,
+.forumportal-page--detected-dark .forumportal-story__icon,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__icon,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__icon,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__icon,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__icon,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__icon,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__icon,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-story__icon {
+	background: #1d2b3a !important;
+	border-color: #31465a !important;
+	color: #d7e0e8 !important;
+}
+
+.forumportal-page--dark-force .forumportal-page__title,
+.forumportal-page--detected-dark .forumportal-page__title,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-page__title,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-page__title,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-page__title,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-page__title,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-page__title,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-page__title,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-page__title,
+.forumportal-page--dark-force .forumportal-section-head__title,
+.forumportal-page--detected-dark .forumportal-section-head__title,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-section-head__title,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-section-head__title,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-section-head__title,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-section-head__title,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-section-head__title,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-section-head__title,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-section-head__title {
+	color: #eef4f8 !important;
+}
+
+.forumportal-page--dark-force .forumportal-story__title a,
+.forumportal-page--detected-dark .forumportal-story__title a,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__title a,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__title a,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__title a,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__title a,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__title a,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__title a,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-story__title a {
+	color: #6fb5ff !important;
+}
+
+.forumportal-page--dark-force .forumportal-story__meta,
+.forumportal-page--dark-force .forumportal-story__excerpt,
+.forumportal-page--detected-dark .forumportal-story__meta,
+.forumportal-page--detected-dark .forumportal-story__excerpt,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__meta,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__excerpt,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__meta,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__excerpt,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__meta,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__excerpt,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__meta,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-story__excerpt,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__meta,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-story__excerpt,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__meta,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-story__excerpt,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-story__meta,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-story__excerpt {
+	color: #b8c7d6 !important;
+}
+
+/* CSS-only detection for modern browsers: style folder names such as prosilver_dark. */
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="dark" i]) .forumportal-page--dark-auto,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="black" i]) .forumportal-page--dark-auto,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="night" i]) .forumportal-page--dark-auto,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="midnight" i]) .forumportal-page--dark-auto,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="slate" i]) .forumportal-page--dark-auto,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="carbon" i]) .forumportal-page--dark-auto {
+	background: #101820 !important;
+	color: #d7e0e8 !important;
+	color-scheme: dark;
+}
+
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="dark" i]) .forumportal-page--dark-auto .forumportal-topbar,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="black" i]) .forumportal-page--dark-auto .forumportal-topbar,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="night" i]) .forumportal-page--dark-auto .forumportal-topbar,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="midnight" i]) .forumportal-page--dark-auto .forumportal-topbar,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="slate" i]) .forumportal-page--dark-auto .forumportal-topbar,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="carbon" i]) .forumportal-page--dark-auto .forumportal-topbar,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="dark" i]) .forumportal-page--dark-auto .forumportal-story,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="black" i]) .forumportal-page--dark-auto .forumportal-story,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="night" i]) .forumportal-page--dark-auto .forumportal-story,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="midnight" i]) .forumportal-page--dark-auto .forumportal-story,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="slate" i]) .forumportal-page--dark-auto .forumportal-story,
+html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="carbon" i]) .forumportal-page--dark-auto .forumportal-story {
+	background: #172331 !important;
+	border-color: #31465a !important;
+	color: #d7e0e8 !important;
+}

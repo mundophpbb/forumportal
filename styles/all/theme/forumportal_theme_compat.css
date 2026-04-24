@@ -143,3 +143,45 @@ body.phpbb-dark .forumportal-poll__bar-fill {
 	opacity: 0.78;
 }
 
+
+/* v1019: optional soft corners for portal cards and blocks.
+   Kept intentionally subtle so the portal still feels close to phpBB/ProSilver. */
+.forumportal-page {
+    --forumportal-soft-radius: 4px;
+}
+
+.forumportal-hero,
+.forumportal-story,
+.forumportal-sidecard,
+.forumportal-custom-html,
+.forumportal-custom-header,
+.forumportal-topbar,
+.forumportal-alert,
+.forumportal-pagination,
+.forumportal-poll,
+.forumportal-poll__option,
+.forumportal-contributors__item {
+    border-radius: var(--forumportal-soft-radius) !important;
+}
+
+.forumportal-hero,
+.forumportal-story,
+.forumportal-custom-header,
+.forumportal-poll,
+.forumportal-poll__option {
+    overflow: hidden;
+}
+
+.forumportal-hero__media,
+.forumportal-story__media,
+.forumportal-custom-header__image,
+.forumportal-custom-header__overlay {
+    border-radius: var(--forumportal-soft-radius);
+}
+
+.forumportal-open-board-button,
+.forumportal-poll__submit,
+.forumportal-pagination__links a,
+.forumportal-pagination__links strong {
+    border-radius: 6px;
+}
