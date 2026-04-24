@@ -1,12 +1,13 @@
 /* Forum Portal dark-theme detector.
+ * v1022: ignores Forum Portal's own dark CSS files when detecting the active phpBB style.
  * Adds a portal-only class when the surrounding phpBB style is visually dark.
- * This avoids depending on a specific dark-style class name.
  */
 (function () {
 	'use strict';
 
 	var DARK_CLASS = 'forumportal-page--detected-dark';
 	var TRANSPARENT = /rgba?\(\s*0\s*,\s*0\s*,\s*0\s*(?:,\s*0\s*)?\)|transparent/i;
+	var DARK_WORDS = /(?:^|[\W_-])(dark|black|night|midnight|slate|carbon)(?:$|[\W_-])/i;
 
 	function parseRgb(value) {
 		var match, alpha;
@@ -32,28 +33,47 @@
 		return (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]) / 255;
 	}
 
+	function isDarkToken(value) {
+		return !!(value && DARK_WORDS.test(String(value).toLowerCase()));
+	}
+
+	function getBoardStyleTokens() {
+		var tokens = [];
+
+		Array.prototype.forEach.call(document.querySelectorAll('link[href]'), function (link) {
+			var rawHref = link.getAttribute('href') || '';
+			var href = rawHref.split('#')[0].split('?')[0].toLowerCase();
+			var match;
+
+			/* Do not let this extension's own filenames such as forumportal_dark_auto.css
+			   force ProSilver into dark mode. Only the active board style should count. */
+			if (!href || href.indexOf('/ext/') !== -1 || href.indexOf('forumportal_') !== -1) {
+				return;
+			}
+
+			match = href.match(/(?:^|\/)styles\/([^\/]+)\/theme\//i);
+			if (match && match[1]) {
+				tokens.push(match[1]);
+				tokens.push(href);
+			}
+		});
+
+		return tokens.join(' ');
+	}
+
 	function hasDarkMarker() {
 		var root = document.documentElement;
 		var body = document.body;
-		var links = Array.prototype.map.call(document.querySelectorAll('link[href]'), function (link) {
-			return link.getAttribute('href') || '';
-		}).join(' ');
-		var haystack = [
+		var markerHaystack = [
 			root.className || '',
 			body ? body.className || '' : '',
 			root.getAttribute('data-theme') || '',
 			root.getAttribute('data-color-scheme') || '',
 			body ? body.getAttribute('data-theme') || '' : '',
-			body ? body.getAttribute('data-color-scheme') || '' : '',
-			links
-		].join(' ').toLowerCase();
+			body ? body.getAttribute('data-color-scheme') || '' : ''
+		].join(' ');
 
-		return haystack.indexOf('dark') !== -1 ||
-			haystack.indexOf('black') !== -1 ||
-			haystack.indexOf('night') !== -1 ||
-			haystack.indexOf('midnight') !== -1 ||
-			haystack.indexOf('slate') !== -1 ||
-			haystack.indexOf('carbon') !== -1;
+		return isDarkToken(markerHaystack) || isDarkToken(getBoardStyleTokens());
 	}
 
 	function firstVisibleBackground(elements) {
@@ -100,7 +120,10 @@
 
 	function apply() {
 		document.querySelectorAll('.forumportal-page--dark-auto').forEach(function (page) {
-			page.classList.toggle(DARK_CLASS, detectDark(page));
+			page.classList.remove(DARK_CLASS);
+			if (detectDark(page)) {
+				page.classList.add(DARK_CLASS);
+			}
 		});
 	}
 
