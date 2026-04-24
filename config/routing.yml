@@ -1,3 +1,0 @@
-mundophpbb_forumportal_controller:
-    path: /portal
-    defaults: { _controller: mundophpbb.forumportal.controller:handle }
