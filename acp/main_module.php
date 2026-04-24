@@ -65,6 +65,12 @@ class main_module
             {
                 $dark_compat_mode = 'auto';
             }
+            $story_icon_mode = (string) $request->variable('forumportal_story_icon_mode', 'megaphone');
+            if (!in_array($story_icon_mode, array('megaphone', 'topic', 'none'), true))
+            {
+                $story_icon_mode = 'megaphone';
+            }
+            $open_forum_color = $this->sanitize_hex_color($request->variable('forumportal_open_forum_color', '#105289', true), '#105289');
             $block_order_notices = max(1, min(99, (int) $request->variable('forumportal_block_order_notices', 10)));
             $block_order_headlines = max(1, min(99, (int) $request->variable('forumportal_block_order_headlines', 20)));
             $block_order_top_contributors = max(1, min(99, (int) $request->variable('forumportal_block_order_top_contributors', 30)));
@@ -140,6 +146,8 @@ class main_module
                 set_config('forumportal_visual_mode', $visual_mode);
                 set_config('forumportal_posts_layout', $posts_layout);
                 set_config('forumportal_dark_compat_mode', $dark_compat_mode);
+                set_config('forumportal_story_icon_mode', $story_icon_mode);
+                set_config('forumportal_open_forum_color', $open_forum_color);
                 set_config('forumportal_block_order_notices', $block_order_notices);
                 set_config('forumportal_block_order_headlines', $block_order_headlines);
                 set_config('forumportal_block_order_top_contributors', $block_order_top_contributors);
@@ -215,6 +223,10 @@ class main_module
             'S_FORUMPORTAL_POSTS_LAYOUT_GRID2'=> (isset($config['forumportal_posts_layout']) && (string) $config['forumportal_posts_layout'] === 'grid2'),
             'S_FORUMPORTAL_DARK_COMPAT_AUTO'   => (!isset($config['forumportal_dark_compat_mode']) || (string) $config['forumportal_dark_compat_mode'] === 'auto'),
             'S_FORUMPORTAL_DARK_COMPAT_FORCE'  => (isset($config['forumportal_dark_compat_mode']) && (string) $config['forumportal_dark_compat_mode'] === 'force'),
+            'S_FORUMPORTAL_STORY_ICON_MEGAPHONE' => (!isset($config['forumportal_story_icon_mode']) || (string) $config['forumportal_story_icon_mode'] === 'megaphone'),
+            'S_FORUMPORTAL_STORY_ICON_TOPIC'   => (isset($config['forumportal_story_icon_mode']) && (string) $config['forumportal_story_icon_mode'] === 'topic'),
+            'S_FORUMPORTAL_STORY_ICON_NONE'    => (isset($config['forumportal_story_icon_mode']) && (string) $config['forumportal_story_icon_mode'] === 'none'),
+            'FORUMPORTAL_OPEN_FORUM_COLOR'     => $this->sanitize_hex_color(isset($config['forumportal_open_forum_color']) ? (string) $config['forumportal_open_forum_color'] : '', '#105289'),
             'FORUMPORTAL_BLOCK_ORDER_NOTICES'   => isset($config['forumportal_block_order_notices']) ? (int) $config['forumportal_block_order_notices'] : 10,
             'FORUMPORTAL_BLOCK_ORDER_HEADLINES' => isset($config['forumportal_block_order_headlines']) ? (int) $config['forumportal_block_order_headlines'] : 20,
             'FORUMPORTAL_BLOCK_ORDER_TOP_CONTRIBUTORS' => isset($config['forumportal_block_order_top_contributors']) ? (int) $config['forumportal_block_order_top_contributors'] : 30,
@@ -298,6 +310,17 @@ class main_module
         return $options;
     }
 
+
+    protected function sanitize_hex_color($value, $fallback)
+    {
+        $value = trim((string) $value);
+        if (preg_match('/^#[0-9a-fA-F]{6}$/', $value))
+        {
+            return strtolower($value);
+        }
+
+        return $fallback;
+    }
 
     protected function config_bool($config, $key, $default)
     {

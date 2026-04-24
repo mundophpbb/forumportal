@@ -121,7 +121,7 @@
 }
 
 .forumportal-page--dark-force .forumportal-poll__option--voted {
-    border-left-color: #9dccff;
+    border-left-color: var(--forumportal-poll-color, #bc2a4d);
 }
 
 .forumportal-page--dark-force .forumportal-pagination__links a:hover,
@@ -131,17 +131,22 @@
     color: #cfe7ff !important;
 }
 
-.forumportal-page--dark-force .forumportal-pagination__links strong,
-.forumportal-page--dark-force .forumportal-poll__submit {
+.forumportal-page--dark-force .forumportal-pagination__links strong {
     border-color: #6fa8dc;
     background: #275d8e;
     color: #fff;
 }
 
+.forumportal-page--dark-force .forumportal-poll__submit {
+    border-color: var(--forumportal-poll-color, #bc2a4d);
+    background: var(--forumportal-poll-color, #bc2a4d);
+    color: #fff;
+}
+
 .forumportal-page--dark-force .forumportal-poll__submit:hover,
 .forumportal-page--dark-force .forumportal-poll__submit:focus {
-    border-color: #9dccff;
-    background: #326fa6;
+    border-color: #e86a8a;
+    background: #a82343;
     color: #fff;
 }
 
@@ -174,7 +179,7 @@
 }
 
 .forumportal-page--dark-force .forumportal-poll__bar-fill {
-	background: #9dccff;
+	background: var(--forumportal-poll-color, #bc2a4d);
 	opacity: 0.82;
 }
 
@@ -183,3 +188,13 @@
 	border-color: #31465a;
 }
 
+
+
+.forumportal-page--dark-force .forumportal-open-board-button,
+.forumportal-page--dark-force .forumportal-open-board-button:hover,
+.forumportal-page--dark-force .forumportal-open-board-button:focus {
+	border-color: var(--forumportal-forum-color, #105289);
+	background: var(--forumportal-forum-color, #105289);
+	color: #ffffff !important;
+	text-decoration: none !important;
+}

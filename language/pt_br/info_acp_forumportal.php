@@ -162,4 +162,14 @@ $lang = array_merge($lang, array(
     'ACP_FORUMPORTAL_POLLS_EXPLAIN'            => 'Configure o bloco de enquetes, votação no portal, votos de convidados, limite, período e enquete fixa.',
     'ACP_FORUMPORTAL_ORDER_FIELD_EXPLAIN'      => 'Número de ordem do bloco lateral. Valores menores aparecem primeiro.',
 
+    'ACP_FORUMPORTAL_STORY_ICON_MODE'          => 'Ícone das publicações',
+    'ACP_FORUMPORTAL_STORY_ICON_MODE_EXPLAIN'  => 'Escolha se os cards do portal devem usar o megafone padrão, o ícone do tópico escolhido no phpBB ou nenhum ícone.',
+    'ACP_FORUMPORTAL_STORY_ICON_MEGAPHONE'     => 'Usar megafone padrão',
+    'ACP_FORUMPORTAL_STORY_ICON_TOPIC'         => 'Usar ícone do tópico; se o tópico não tiver ícone, não mostrar nada',
+    'ACP_FORUMPORTAL_STORY_ICON_NONE'          => 'Não mostrar ícone',
+
+
+    'ACP_FORUMPORTAL_OPEN_FORUM_COLOR'          => 'Cor do botão Abrir fórum',
+    'ACP_FORUMPORTAL_OPEN_FORUM_COLOR_EXPLAIN'  => 'Cor hexadecimal usada somente no botão Abrir fórum do portal. O link Portal e o Índice do fórum continuam seguindo o tema ativo.',
+
 ));

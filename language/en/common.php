@@ -89,4 +89,7 @@ $lang = array_merge($lang, array(
     'FORUMPORTAL_POLL_ERROR_NO_PERMISSION'=> 'You do not have permission to vote in this poll.',
     'FORUMPORTAL_POLL_ERROR_UNAVAILABLE'  => 'The poll is not available right now.',
 
+    'FORUMPORTAL_NAV_FORUM'               => 'Forum',
+
+
 ));

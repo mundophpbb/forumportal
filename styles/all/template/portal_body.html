@@ -1,6 +1,6 @@
 <!-- INCLUDE overall_header.html -->
 
-<div class="forumportal-page page-body<!-- IF S_FORUMPORTAL_TYPOGRAPHY_PORTAL --> forumportal-page--font-portal<!-- ELSE --> forumportal-page--font-forum<!-- ENDIF --><!-- IF S_FORUMPORTAL_VISUAL_PROSILVER --> forumportal-page--visual-prosilver<!-- ELSE --> forumportal-page--visual-editorial<!-- ENDIF --><!-- IF S_FORUMPORTAL_POSTS_LAYOUT_GRID2 --> forumportal-page--posts-grid2<!-- ELSE --> forumportal-page--posts-list<!-- ENDIF --><!-- IF S_FORUMPORTAL_DARK_COMPAT_FORCE --> forumportal-page--dark-force<!-- ELSE --> forumportal-page--dark-auto<!-- ENDIF -->">
+<div class="forumportal-page page-body<!-- IF S_FORUMPORTAL_TYPOGRAPHY_PORTAL --> forumportal-page--font-portal<!-- ELSE --> forumportal-page--font-forum<!-- ENDIF --><!-- IF S_FORUMPORTAL_VISUAL_PROSILVER --> forumportal-page--visual-prosilver<!-- ELSE --> forumportal-page--visual-editorial<!-- ENDIF --><!-- IF S_FORUMPORTAL_POSTS_LAYOUT_GRID2 --> forumportal-page--posts-grid2<!-- ELSE --> forumportal-page--posts-list<!-- ENDIF --><!-- IF S_FORUMPORTAL_DARK_COMPAT_FORCE --> forumportal-page--dark-force<!-- ELSE --> forumportal-page--dark-auto<!-- ENDIF -->" style="--forumportal-open-forum-color: {FORUMPORTAL_OPEN_FORUM_COLOR};">
 	<div class="forumportal-shell">
 		<!-- IF S_FORUMPORTAL_CUSTOM_HEADER -->
 		<div class="forumportal-custom-header<!-- IF S_FORUMPORTAL_HIDE_STANDARD_HEADER --> forumportal-custom-header--standalone<!-- ENDIF -->" style="min-height: {FORUMPORTAL_HEADER_HEIGHT}px">
@@ -18,7 +18,7 @@
 				<h1 class="forumportal-page__title">{PORTAL_PAGE_TITLE}</h1>
 			</div>
 			<div class="forumportal-topbar__actions">
-				<a class="forumportal-topbar__link" href="{U_FORUM_INDEX}">{L_FORUMPORTAL_GO_TO_FORUM}</a>
+				<a class="forumportal-topbar__link forumportal-open-board-button" href="{U_FORUM_INDEX}">{L_FORUMPORTAL_GO_TO_FORUM}</a>
 			</div>
 		</div>
 
@@ -61,7 +61,7 @@
 				</div>
 				<div class="forumportal-stream<!-- IF S_FORUMPORTAL_POSTS_LAYOUT_GRID2 --> forumportal-stream--grid2<!-- ELSE --> forumportal-stream--list<!-- ENDIF -->">
 					<!-- BEGIN topics -->
-					<article class="forumportal-story<!-- IF topics.S_FEATURED --> forumportal-story--featured<!-- ENDIF --><!-- IF not S_FORUMPORTAL_SHOW_DATE --> forumportal-story--no-date<!-- ENDIF --><!-- IF topics.IMAGE --> forumportal-story--has-image<!-- ELSE --> forumportal-story--no-image<!-- ENDIF -->">
+					<article class="forumportal-story<!-- IF topics.S_FEATURED --> forumportal-story--featured<!-- ENDIF --><!-- IF not S_FORUMPORTAL_SHOW_DATE --> forumportal-story--no-date<!-- ENDIF --><!-- IF topics.IMAGE --> forumportal-story--has-image<!-- ELSE --> forumportal-story--no-image<!-- ENDIF --><!-- IF S_FORUMPORTAL_STORY_ICON_NONE or (S_FORUMPORTAL_STORY_ICON_TOPIC and not topics.TOPIC_ICON) --> forumportal-story--no-icon<!-- ENDIF -->">
 						<!-- IF S_FORUMPORTAL_SHOW_DATE -->
 						<div class="forumportal-story__date" aria-hidden="true">
 							<span class="forumportal-story__day">{topics.DATE_DAY}</span>
@@ -78,12 +78,15 @@
 						<!-- ENDIF -->
 						<div class="forumportal-story__content">
 							<div class="forumportal-story__header">
-								<span class="forumportal-story__icon" aria-hidden="true"><i class="icon fa-bullhorn fa-fw" aria-hidden="true"></i></span>
+								<!-- IF S_FORUMPORTAL_STORY_ICON_MEGAPHONE or (S_FORUMPORTAL_STORY_ICON_TOPIC and topics.TOPIC_ICON) -->
+								<span class="forumportal-story__icon" aria-hidden="true"><!-- IF S_FORUMPORTAL_STORY_ICON_TOPIC and topics.TOPIC_ICON -->{topics.TOPIC_ICON}<!-- ELSE --><i class="icon fa-bullhorn fa-fw" aria-hidden="true"></i><!-- ENDIF --></span>
+								<!-- ENDIF -->
 								<div class="forumportal-story__headline">
+									<!-- IF topics.S_FEATURED -->
 									<div class="forumportal-story__kicker">
-										<span class="forumportal-story__label">{L_FORUMPORTAL_LATEST_STORIES}</span>
-										<!-- IF topics.S_FEATURED --><span class="forumportal-card__badge">{L_FORUMPORTAL_FEATURED}</span><!-- ENDIF -->
+										<span class="forumportal-card__badge">{L_FORUMPORTAL_FEATURED}</span>
 									</div>
+									<!-- ENDIF -->
 									<h3 class="forumportal-story__title"><a href="{topics.U_VIEW_TOPIC}">{topics.TITLE}</a></h3>
 								</div>
 							</div>

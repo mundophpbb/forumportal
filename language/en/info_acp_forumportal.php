@@ -162,4 +162,14 @@ $lang = array_merge($lang, array(
     'ACP_FORUMPORTAL_POLLS_EXPLAIN'            => 'Configure the polls block, portal voting, guest voting, limit, period and pinned poll.',
     'ACP_FORUMPORTAL_ORDER_FIELD_EXPLAIN'      => 'Sidebar block order number. Lower values appear first.',
 
+    'ACP_FORUMPORTAL_STORY_ICON_MODE'          => 'Post icon',
+    'ACP_FORUMPORTAL_STORY_ICON_MODE_EXPLAIN'  => 'Choose whether portal cards use the default megaphone, the phpBB topic icon, or no icon.',
+    'ACP_FORUMPORTAL_STORY_ICON_MEGAPHONE'     => 'Use default megaphone',
+    'ACP_FORUMPORTAL_STORY_ICON_TOPIC'         => 'Use topic icon; if the topic has no icon, show nothing',
+    'ACP_FORUMPORTAL_STORY_ICON_NONE'          => 'Show no icon',
+
+
+    'ACP_FORUMPORTAL_OPEN_FORUM_COLOR'          => 'Open forum button color',
+    'ACP_FORUMPORTAL_OPEN_FORUM_COLOR_EXPLAIN'  => 'Hex color used only by the portal Open forum button. The Portal link and Board index keep the active style theme.',
+
 ));

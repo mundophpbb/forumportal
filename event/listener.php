@@ -129,9 +129,21 @@ class listener implements EventSubscriberInterface
             'U_FORUMPORTAL'              => $this->helper->route('mundophpbb_forumportal_controller'),
             'U_FORUM_INDEX_BYPASS'       => $forum_index_url,
             'FORUMPORTAL_NAV_TITLE'      => $nav_title,
+            'FORUMPORTAL_BOARD_TITLE'    => (string) $this->config['sitename'],
             'S_FORUMPORTAL_HOME_ENABLED' => ((int) $this->config['forumportal_home_enabled'] === 1),
             'U_INDEX'                    => (((int) $this->config['forumportal_home_enabled'] === 1) ? $forum_index_url : append_sid($this->phpbb_root_path . 'index.' . $this->php_ext)),
         ));
+    }
+
+    protected function sanitize_hex_color($value, $fallback)
+    {
+        $value = trim((string) $value);
+        if (preg_match('/^#[0-9a-fA-F]{6}$/', $value))
+        {
+            return strtolower($value);
+        }
+
+        return $fallback;
     }
 
     protected function redirect_index_to_portal()

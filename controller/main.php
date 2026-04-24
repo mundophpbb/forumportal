@@ -48,6 +48,9 @@ class main
     /** @var array|null */
     protected $topic_comment_metric = null;
 
+    /** @var array */
+    protected $topic_icon_cache = array();
+
     public function __construct(
         \phpbb\auth\auth $auth,
         \phpbb\config\config $config,
@@ -138,6 +141,12 @@ class main
         $visual_mode = (isset($this->config['forumportal_visual_mode']) && (string) $this->config['forumportal_visual_mode'] === 'prosilver') ? 'prosilver' : 'editorial';
         $posts_layout = (isset($this->config['forumportal_posts_layout']) && (string) $this->config['forumportal_posts_layout'] === 'grid2') ? 'grid2' : 'list';
         $dark_compat_mode = (isset($this->config['forumportal_dark_compat_mode']) && (string) $this->config['forumportal_dark_compat_mode'] === 'force') ? 'force' : 'auto';
+        $story_icon_mode = isset($this->config['forumportal_story_icon_mode']) ? (string) $this->config['forumportal_story_icon_mode'] : 'megaphone';
+        if (!in_array($story_icon_mode, array('megaphone', 'topic', 'none'), true))
+        {
+            $story_icon_mode = 'megaphone';
+        }
+        $open_forum_color = $this->sanitize_hex_color(isset($this->config['forumportal_open_forum_color']) ? (string) $this->config['forumportal_open_forum_color'] : '', '#105289');
         $header_mode = isset($this->config['forumportal_header_mode']) ? (string) $this->config['forumportal_header_mode'] : 'standard';
         if (!in_array($header_mode, array('standard', 'custom', 'custom_only'), true))
         {
@@ -247,7 +256,7 @@ class main
         $query_limit = $per_page + (($start === 0 && $use_fixed_hero) ? 1 : 0);
         $topic_cards_assigned = 0;
 
-        $sql = 'SELECT t.topic_id, t.forum_id, t.topic_title, t.topic_time, t.topic_views, t.topic_first_post_id,
+        $sql = 'SELECT t.topic_id, t.forum_id, t.icon_id, t.topic_title, t.topic_time, t.topic_views, t.topic_first_post_id,
                        p.post_text, p.bbcode_uid, p.bbcode_bitfield,
                        p.enable_bbcode, p.enable_smilies, p.enable_magic_url,
                        u.user_id, u.username, u.user_colour, u.user_avatar, u.user_avatar_type, u.user_avatar_width, u.user_avatar_height,
@@ -394,6 +403,11 @@ class main
             'S_FORUMPORTAL_POSTS_LAYOUT_GRID2'=> ($posts_layout === 'grid2'),
             'S_FORUMPORTAL_DARK_COMPAT_AUTO'  => ($dark_compat_mode === 'auto'),
             'S_FORUMPORTAL_DARK_COMPAT_FORCE' => ($dark_compat_mode === 'force'),
+            'S_FORUMPORTAL_STORY_ICON_MEGAPHONE' => ($story_icon_mode === 'megaphone'),
+            'S_FORUMPORTAL_STORY_ICON_TOPIC'  => ($story_icon_mode === 'topic'),
+            'S_FORUMPORTAL_STORY_ICON_NONE'   => ($story_icon_mode === 'none'),
+            'FORUMPORTAL_OPEN_FORUM_COLOR'    => $open_forum_color,
+            'FORUMPORTAL_BOARD_TITLE'         => (string) $this->config['sitename'],
             'FORUMPORTAL_BLOCK_ORDER_NOTICES'  => isset($this->config['forumportal_block_order_notices']) ? (int) $this->config['forumportal_block_order_notices'] : 10,
             'FORUMPORTAL_BLOCK_ORDER_HEADLINES' => isset($this->config['forumportal_block_order_headlines']) ? (int) $this->config['forumportal_block_order_headlines'] : 20,
             'FORUMPORTAL_BLOCK_ORDER_TOP_CONTRIBUTORS' => isset($this->config['forumportal_block_order_top_contributors']) ? (int) $this->config['forumportal_block_order_top_contributors'] : 30,
@@ -441,7 +455,7 @@ class main
             return array();
         }
 
-        $sql = 'SELECT t.topic_id, t.forum_id, t.topic_title, t.topic_time, t.topic_views, t.topic_first_post_id,
+        $sql = 'SELECT t.topic_id, t.forum_id, t.icon_id, t.topic_title, t.topic_time, t.topic_views, t.topic_first_post_id,
                        p.post_text, p.bbcode_uid, p.bbcode_bitfield,
                        p.enable_bbcode, p.enable_smilies, p.enable_magic_url,
                        u.user_id, u.username, u.user_colour, u.user_avatar, u.user_avatar_type, u.user_avatar_width, u.user_avatar_height,
@@ -507,6 +521,7 @@ class main
             'TITLE'           => $row['topic_title'],
             'EXCERPT'         => $excerpt,
             'IMAGE'           => $this->resolve_topic_image($row, $rendered, $default_image),
+            'TOPIC_ICON'      => $this->build_topic_icon_html(isset($row['icon_id']) ? (int) $row['icon_id'] : 0),
             'DATE'            => $date_data['DATE'],
             'DATE_DAY'        => $date_data['DAY'],
             'DATE_MONTH'      => $date_data['MONTH'],
@@ -518,6 +533,48 @@ class main
             'S_FEATURED'      => (bool) $row['portal_featured'],
             'U_VIEW_TOPIC'    => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . (int) $row['topic_id']),
         );
+    }
+
+    protected function build_topic_icon_html($icon_id)
+    {
+        $icon_id = (int) $icon_id;
+        if ($icon_id <= 0 || !defined('ICONS_TABLE'))
+        {
+            return '';
+        }
+
+        if (!array_key_exists($icon_id, $this->topic_icon_cache))
+        {
+            $this->topic_icon_cache[$icon_id] = '';
+
+            $sql = 'SELECT icons_url, icons_width, icons_height
+                FROM ' . ICONS_TABLE . '
+                WHERE icons_id = ' . $icon_id;
+            $result = $this->db->sql_query_limit($sql, 1);
+            $row = $this->db->sql_fetchrow($result);
+            $this->db->sql_freeresult($result);
+
+            if ($row && !empty($row['icons_url']))
+            {
+                $icons_path = trim((string) (isset($this->config['icons_path']) ? $this->config['icons_path'] : 'images/icons'), '/');
+                $src = $this->phpbb_root_path . $icons_path . '/' . ltrim((string) $row['icons_url'], '/');
+                $width = max(0, (int) $row['icons_width']);
+                $height = max(0, (int) $row['icons_height']);
+                $size = '';
+                if ($width > 0)
+                {
+                    $size .= ' width="' . $width . '"';
+                }
+                if ($height > 0)
+                {
+                    $size .= ' height="' . $height . '"';
+                }
+
+                $this->topic_icon_cache[$icon_id] = '<img src="' . htmlspecialchars($src, ENT_COMPAT, 'UTF-8') . '"' . $size . ' alt="" loading="lazy" />';
+            }
+        }
+
+        return $this->topic_icon_cache[$icon_id];
     }
 
     protected function build_author_avatar(array $row)
@@ -567,6 +624,17 @@ class main
             'MONTH' => isset($months[$month_number]) ? $months[$month_number] : $this->user->format_date($timestamp, 'M'),
             'YEAR'  => $this->user->format_date($timestamp, 'Y'),
         );
+    }
+
+    protected function sanitize_hex_color($value, $fallback)
+    {
+        $value = trim((string) $value);
+        if (preg_match('/^#[0-9a-fA-F]{6}$/', $value))
+        {
+            return strtolower($value);
+        }
+
+        return $fallback;
     }
 
     protected function config_bool($key, $default)

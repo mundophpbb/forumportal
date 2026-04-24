@@ -253,8 +253,8 @@
 }
 
 .forumportal-poll__bar-fill {
-	background: #224f78;
-	opacity: 0.72;
+	background: var(--forumportal-poll-color, #bc2a4d);
+	opacity: 0.78;
 }
 
 .forumportal-poll__result {

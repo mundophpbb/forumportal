@@ -89,4 +89,7 @@ $lang = array_merge($lang, array(
     'FORUMPORTAL_POLL_ERROR_NO_PERMISSION'=> 'Você não tem permissão para votar nesta enquete.',
     'FORUMPORTAL_POLL_ERROR_UNAVAILABLE'  => 'A enquete não está disponível no momento.',
 
+    'FORUMPORTAL_NAV_FORUM'               => 'Fórum',
+
+
 ));
