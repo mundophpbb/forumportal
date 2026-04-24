@@ -1,0 +1,145 @@
+/* Better readability when dark-theme extensions override backgrounds. */
+html[class*="dark"] .forumportal-alert,
+body[class*="dark"] .forumportal-alert,
+[data-theme*="dark"] .forumportal-alert {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.35);
+}
+
+html[class*="dark"] .forumportal-poll__option,
+body[class*="dark"] .forumportal-poll__option,
+[data-theme*="dark"] .forumportal-poll__option {
+	background: rgba(255, 255, 255, 0.06);
+	border-color: rgba(255, 255, 255, 0.14);
+}
+
+html[class*="dark"] .forumportal-poll__bar,
+body[class*="dark"] .forumportal-poll__bar,
+[data-theme*="dark"] .forumportal-poll__bar {
+	background: rgba(255, 255, 255, 0.16);
+}
+
+
+html.dark .forumportal-poll__submit,
+html[data-theme="dark"] .forumportal-poll__submit,
+html[data-color-scheme="dark"] .forumportal-poll__submit,
+body.dark .forumportal-poll__submit,
+body[data-theme="dark"] .forumportal-poll__submit,
+body[data-color-scheme="dark"] .forumportal-poll__submit,
+body.phpbb-dark .forumportal-poll__submit {
+	border-color: rgba(255, 255, 255, 0.28);
+	background: rgba(255, 255, 255, 0.14);
+	color: #fff;
+}
+
+html.dark .forumportal-poll__submit:hover,
+html[data-theme="dark"] .forumportal-poll__submit:hover,
+html[data-color-scheme="dark"] .forumportal-poll__submit:hover,
+body.dark .forumportal-poll__submit:hover,
+body[data-theme="dark"] .forumportal-poll__submit:hover,
+body[data-color-scheme="dark"] .forumportal-poll__submit:hover,
+body.phpbb-dark .forumportal-poll__submit:hover,
+html.dark .forumportal-poll__submit:focus,
+html[data-theme="dark"] .forumportal-poll__submit:focus,
+html[data-color-scheme="dark"] .forumportal-poll__submit:focus,
+body.dark .forumportal-poll__submit:focus,
+body[data-theme="dark"] .forumportal-poll__submit:focus,
+body[data-color-scheme="dark"] .forumportal-poll__submit:focus,
+body.phpbb-dark .forumportal-poll__submit:focus {
+	border-color: rgba(255, 255, 255, 0.46);
+	background: rgba(255, 255, 255, 0.22);
+	color: #fff;
+}
+
+@media (max-width: 700px) {
+    .forumportal-custom-header {
+        min-height: 180px !important;
+    }
+
+    .forumportal-custom-header__overlay {
+        padding: 20px 18px;
+        background: linear-gradient(0deg, rgba(12, 22, 32, 0.78), rgba(12, 22, 32, 0.12));
+    }
+
+    .forumportal-custom-header__title {
+        font-size: 1.55em;
+    }
+
+    .forumportal-custom-header__subtitle {
+        font-size: 0.95em;
+    }
+}
+
+
+html.dark .forumportal-sidecard__period,
+html[data-theme="dark"] .forumportal-sidecard__period,
+html[data-color-scheme="dark"] .forumportal-sidecard__period,
+body.dark .forumportal-sidecard__period,
+body[data-theme="dark"] .forumportal-sidecard__period,
+body[data-color-scheme="dark"] .forumportal-sidecard__period,
+body.phpbb-dark .forumportal-sidecard__period {
+    border-color: #31465a;
+    background: #1c2a37;
+    color: #bac8d5;
+}
+
+/* Light-mode guard: the portal's automatic dark class must not make the vote button dark. */
+.forumportal-page--dark-auto .forumportal-poll__submit {
+    border-color: #224f78;
+    background: #224f78;
+    color: #fff;
+}
+
+.forumportal-page--dark-auto .forumportal-poll__submit:hover,
+.forumportal-page--dark-auto .forumportal-poll__submit:focus {
+    border-color: #173a5a;
+    background: #173a5a;
+    color: #fff;
+}
+
+/* v1016: dark-theme poll polish overrides. */
+html.dark .forumportal-poll__question,
+html[data-theme="dark"] .forumportal-poll__question,
+html[data-color-scheme="dark"] .forumportal-poll__question,
+body.dark .forumportal-poll__question,
+body[data-theme="dark"] .forumportal-poll__question,
+body[data-color-scheme="dark"] .forumportal-poll__question,
+body.phpbb-dark .forumportal-poll__question {
+	border-left-color: rgba(255, 255, 255, 0.38);
+	background: rgba(255, 255, 255, 0.07);
+}
+
+html.dark .forumportal-poll__status,
+html[data-theme="dark"] .forumportal-poll__status,
+html[data-color-scheme="dark"] .forumportal-poll__status,
+body.dark .forumportal-poll__status,
+body[data-theme="dark"] .forumportal-poll__status,
+body[data-color-scheme="dark"] .forumportal-poll__status,
+body.phpbb-dark .forumportal-poll__status {
+	border-color: rgba(255, 255, 255, 0.18);
+	background: rgba(255, 255, 255, 0.08);
+	color: #e6eef6;
+}
+
+html.dark .forumportal-poll__option:hover,
+html[data-theme="dark"] .forumportal-poll__option:hover,
+html[data-color-scheme="dark"] .forumportal-poll__option:hover,
+body.dark .forumportal-poll__option:hover,
+body[data-theme="dark"] .forumportal-poll__option:hover,
+body[data-color-scheme="dark"] .forumportal-poll__option:hover,
+body.phpbb-dark .forumportal-poll__option:hover {
+	border-color: rgba(255, 255, 255, 0.28);
+	background: rgba(255, 255, 255, 0.09);
+}
+
+html.dark .forumportal-poll__bar-fill,
+html[data-theme="dark"] .forumportal-poll__bar-fill,
+html[data-color-scheme="dark"] .forumportal-poll__bar-fill,
+body.dark .forumportal-poll__bar-fill,
+body[data-theme="dark"] .forumportal-poll__bar-fill,
+body[data-color-scheme="dark"] .forumportal-poll__bar-fill,
+body.phpbb-dark .forumportal-poll__bar-fill {
+	background: #9dccff;
+	opacity: 0.78;
+}
+

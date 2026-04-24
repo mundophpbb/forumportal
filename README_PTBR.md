@@ -29,3 +29,7 @@ Extensão experimental para phpBB 3.3.x que transforma um fórum específico em 
 ## Observações honestas
 
 Esta é uma base inicial para a saga do projeto. A estrutura foi montada para crescer bem, mas ainda deve receber ajustes finos conforme os testes reais no phpBB.
+
+
+## Atualização
+- Adicionado hook de integração `mundophpbb_forumportal_after_content` em `portal_body.html` para blocos extras no portal, como GitHub Portfolio.

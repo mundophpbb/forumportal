@@ -1,0 +1,31 @@
+<!-- IF S_FORUMPORTAL_PAGE or S_FORUMPORTAL_FIELDS -->
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_typography.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_header.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_feedback.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_images_layout.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_dark_auto.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_contributors.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_polls.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_theme_compat.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_visual_modes.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_dark_force.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_responsive.css' %}
+<!-- ENDIF -->
+
+<!-- IF S_FORUMPORTAL_HOME_ENABLED -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var forumIndexUrl = '{{ U_FORUM_INDEX_BYPASS|e('js') }}';
+    if (!forumIndexUrl) {
+        return;
+    }
+
+    document.querySelectorAll('.breadcrumbs a[href*="index."]').forEach(function (link) {
+        if (link.href.indexOf('forumportal_bypass=1') === -1) {
+            link.href = forumIndexUrl;
+        }
+    });
+});
+</script>
+<!-- ENDIF -->

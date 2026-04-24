@@ -1,0 +1,221 @@
+/* v1015: normalized portal images/avatars and optional two-card post layout. */
+.forumportal-page img {
+    box-sizing: border-box;
+}
+
+.forumportal-custom-header,
+.forumportal-hero__media,
+.forumportal-story__media,
+.forumportal-card__media,
+.forumportal-card__placeholder {
+    overflow: hidden;
+}
+
+.forumportal-custom-header__image,
+.forumportal-hero__media img,
+.forumportal-story__media img,
+.forumportal-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+}
+
+.forumportal-hero__media {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+    max-height: 430px;
+}
+
+.forumportal-story__media {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+}
+
+.forumportal-stream--list .forumportal-story__media {
+    height: 132px;
+}
+
+.forumportal-card__media,
+.forumportal-card__placeholder {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+}
+
+.forumportal-authorline__avatar,
+.forumportal-authorline__avatar img,
+.forumportal-authorline__avatar .avatar,
+.forumportal-contributors__avatar,
+.forumportal-contributors__avatar img,
+.forumportal-contributors__avatar .avatar,
+.forumportal-contributors__avatar-empty {
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.forumportal-authorline__avatar {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+}
+
+.forumportal-authorline__avatar img,
+.forumportal-authorline__avatar .avatar {
+    display: block;
+    width: 28px !important;
+    height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
+    object-fit: cover;
+}
+
+.forumportal-contributors__avatar,
+.forumportal-contributors__avatar-empty {
+    width: 40px;
+    height: 40px;
+}
+
+.forumportal-contributors__avatar img,
+.forumportal-contributors__avatar .avatar {
+    display: block;
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    object-fit: cover;
+}
+
+.forumportal-contributors__item {
+    grid-template-columns: 24px 40px minmax(0, 1fr);
+}
+
+.forumportal-stream--grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    align-items: stretch;
+}
+
+.forumportal-stream--grid2 .forumportal-story {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    border: 1px solid #d9dde1;
+    background: #fff;
+}
+
+.forumportal-stream--grid2 .forumportal-story:first-child,
+.forumportal-stream--grid2 .forumportal-story--featured:first-child {
+    padding-top: 0;
+}
+
+.forumportal-stream--grid2 .forumportal-story--featured {
+    padding-left: 0;
+    border-left-width: 1px;
+    border-top: 3px solid #224f78;
+}
+
+.forumportal-stream--grid2 .forumportal-story__media {
+    order: 1;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+}
+
+.forumportal-stream--grid2 .forumportal-story__date {
+    order: 2;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: flex-start;
+    gap: 5px;
+    width: auto;
+    min-height: 0;
+    margin: 12px 14px 0;
+    padding: 4px 7px;
+    text-align: left;
+}
+
+.forumportal-stream--grid2 .forumportal-story__day {
+    font-size: 1.05em;
+}
+
+.forumportal-stream--grid2 .forumportal-story__month,
+.forumportal-stream--grid2 .forumportal-story__year {
+    font-size: 0.72em;
+    letter-spacing: 0.08em;
+}
+
+.forumportal-stream--grid2 .forumportal-story__month {
+    margin-top: 0;
+}
+
+.forumportal-stream--grid2 .forumportal-story__content {
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 14px 15px 15px;
+}
+
+.forumportal-stream--grid2 .forumportal-story__header {
+    gap: 10px;
+}
+
+.forumportal-stream--grid2 .forumportal-story__icon {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    font-size: 13px;
+}
+
+.forumportal-stream--grid2 .forumportal-story__title {
+    font-size: 1.38em;
+}
+
+.forumportal-stream--grid2 .forumportal-story__meta,
+.forumportal-stream--grid2 .forumportal-story__excerpt,
+.forumportal-stream--grid2 .forumportal-story__footer {
+    margin-left: 40px;
+}
+
+.forumportal-stream--grid2 .forumportal-story__excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.forumportal-stream--grid2 .forumportal-story__footer {
+    margin-top: auto;
+}
+
+.forumportal-stream--grid2 .forumportal-story--no-image .forumportal-story__date {
+    margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+    .forumportal-stream--grid2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .forumportal-stream--grid2 .forumportal-story__content {
+        padding: 12px;
+    }
+
+    .forumportal-stream--grid2 .forumportal-story__date {
+        margin: 10px 12px 0;
+    }
+
+    .forumportal-stream--grid2 .forumportal-story__meta,
+    .forumportal-stream--grid2 .forumportal-story__excerpt,
+    .forumportal-stream--grid2 .forumportal-story__footer {
+        margin-left: 0;
+    }
+}
