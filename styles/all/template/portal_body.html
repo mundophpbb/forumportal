@@ -239,6 +239,19 @@
 				</div>
 				<!-- ENDIF -->
 
+				<!-- IF S_FORUMPORTAL_SHOW_CUSTOM_LINKS and .custom_links -->
+				<div class="forumportal-sidecard forumportal-sidecard--custom-links" style="order: {FORUMPORTAL_BLOCK_ORDER_CUSTOM_LINKS};">
+					<h3 class="forumportal-sidecard__title">{PORTAL_CUSTOM_LINKS_TITLE}</h3>
+					<ul class="forumportal-custom-links">
+						<!-- BEGIN custom_links -->
+						<li class="forumportal-custom-links__item">
+							<a class="forumportal-custom-links__link" href="{custom_links.URL}">{custom_links.TITLE}</a>
+						</li>
+						<!-- END custom_links -->
+					</ul>
+				</div>
+				<!-- ENDIF -->
+
 				<!-- IF S_PORTAL_CUSTOM_HTML_TOP -->
 				<div class="forumportal-sidecard forumportal-sidecard--html" style="order: {FORUMPORTAL_BLOCK_ORDER_CUSTOM_HTML};">
 					<h3 class="forumportal-sidecard__title">{PORTAL_CUSTOM_HTML_TITLE}</h3>

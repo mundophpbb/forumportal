@@ -172,4 +172,14 @@ $lang = array_merge($lang, array(
     'ACP_FORUMPORTAL_OPEN_FORUM_COLOR'          => 'Cor do botão Abrir fórum',
     'ACP_FORUMPORTAL_OPEN_FORUM_COLOR_EXPLAIN'  => 'Cor hexadecimal usada somente no botão Abrir fórum do portal. O link Portal e o Índice do fórum continuam seguindo o tema ativo.',
 
+    'ACP_FORUMPORTAL_TAB_LINKS'                 => 'Links personalizados',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS'              => 'Links personalizados',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS_SECTION_EXPLAIN' => 'Cria um painel lateral separado para links manuais. Use um link por linha no formato Título | URL. Linhas começando com # seguido de espaço são ignoradas.',
+    'ACP_FORUMPORTAL_SHOW_CUSTOM_LINKS'         => 'Mostrar painel de links personalizados',
+    'ACP_FORUMPORTAL_SHOW_CUSTOM_LINKS_EXPLAIN' => 'Exibe ou oculta o painel lateral separado de links personalizados.',
+    'ACP_FORUMPORTAL_ORDER_CUSTOM_LINKS'        => 'Links personalizados',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS_TITLE'        => 'Título dos links personalizados',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS_TITLE_EXPLAIN'=> 'Opcional. Deixe em branco para usar o título padrão.',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS_EXPLAIN'      => 'Um link por linha. Formato recomendado: Título | https://exemplo.com. Links relativos do fórum, como viewforum.php?f=2, também são aceitos. Se usar Título = URL, mantenha espaços em volta do sinal de igual.',
+
 ));

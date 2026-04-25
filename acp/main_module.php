@@ -113,6 +113,10 @@ class main_module
             $custom_html = html_entity_decode((string) $request->variable('forumportal_custom_html', '', true), ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $custom_html_title = trim((string) $request->variable('forumportal_custom_html_title', '', true));
             $custom_html_position = (string) $request->variable('forumportal_custom_html_position', 'top');
+            $show_custom_links = (int) $request->variable('forumportal_show_custom_links', 0);
+            $block_order_custom_links = max(1, min(99, (int) $request->variable('forumportal_block_order_custom_links', 75)));
+            $custom_links_title = trim((string) $request->variable('forumportal_custom_links_title', '', true));
+            $custom_links = html_entity_decode((string) $request->variable('forumportal_custom_links', '', true), ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
             if (!in_array($custom_html_position, array('top', 'bottom')))
             {
@@ -155,6 +159,9 @@ class main_module
                 set_config('forumportal_block_order_most_read', $block_order_most_read);
                 set_config('forumportal_block_order_most_commented', $block_order_most_commented);
                 set_config('forumportal_block_order_custom_html', $block_order_custom_html);
+                set_config('forumportal_show_custom_links', $show_custom_links);
+                set_config('forumportal_block_order_custom_links', $block_order_custom_links);
+                set_config('forumportal_custom_links_title', $custom_links_title);
                 set_config('forumportal_header_mode', $header_mode);
                 set_config('forumportal_header_image', $header_image);
                 set_config('forumportal_header_title', $header_title);
@@ -187,6 +194,7 @@ class main_module
                 set_config('forumportal_custom_html_position', $custom_html_position);
 
                 $this->save_custom_html($db, $table_prefix, $custom_html);
+                $this->save_custom_links($db, $table_prefix, $custom_links);
 
                 if ($sync_existing)
                 {
@@ -199,6 +207,7 @@ class main_module
         }
 
         $custom_html = $this->get_custom_html($db, $table_prefix);
+        $custom_links = $this->get_custom_links($db, $table_prefix);
 
         $template->assign_vars(array(
             'U_ACTION'                           => $this->u_action,
@@ -234,6 +243,7 @@ class main_module
             'FORUMPORTAL_BLOCK_ORDER_MOST_READ' => isset($config['forumportal_block_order_most_read']) ? (int) $config['forumportal_block_order_most_read'] : 50,
             'FORUMPORTAL_BLOCK_ORDER_MOST_COMMENTED' => isset($config['forumportal_block_order_most_commented']) ? (int) $config['forumportal_block_order_most_commented'] : 60,
             'FORUMPORTAL_BLOCK_ORDER_CUSTOM_HTML' => isset($config['forumportal_block_order_custom_html']) ? (int) $config['forumportal_block_order_custom_html'] : 70,
+            'FORUMPORTAL_BLOCK_ORDER_CUSTOM_LINKS' => isset($config['forumportal_block_order_custom_links']) ? (int) $config['forumportal_block_order_custom_links'] : 75,
             'S_FORUMPORTAL_HEADER_STANDARD'     => (!isset($config['forumportal_header_mode']) || (string) $config['forumportal_header_mode'] === 'standard'),
             'S_FORUMPORTAL_HEADER_CUSTOM'       => (isset($config['forumportal_header_mode']) && (string) $config['forumportal_header_mode'] === 'custom'),
             'S_FORUMPORTAL_HEADER_CUSTOM_ONLY'  => (isset($config['forumportal_header_mode']) && (string) $config['forumportal_header_mode'] === 'custom_only'),
@@ -266,8 +276,12 @@ class main_module
             'S_FORUMPORTAL_SHOW_HERO_EXCERPT'    => $this->config_bool($config, 'forumportal_show_hero_excerpt', true),
             'FORUMPORTAL_CUSTOM_HTML'            => $custom_html,
             'FORUMPORTAL_CUSTOM_HTML_TITLE'      => isset($config['forumportal_custom_html_title']) ? (string) $config['forumportal_custom_html_title'] : '',
-            'S_FORUMPORTAL_HTML_TOP'             => ((string) $config['forumportal_custom_html_position'] !== 'bottom'),
-            'S_FORUMPORTAL_HTML_BOTTOM'          => ((string) $config['forumportal_custom_html_position'] === 'bottom'),
+            'S_FORUMPORTAL_HTML_TOP'             => (!isset($config['forumportal_custom_html_position']) || (string) $config['forumportal_custom_html_position'] !== 'bottom'),
+            'S_FORUMPORTAL_HTML_BOTTOM'          => (isset($config['forumportal_custom_html_position']) && (string) $config['forumportal_custom_html_position'] === 'bottom'),
+            'S_FORUMPORTAL_SHOW_CUSTOM_LINKS'    => $this->config_bool($config, 'forumportal_show_custom_links', false),
+            'FORUMPORTAL_BLOCK_ORDER_CUSTOM_LINKS' => isset($config['forumportal_block_order_custom_links']) ? (int) $config['forumportal_block_order_custom_links'] : 75,
+            'FORUMPORTAL_CUSTOM_LINKS_TITLE'     => isset($config['forumportal_custom_links_title']) ? (string) $config['forumportal_custom_links_title'] : '',
+            'FORUMPORTAL_CUSTOM_LINKS'           => $custom_links,
         ));
     }
 
@@ -432,6 +446,33 @@ class main_module
         }
 
         return count($topic_ids);
+    }
+
+    protected function get_custom_links($db, $table_prefix)
+    {
+        $sql = 'SELECT html_value
+            FROM ' . $table_prefix . "forumportal_html
+            WHERE html_key = 'forumportal_custom_links'";
+        $result = $db->sql_query_limit($sql, 1);
+        $links = (string) $db->sql_fetchfield('html_value');
+        $db->sql_freeresult($result);
+
+        return html_entity_decode((string) $links, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+    protected function save_custom_links($db, $table_prefix, $custom_links)
+    {
+        $sql = 'DELETE FROM ' . $table_prefix . "forumportal_html
+            WHERE html_key = 'forumportal_custom_links'";
+        $db->sql_query($sql);
+
+        $sql_ary = array(
+            'html_key'   => 'forumportal_custom_links',
+            'html_value' => (string) $custom_links,
+        );
+
+        $sql = 'INSERT INTO ' . $table_prefix . 'forumportal_html ' . $db->sql_build_array('INSERT', $sql_ary);
+        $db->sql_query($sql);
     }
 
     protected function get_custom_html($db, $table_prefix)

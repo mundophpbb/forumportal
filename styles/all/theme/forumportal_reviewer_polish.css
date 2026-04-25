@@ -261,3 +261,110 @@
 		max-width: 100%;
 	}
 }
+
+
+/* v1018: reviewer sidebar/link polish.
+   Keep sidebar text consistent, give hover states padding, avoid empty topic-icon boxes,
+   and let topic/sidebar links follow the active theme instead of fighting it. */
+.forumportal-sidebar {
+	font-size: 13px;
+	line-height: 1.35;
+}
+
+.forumportal-sidebar .forumportal-sidecard__title {
+	font-size: 1.08em;
+	line-height: 1.25;
+}
+
+.forumportal-sidebar .forumportal-sidecard__period,
+.forumportal-sidebar .forumportal-headlines__meta,
+.forumportal-sidebar .forumportal-mostread__meta,
+.forumportal-sidebar .forumportal-mostcommented__meta,
+.forumportal-sidebar .forumportal-notices__meta,
+.forumportal-sidebar .forumportal-contributors__meta {
+	font-size: .86em;
+	line-height: 1.3;
+}
+
+.forumportal-sidebar .forumportal-headlines__link,
+.forumportal-sidebar .forumportal-mostread__link,
+.forumportal-sidebar .forumportal-mostcommented__link,
+.forumportal-sidebar .forumportal-notices__link,
+.forumportal-sidebar .forumportal-poll__title a,
+.forumportal-sidebar .forumportal-custom-links__link {
+	display: block;
+	margin: 0 -8px 3px;
+	padding: 5px 8px;
+	box-sizing: border-box;
+	color: inherit !important;
+	line-height: 1.3;
+	text-decoration: none !important;
+}
+
+.forumportal-sidebar .forumportal-headlines__link:hover,
+.forumportal-sidebar .forumportal-mostread__link:hover,
+.forumportal-sidebar .forumportal-mostcommented__link:hover,
+.forumportal-sidebar .forumportal-notices__link:hover,
+.forumportal-sidebar .forumportal-poll__title a:hover,
+.forumportal-sidebar .forumportal-custom-links__link:hover,
+.forumportal-sidebar .forumportal-headlines__link:focus,
+.forumportal-sidebar .forumportal-mostread__link:focus,
+.forumportal-sidebar .forumportal-mostcommented__link:focus,
+.forumportal-sidebar .forumportal-notices__link:focus,
+.forumportal-sidebar .forumportal-poll__title a:focus,
+.forumportal-sidebar .forumportal-custom-links__link:focus {
+	background: rgba(16, 82, 137, .08);
+	color: inherit !important;
+	text-decoration: underline !important;
+	outline: 0;
+}
+
+.forumportal-page .forumportal-story__title,
+.forumportal-page .forumportal-hero__title,
+.forumportal-page .forumportal-card__title {
+	color: inherit;
+}
+
+.forumportal-page .forumportal-story__title a,
+.forumportal-page .forumportal-hero__title a,
+.forumportal-page .forumportal-card__title a {
+	color: inherit !important;
+	text-decoration: none;
+}
+
+.forumportal-page .forumportal-story__title a:hover,
+.forumportal-page .forumportal-hero__title a:hover,
+.forumportal-page .forumportal-card__title a:hover,
+.forumportal-page .forumportal-story__title a:focus,
+.forumportal-page .forumportal-hero__title a:focus,
+.forumportal-page .forumportal-card__title a:focus {
+	color: inherit !important;
+	text-decoration: underline;
+}
+
+.forumportal-story__icon:empty {
+	display: none;
+}
+
+.forumportal-story__icon img {
+	background: transparent;
+	border: 0;
+}
+
+.forumportal-custom-links {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.forumportal-custom-links__item {
+	margin: 0 0 6px;
+	padding: 0 0 6px;
+	border-bottom: 1px solid #e0e3e7;
+}
+
+.forumportal-custom-links__item:last-child {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: 0;
+}

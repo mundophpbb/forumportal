@@ -136,7 +136,15 @@ class main
         {
             $custom_html_title = $this->user->lang('FORUMPORTAL_CUSTOM_BLOCK');
         }
-        $custom_html_position = ((string) $this->config['forumportal_custom_html_position'] === 'bottom') ? 'bottom' : 'top';
+        $custom_html_position = ((isset($this->config['forumportal_custom_html_position']) && (string) $this->config['forumportal_custom_html_position'] === 'bottom') ? 'bottom' : 'top');
+        $custom_links_raw = $this->get_custom_links();
+        $custom_links = $this->parse_custom_links($custom_links_raw);
+        $custom_links_title = trim((string) (isset($this->config['forumportal_custom_links_title']) ? $this->config['forumportal_custom_links_title'] : ''));
+        if ($custom_links_title === '')
+        {
+            $custom_links_title = $this->user->lang('FORUMPORTAL_CUSTOM_LINKS');
+        }
+        $show_custom_links = $this->config_bool('forumportal_show_custom_links', false);
         $typography_style = (isset($this->config['forumportal_typography_style']) && (string) $this->config['forumportal_typography_style'] === 'forum') ? 'forum' : 'portal';
         $visual_mode = (isset($this->config['forumportal_visual_mode']) && (string) $this->config['forumportal_visual_mode'] === 'prosilver') ? 'prosilver' : 'editorial';
         $posts_layout = (isset($this->config['forumportal_posts_layout']) && (string) $this->config['forumportal_posts_layout'] === 'grid2') ? 'grid2' : 'list';
@@ -237,7 +245,7 @@ class main
         {
             $has_topics = true;
             $has_hero_topic = true;
-            $has_sidebar = (!empty($notices) || !empty($headlines) || !empty($top_contributors) || !empty($polls) || !empty($most_read_topics) || !empty($most_commented_topics) || ($custom_html !== '' && $custom_html_position === 'top'));
+            $has_sidebar = (!empty($notices) || !empty($headlines) || !empty($top_contributors) || !empty($polls) || !empty($most_read_topics) || !empty($most_commented_topics) || ($custom_html !== '' && $custom_html_position === 'top') || ($show_custom_links && !empty($custom_links)));
 
         $this->template->assign_vars(array(
                 'S_HAS_HERO_TOPIC'      => true,
@@ -291,7 +299,7 @@ class main
             if ($use_hero_layout && !$has_hero_topic)
             {
                 $has_hero_topic = true;
-                $has_sidebar = (!empty($notices) || !empty($headlines) || !empty($top_contributors) || !empty($polls) || !empty($most_read_topics) || !empty($most_commented_topics) || ($custom_html !== '' && $custom_html_position === 'top'));
+                $has_sidebar = (!empty($notices) || !empty($headlines) || !empty($top_contributors) || !empty($polls) || !empty($most_read_topics) || !empty($most_commented_topics) || ($custom_html !== '' && $custom_html_position === 'top') || ($show_custom_links && !empty($custom_links)));
 
         $this->template->assign_vars(array(
                     'S_HAS_HERO_TOPIC'      => true,
@@ -357,12 +365,22 @@ class main
             $this->template->assign_block_vars('most_commented', $most_commented_topic);
         }
 
-        $has_sidebar = (!empty($notices) || !empty($headlines) || !empty($top_contributors) || !empty($polls) || !empty($most_read_topics) || !empty($most_commented_topics) || ($custom_html !== '' && $custom_html_position === 'top'));
+        if ($show_custom_links)
+        {
+            foreach ($custom_links as $custom_link)
+            {
+                $this->template->assign_block_vars('custom_links', $custom_link);
+            }
+        }
+
+        $has_sidebar = (!empty($notices) || !empty($headlines) || !empty($top_contributors) || !empty($polls) || !empty($most_read_topics) || !empty($most_commented_topics) || ($custom_html !== '' && $custom_html_position === 'top') || ($show_custom_links && !empty($custom_links)));
 
         $this->template->assign_vars(array(
             'PORTAL_PAGE_TITLE'              => $page_title,
             'PORTAL_CUSTOM_HTML'             => $custom_html,
             'PORTAL_CUSTOM_HTML_TITLE'       => $custom_html_title,
+            'PORTAL_CUSTOM_LINKS_TITLE'      => $custom_links_title,
+            'S_FORUMPORTAL_SHOW_CUSTOM_LINKS'=> ($show_custom_links && !empty($custom_links)),
             'S_PORTAL_CUSTOM_HTML_TOP'       => ($custom_html !== '' && $custom_html_position === 'top'),
             'S_PORTAL_CUSTOM_HTML_BOTTOM'    => ($custom_html !== '' && $custom_html_position === 'bottom'),
             'S_HAS_PORTAL_TOPICS'            => $has_topics,
@@ -415,6 +433,7 @@ class main
             'FORUMPORTAL_BLOCK_ORDER_MOST_READ' => isset($this->config['forumportal_block_order_most_read']) ? (int) $this->config['forumportal_block_order_most_read'] : 50,
             'FORUMPORTAL_BLOCK_ORDER_MOST_COMMENTED' => isset($this->config['forumportal_block_order_most_commented']) ? (int) $this->config['forumportal_block_order_most_commented'] : 60,
             'FORUMPORTAL_BLOCK_ORDER_CUSTOM_HTML' => isset($this->config['forumportal_block_order_custom_html']) ? (int) $this->config['forumportal_block_order_custom_html'] : 70,
+            'FORUMPORTAL_BLOCK_ORDER_CUSTOM_LINKS' => isset($this->config['forumportal_block_order_custom_links']) ? (int) $this->config['forumportal_block_order_custom_links'] : 75,
             'S_FORUMPORTAL_CUSTOM_HEADER'    => $show_custom_header,
             'S_FORUMPORTAL_CUSTOM_HEADER_TEXT' => ($header_title !== '' || $header_subtitle !== ''),
             'S_FORUMPORTAL_HIDE_STANDARD_HEADER' => $hide_standard_header,
@@ -557,7 +576,8 @@ class main
             if ($row && !empty($row['icons_url']))
             {
                 $icons_path = trim((string) (isset($this->config['icons_path']) ? $this->config['icons_path'] : 'images/icons'), '/');
-                $src = $this->phpbb_root_path . $icons_path . '/' . ltrim((string) $row['icons_url'], '/');
+                $board_url = function_exists('generate_board_url') ? generate_board_url() . '/' : $this->phpbb_root_path;
+                $src = $board_url . $icons_path . '/' . ltrim((string) $row['icons_url'], '/');
                 $width = max(0, (int) $row['icons_width']);
                 $height = max(0, (int) $row['icons_height']);
                 $size = '';
@@ -1646,6 +1666,151 @@ class main
     protected function get_portal_featured_expression()
     {
         return 'COALESCE(fp.portal_featured, 0)';
+    }
+
+    protected function get_custom_links()
+    {
+        $sql = 'SELECT html_value
+            FROM ' . $this->forumportal_html_table . "
+            WHERE html_key = 'forumportal_custom_links'";
+        $result = $this->db->sql_query_limit($sql, 1);
+        $links = (string) $this->db->sql_fetchfield('html_value');
+        $this->db->sql_freeresult($result);
+
+        return html_entity_decode((string) $links, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+    protected function parse_custom_links($raw_links)
+    {
+        $items = array();
+        $lines = preg_split('/\r\n|\r|\n/', (string) $raw_links);
+
+        foreach ($lines as $line)
+        {
+            $line = trim((string) $line);
+            if ($line === '' || preg_match('/^#\s+/', $line))
+            {
+                continue;
+            }
+
+            $title = '';
+            $url = '';
+
+            if (strpos($line, '|') !== false)
+            {
+                $parts = array_map('trim', explode('|', $line, 2));
+                $title = (string) $parts[0];
+                $url = (string) $parts[1];
+            }
+            else if (preg_match('/^(.+?)\s+=\s+(.+)$/u', $line, $match))
+            {
+                // Only accept "Title = URL" when the equal sign is surrounded by spaces.
+                // This keeps valid query strings such as viewforum.php?f=5 intact.
+                $title = trim((string) $match[1]);
+                $url = trim((string) $match[2]);
+            }
+            else
+            {
+                $url = $line;
+                $title = $line;
+            }
+
+            if ($this->looks_like_url($title) && !$this->looks_like_url($url))
+            {
+                $tmp = $title;
+                $title = $url;
+                $url = $tmp;
+            }
+
+            $url = $this->normalise_custom_link_url($url);
+            $title = trim($title);
+
+            if ($url === '' || $title === '')
+            {
+                continue;
+            }
+
+            $items[] = array(
+                'TITLE' => $title,
+                'URL'   => $url,
+            );
+        }
+
+        return $items;
+    }
+
+    protected function looks_like_url($value)
+    {
+        $value = trim((string) $value);
+
+        return (bool) preg_match('#^(https?://|mailto:|ftp://|/|\./|\.\./|\#)#i', $value);
+    }
+
+    protected function normalise_custom_link_url($url)
+    {
+        $url = trim((string) $url);
+        if ($url === '')
+        {
+            return '';
+        }
+
+        $url = preg_replace('/[\\x00-\\x1F\\x7F]/u', '', $url);
+
+        $scheme = parse_url($url, PHP_URL_SCHEME);
+        if ($scheme !== null && $scheme !== false && $scheme !== '')
+        {
+            $scheme = strtolower((string) $scheme);
+            if (!in_array($scheme, array('http', 'https', 'mailto', 'ftp'), true))
+            {
+                return '';
+            }
+
+            return $url;
+        }
+
+        if (strpos($url, '//') === 0)
+        {
+            return '';
+        }
+
+        if ($url[0] === '#')
+        {
+            return $url;
+        }
+
+        if (strpos($url, ':') !== false && preg_match('/^[^\\/\\?#]+:/', $url))
+        {
+            return '';
+        }
+
+        // Links entered as viewforum.php?f=14, viewtopic.php?t=10, app.php/route, etc.
+        // must point to the board root. If left as plain relative URLs, browsers resolve
+        // them against the portal route (/app.php/...), producing /app.php/viewforum.php.
+        if ($url[0] !== '/')
+        {
+            return $this->make_board_absolute_url($url);
+        }
+
+        return $url;
+    }
+
+    protected function make_board_absolute_url($url)
+    {
+        $url = trim((string) $url);
+        if ($url === '')
+        {
+            return '';
+        }
+
+        $url = preg_replace('#^\\./+#', '', $url);
+        if (strpos($url, '../') === 0 || strpos($url, '/../') !== false)
+        {
+            return '';
+        }
+
+        $board_url = function_exists('generate_board_url') ? generate_board_url() : rtrim($this->phpbb_root_path, '/');
+
+        return rtrim((string) $board_url, '/') . '/' . ltrim($url, '/');
     }
 
     protected function get_custom_html()

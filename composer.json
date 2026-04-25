@@ -3,7 +3,7 @@
   "type": "phpbb-extension",
   "description": "Transforma um fórum específico em uma página portal estilo revista para phpBB.",
   "homepage": "https://mundophpbb.com",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "keywords": [
     "phpbb",
     "portal",

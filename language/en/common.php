@@ -62,6 +62,7 @@ $lang = array_merge($lang, array(
     'FORUMPORTAL_FORUM_GATEWAY'           => 'Continue in the forum',
     'FORUMPORTAL_FORUM_GATEWAY_EXPLAIN'   => 'Read the highlight here and open the forum to see the full topic and the discussion.',
     'FORUMPORTAL_CUSTOM_BLOCK'            => 'Custom block',
+    'FORUMPORTAL_CUSTOM_LINKS'           => 'Custom links',
 
     'ACL_CAT_FORUMPORTAL'                => 'Forum Portal',
     'ACL_F_FORUMPORTAL_PUBLISH'          => 'Can publish topics on the portal and edit portal data in the first post options',

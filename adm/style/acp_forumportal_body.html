@@ -19,6 +19,7 @@
 		<a class="forumportal-acp-tab" href="#forumportal-sidebar">{L_ACP_FORUMPORTAL_TAB_BLOCKS}</a>
 		<a class="forumportal-acp-tab" href="#forumportal-polls">{L_ACP_FORUMPORTAL_TAB_POLLS}</a>
 		<a class="forumportal-acp-tab" href="#forumportal-custom-html">{L_ACP_FORUMPORTAL_TAB_HTML}</a>
+		<a class="forumportal-acp-tab" href="#forumportal-custom-links">{L_ACP_FORUMPORTAL_TAB_LINKS}</a>
 	</div>
 
 	<fieldset id="forumportal-general" class="forumportal-acp-section">
@@ -350,6 +351,31 @@
 		<dl>
 			<dt><label for="forumportal_custom_html">{L_ACP_FORUMPORTAL_CUSTOM_HTML}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_CUSTOM_HTML_EXPLAIN}</span></dt>
 			<dd><textarea id="forumportal_custom_html" name="forumportal_custom_html" rows="10" cols="70">{FORUMPORTAL_CUSTOM_HTML}</textarea></dd>
+		</dl>
+	</fieldset>
+
+
+	<fieldset id="forumportal-custom-links" class="forumportal-acp-section">
+		<legend>{L_ACP_FORUMPORTAL_CUSTOM_LINKS}</legend>
+		<p>{L_ACP_FORUMPORTAL_CUSTOM_LINKS_SECTION_EXPLAIN}</p>
+		<dl>
+			<dt><label for="forumportal_show_custom_links">{L_ACP_FORUMPORTAL_SHOW_CUSTOM_LINKS}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SHOW_CUSTOM_LINKS_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_show_custom_links" value="1"<!-- IF S_FORUMPORTAL_SHOW_CUSTOM_LINKS --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_show_custom_links" value="0"<!-- IF not S_FORUMPORTAL_SHOW_CUSTOM_LINKS --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_block_order_custom_links">{L_ACP_FORUMPORTAL_ORDER_CUSTOM_LINKS}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_ORDER_FIELD_EXPLAIN}</span></dt>
+			<dd><input type="number" id="forumportal_block_order_custom_links" name="forumportal_block_order_custom_links" value="{FORUMPORTAL_BLOCK_ORDER_CUSTOM_LINKS}" min="1" max="99" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_custom_links_title">{L_ACP_FORUMPORTAL_CUSTOM_LINKS_TITLE}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_CUSTOM_LINKS_TITLE_EXPLAIN}</span></dt>
+			<dd><input type="text" id="forumportal_custom_links_title" name="forumportal_custom_links_title" value="{FORUMPORTAL_CUSTOM_LINKS_TITLE}" maxlength="255" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="forumportal_custom_links">{L_ACP_FORUMPORTAL_CUSTOM_LINKS}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_CUSTOM_LINKS_EXPLAIN}</span></dt>
+			<dd><textarea id="forumportal_custom_links" name="forumportal_custom_links" rows="8" cols="70">{FORUMPORTAL_CUSTOM_LINKS}</textarea></dd>
 		</dl>
 	</fieldset>
 

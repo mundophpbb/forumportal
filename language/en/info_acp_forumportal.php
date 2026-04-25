@@ -172,4 +172,14 @@ $lang = array_merge($lang, array(
     'ACP_FORUMPORTAL_OPEN_FORUM_COLOR'          => 'Open forum button color',
     'ACP_FORUMPORTAL_OPEN_FORUM_COLOR_EXPLAIN'  => 'Hex color used only by the portal Open forum button. The Portal link and Board index keep the active style theme.',
 
+    'ACP_FORUMPORTAL_TAB_LINKS'                 => 'Custom links',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS'              => 'Custom links',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS_SECTION_EXPLAIN' => 'Create a separate sidebar panel for manual links. One link per line, using Title | URL. Lines starting with # followed by a space are ignored.',
+    'ACP_FORUMPORTAL_SHOW_CUSTOM_LINKS'         => 'Show custom links panel',
+    'ACP_FORUMPORTAL_SHOW_CUSTOM_LINKS_EXPLAIN' => 'Shows or hides the separate custom links sidebar panel.',
+    'ACP_FORUMPORTAL_ORDER_CUSTOM_LINKS'        => 'Custom links',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS_TITLE'        => 'Custom links title',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS_TITLE_EXPLAIN'=> 'Optional. Leave empty to use the default title.',
+    'ACP_FORUMPORTAL_CUSTOM_LINKS_EXPLAIN'      => 'One link per line. Recommended format: Title | https://example.com. Relative forum links such as viewforum.php?f=2 are also accepted. If using Title = URL, keep spaces around the equal sign.',
+
 ));
