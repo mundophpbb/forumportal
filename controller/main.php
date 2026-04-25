@@ -222,6 +222,8 @@ class main
         $allow_poll_vote = $this->config_bool('forumportal_allow_poll_vote', true);
         $show_notices = $this->config_bool('forumportal_show_notices', true);
         $show_hero_excerpt = $this->config_bool('forumportal_show_hero_excerpt', true);
+        $prevent_duplicate_topics = $this->config_bool('forumportal_prevent_duplicate_topics', true);
+        $used_topic_ids = array();
         $fixed_topic_id = isset($this->config['forumportal_fixed_topic_id']) ? (int) $this->config['forumportal_fixed_topic_id'] : 0;
 
         $count_sql = 'SELECT COUNT(t.topic_id) AS total_topics
@@ -259,10 +261,13 @@ class main
                 'HERO_S_FEATURED'       => true,
                 'U_HERO_VIEW_TOPIC'     => $fixed_hero_topic['U_VIEW_TOPIC'],
             ));
+
+            $this->remember_topic_used($fixed_topic_id, $used_topic_ids, $prevent_duplicate_topics);
         }
 
-        $query_limit = $per_page + (($start === 0 && $use_fixed_hero) ? 1 : 0);
+        $query_limit = $per_page + (($start === 0 && $use_fixed_hero) ? 1 : 0) + 10;
         $topic_cards_assigned = 0;
+        $main_topic_ids = array();
 
         $sql = 'SELECT t.topic_id, t.forum_id, t.icon_id, t.topic_title, t.topic_time, t.topic_views, t.topic_first_post_id,
                        p.post_text, p.bbcode_uid, p.bbcode_bitfield,
@@ -283,7 +288,14 @@ class main
 
         while ($row = $this->db->sql_fetchrow($result))
         {
-            if ($use_fixed_hero && (int) $row['topic_id'] === $fixed_topic_id)
+            $topic_id = (int) $row['topic_id'];
+
+            if ($use_fixed_hero && $topic_id === $fixed_topic_id)
+            {
+                continue;
+            }
+
+            if ($this->should_skip_topic($topic_id, $main_topic_ids, $used_topic_ids, $prevent_duplicate_topics))
             {
                 continue;
             }
@@ -313,21 +325,23 @@ class main
                     'HERO_S_FEATURED'       => $topic_data['S_FEATURED'],
                     'U_HERO_VIEW_TOPIC'     => $topic_data['U_VIEW_TOPIC'],
                 ));
+                $this->remember_topic_used($topic_id, $used_topic_ids, $prevent_duplicate_topics);
                 continue;
             }
 
             $this->template->assign_block_vars('topics', $topic_data);
+            $this->remember_topic_used($topic_id, $used_topic_ids, $prevent_duplicate_topics);
             $topic_cards_assigned++;
         }
         $this->db->sql_freeresult($result);
 
-        $notices = $show_notices ? $this->get_notice_topics($source_forum_ids, $notices_limit) : array();
+        $notices = $show_notices ? $this->get_notice_topics($source_forum_ids, $notices_limit, $used_topic_ids, $prevent_duplicate_topics) : array();
         foreach ($notices as $notice)
         {
             $this->template->assign_block_vars('notices', $notice);
         }
 
-        $headlines = $show_headlines ? $this->get_latest_headlines($source_forum_ids, $headline_limit) : array();
+        $headlines = $show_headlines ? $this->get_latest_headlines($source_forum_ids, $headline_limit, $used_topic_ids, $prevent_duplicate_topics) : array();
         foreach ($headlines as $headline)
         {
             $this->template->assign_block_vars('headlines', $headline);
@@ -340,7 +354,7 @@ class main
         }
 
         $poll_message = $this->handle_poll_vote($source_forum_ids);
-        $polls = $show_polls ? $this->get_poll_topics($source_forum_ids, $polls_limit, $polls_days, $poll_topic_id, $allow_poll_vote) : array();
+        $polls = $show_polls ? $this->get_poll_topics($source_forum_ids, $polls_limit, $polls_days, $poll_topic_id, $allow_poll_vote, $used_topic_ids, $prevent_duplicate_topics) : array();
         foreach ($polls as $poll)
         {
             $poll_options = isset($poll['OPTIONS']) ? $poll['OPTIONS'] : array();
@@ -353,13 +367,13 @@ class main
             }
         }
 
-        $most_read_topics = $show_most_read ? $this->get_most_read_topics($source_forum_ids, $most_read_limit, $most_read_days) : array();
+        $most_read_topics = $show_most_read ? $this->get_most_read_topics($source_forum_ids, $most_read_limit, $most_read_days, $used_topic_ids, $prevent_duplicate_topics) : array();
         foreach ($most_read_topics as $most_read_topic)
         {
             $this->template->assign_block_vars('most_read', $most_read_topic);
         }
 
-        $most_commented_topics = $show_most_commented ? $this->get_most_commented_topics($source_forum_ids, $most_commented_limit, $most_commented_days) : array();
+        $most_commented_topics = $show_most_commented ? $this->get_most_commented_topics($source_forum_ids, $most_commented_limit, $most_commented_days, $used_topic_ids, $prevent_duplicate_topics) : array();
         foreach ($most_commented_topics as $most_commented_topic)
         {
             $this->template->assign_block_vars('most_commented', $most_commented_topic);
@@ -413,6 +427,7 @@ class main
             'FORUMPORTAL_POLLS_DAYS'        => $polls_days,
             'S_FORUMPORTAL_SHOW_NOTICES'     => $show_notices,
             'S_FORUMPORTAL_SHOW_HERO_EXCERPT' => $show_hero_excerpt,
+            'S_FORUMPORTAL_PREVENT_DUPLICATE_TOPICS' => $prevent_duplicate_topics,
             'S_FORUMPORTAL_TYPOGRAPHY_FORUM'  => ($typography_style === 'forum'),
             'S_FORUMPORTAL_TYPOGRAPHY_PORTAL' => ($typography_style === 'portal'),
             'S_FORUMPORTAL_VISUAL_EDITORIAL'  => ($visual_mode === 'editorial'),
@@ -537,6 +552,7 @@ class main
         $date_data = $this->build_date_display_data($row['topic_time']);
 
         return array(
+            'TOPIC_ID'        => (int) $row['topic_id'],
             'TITLE'           => $row['topic_title'],
             'EXCERPT'         => $excerpt,
             'IMAGE'           => $this->resolve_topic_image($row, $rendered, $default_image),
@@ -960,11 +976,12 @@ class main
         return max(0, $value);
     }
 
-    protected function get_notice_topics(array $forum_ids, $limit)
+    protected function get_notice_topics(array $forum_ids, $limit, array &$used_topic_ids, $prevent_duplicates = false)
     {
         $forum_ids = $this->normalise_forum_ids($forum_ids);
         $limit = max(1, (int) $limit);
         $topics = array();
+        $block_topic_ids = array();
 
         if (empty($forum_ids))
         {
@@ -1008,10 +1025,17 @@ class main
                 WHEN t.topic_type = ' . (defined('POST_STICKY') ? (int) POST_STICKY : -1) . ' THEN 2
                 ELSE 3
             END ASC, t.topic_time DESC';
-        $result = $this->db->sql_query_limit($sql, $limit);
+        $result = $this->db->sql_query_limit($sql, $this->get_duplicate_aware_query_limit($limit, $used_topic_ids, $prevent_duplicates));
 
         while ($row = $this->db->sql_fetchrow($result))
         {
+            $topic_id = (int) $row['topic_id'];
+
+            if ($this->should_skip_topic($topic_id, $block_topic_ids, $used_topic_ids, $prevent_duplicates))
+            {
+                continue;
+            }
+
             $type_label = $this->user->lang('FORUMPORTAL_NOTICE_LABEL');
             if (defined('POST_GLOBAL') && (int) $row['topic_type'] === (int) POST_GLOBAL)
             {
@@ -1030,8 +1054,15 @@ class main
                 'TITLE'        => $row['topic_title'],
                 'DATE'         => $this->format_portal_date($row['topic_time']),
                 'TYPE'         => $type_label,
-                'U_VIEW_TOPIC' => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . (int) $row['topic_id']),
+                'U_VIEW_TOPIC' => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . $topic_id),
             );
+
+            $this->remember_topic_used($topic_id, $used_topic_ids, $prevent_duplicates);
+
+            if (count($topics) >= $limit)
+            {
+                break;
+            }
         }
         $this->db->sql_freeresult($result);
 
@@ -1216,13 +1247,14 @@ class main
         return $this->user->lang(!empty($existing_vote_ids) ? 'FORUMPORTAL_POLL_CHANGED' : 'FORUMPORTAL_POLL_VOTED');
     }
 
-    protected function get_poll_topics(array $forum_ids, $limit, $days = 0, $fixed_topic_id = 0, $allow_vote = true)
+    protected function get_poll_topics(array $forum_ids, $limit, $days, $fixed_topic_id, $allow_vote, array &$used_topic_ids, $prevent_duplicates = false)
     {
         $forum_ids = $this->normalise_forum_ids($forum_ids);
         $limit = max(1, (int) $limit);
         $days = max(0, (int) $days);
         $fixed_topic_id = max(0, (int) $fixed_topic_id);
         $polls = array();
+        $block_topic_ids = array();
 
         if (empty($forum_ids) || !defined('POLL_OPTIONS_TABLE') || !defined('POLL_VOTES_TABLE'))
         {
@@ -1242,16 +1274,27 @@ class main
                 AND t.poll_title <> ''
                 AND t.poll_start > 0" . $fixed_sql . $time_sql . '
             ORDER BY t.poll_start DESC, t.topic_time DESC';
-        $result = $this->db->sql_query_limit($sql, $limit);
+        $result = $this->db->sql_query_limit($sql, $this->get_duplicate_aware_query_limit($limit, $used_topic_ids, $prevent_duplicates));
 
         $topic_ids = array();
         while ($row = $this->db->sql_fetchrow($result))
         {
             $topic_id = (int) $row['topic_id'];
+
+            if ($this->should_skip_topic($topic_id, $block_topic_ids, $used_topic_ids, $prevent_duplicates))
+            {
+                continue;
+            }
+
             $topic_ids[] = $topic_id;
             $polls[$topic_id] = $row;
             $polls[$topic_id]['OPTIONS'] = array();
             $polls[$topic_id]['TOTAL_VOTES'] = 0;
+
+            if (count($topic_ids) >= $limit)
+            {
+                break;
+            }
         }
         $this->db->sql_freeresult($result);
 
@@ -1335,6 +1378,8 @@ class main
                 'U_VIEW_TOPIC'     => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . $topic_id),
                 'OPTIONS'          => $prepared_options,
             );
+
+            $this->remember_topic_used($topic_id, $used_topic_ids, $prevent_duplicates);
         }
 
         return $prepared;
@@ -1482,12 +1527,13 @@ class main
         return $this->user->lang('FORUMPORTAL_PERIOD_ALL_TIME');
     }
 
-    protected function get_most_commented_topics(array $forum_ids, $limit, $days = 0)
+    protected function get_most_commented_topics(array $forum_ids, $limit, $days, array &$used_topic_ids, $prevent_duplicates = false)
     {
         $forum_ids = $this->normalise_forum_ids($forum_ids);
         $limit = max(1, (int) $limit);
         $days = max(0, (int) $days);
         $topics = array();
+        $block_topic_ids = array();
         $metric = $this->get_topic_comment_metric();
 
         if (empty($forum_ids) || empty($metric['field']))
@@ -1505,29 +1551,44 @@ class main
                 AND ' . $this->get_portal_topic_visibility_sql() . '
                 ' . $time_sql . '
             ORDER BY t.' . $field . ' DESC, ' . $this->get_portal_featured_expression() . ' DESC, t.topic_time DESC';
-        $result = $this->db->sql_query_limit($sql, $limit);
+        $result = $this->db->sql_query_limit($sql, $this->get_duplicate_aware_query_limit($limit, $used_topic_ids, $prevent_duplicates));
 
         while ($row = $this->db->sql_fetchrow($result))
         {
+            $topic_id = (int) $row['topic_id'];
+
+            if ($this->should_skip_topic($topic_id, $block_topic_ids, $used_topic_ids, $prevent_duplicates))
+            {
+                continue;
+            }
+
             $topics[] = array(
                 'TITLE'          => $row['topic_title'],
                 'DATE'           => $this->format_portal_date($row['topic_time']),
                 'COMMENTS'       => $this->get_topic_comment_count($row),
                 'S_FEATURED'     => (bool) $row['portal_featured'],
-                'U_VIEW_TOPIC'   => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . (int) $row['topic_id']),
+                'U_VIEW_TOPIC'   => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . $topic_id),
             );
+
+            $this->remember_topic_used($topic_id, $used_topic_ids, $prevent_duplicates);
+
+            if (count($topics) >= $limit)
+            {
+                break;
+            }
         }
         $this->db->sql_freeresult($result);
 
         return $topics;
     }
 
-    protected function get_most_read_topics(array $forum_ids, $limit, $days = 0)
+    protected function get_most_read_topics(array $forum_ids, $limit, $days, array &$used_topic_ids, $prevent_duplicates = false)
     {
         $forum_ids = $this->normalise_forum_ids($forum_ids);
         $limit = max(1, (int) $limit);
         $days = max(0, (int) $days);
         $topics = array();
+        $block_topic_ids = array();
 
         if (empty($forum_ids))
         {
@@ -1543,28 +1604,43 @@ class main
                 AND ' . $this->get_portal_topic_visibility_sql() . '
                 ' . $time_sql . '
             ORDER BY t.topic_views DESC, ' . $this->get_portal_featured_expression() . ' DESC, t.topic_time DESC';
-        $result = $this->db->sql_query_limit($sql, $limit);
+        $result = $this->db->sql_query_limit($sql, $this->get_duplicate_aware_query_limit($limit, $used_topic_ids, $prevent_duplicates));
 
         while ($row = $this->db->sql_fetchrow($result))
         {
+            $topic_id = (int) $row['topic_id'];
+
+            if ($this->should_skip_topic($topic_id, $block_topic_ids, $used_topic_ids, $prevent_duplicates))
+            {
+                continue;
+            }
+
             $topics[] = array(
                 'TITLE'        => $row['topic_title'],
                 'DATE'         => $this->format_portal_date($row['topic_time']),
                 'VIEWS'        => (int) $row['topic_views'],
                 'S_FEATURED'   => (bool) $row['portal_featured'],
-                'U_VIEW_TOPIC' => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . (int) $row['topic_id']),
+                'U_VIEW_TOPIC' => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . $topic_id),
             );
+
+            $this->remember_topic_used($topic_id, $used_topic_ids, $prevent_duplicates);
+
+            if (count($topics) >= $limit)
+            {
+                break;
+            }
         }
         $this->db->sql_freeresult($result);
 
         return $topics;
     }
 
-    protected function get_latest_headlines(array $forum_ids, $limit)
+    protected function get_latest_headlines(array $forum_ids, $limit, array &$used_topic_ids, $prevent_duplicates = false)
     {
         $forum_ids = $this->normalise_forum_ids($forum_ids);
         $limit = max(1, (int) $limit);
         $headlines = array();
+        $block_topic_ids = array();
 
         if (empty($forum_ids))
         {
@@ -1578,20 +1654,84 @@ class main
                 AND t.topic_visibility = ' . ITEM_APPROVED . '
                 AND ' . $this->get_portal_topic_visibility_sql() . '
             ORDER BY CASE WHEN ' . $this->get_portal_order_expression() . ' > 0 THEN 0 ELSE 1 END ASC, ' . $this->get_portal_order_expression() . ' ASC, ' . $this->get_portal_featured_expression() . ' DESC, t.topic_time DESC';
-        $result = $this->db->sql_query_limit($sql, $limit);
+        $result = $this->db->sql_query_limit($sql, $this->get_duplicate_aware_query_limit($limit, $used_topic_ids, $prevent_duplicates));
 
         while ($row = $this->db->sql_fetchrow($result))
         {
+            $topic_id = (int) $row['topic_id'];
+
+            if ($this->should_skip_topic($topic_id, $block_topic_ids, $used_topic_ids, $prevent_duplicates))
+            {
+                continue;
+            }
+
             $headlines[] = array(
                 'TITLE'        => $row['topic_title'],
                 'DATE'         => $this->format_portal_date($row['topic_time']),
                 'S_FEATURED'   => (bool) $row['portal_featured'],
-                'U_VIEW_TOPIC' => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . (int) $row['topic_id']),
+                'U_VIEW_TOPIC' => append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . $topic_id),
             );
+
+            $this->remember_topic_used($topic_id, $used_topic_ids, $prevent_duplicates);
+
+            if (count($headlines) >= $limit)
+            {
+                break;
+            }
         }
         $this->db->sql_freeresult($result);
 
         return $headlines;
+    }
+
+    protected function should_skip_topic($topic_id, array &$block_topic_ids, array &$used_topic_ids, $prevent_duplicates)
+    {
+        $topic_id = (int) $topic_id;
+
+        if ($topic_id <= 0)
+        {
+            return true;
+        }
+
+        if (isset($block_topic_ids[$topic_id]))
+        {
+            return true;
+        }
+
+        if ($prevent_duplicates && isset($used_topic_ids[$topic_id]))
+        {
+            return true;
+        }
+
+        $block_topic_ids[$topic_id] = true;
+
+        return false;
+    }
+
+    protected function remember_topic_used($topic_id, array &$used_topic_ids, $prevent_duplicates)
+    {
+        if (!$prevent_duplicates)
+        {
+            return;
+        }
+
+        $topic_id = (int) $topic_id;
+        if ($topic_id > 0)
+        {
+            $used_topic_ids[$topic_id] = true;
+        }
+    }
+
+    protected function get_duplicate_aware_query_limit($limit, array $used_topic_ids, $prevent_duplicates)
+    {
+        $limit = max(1, (int) $limit);
+
+        if (!$prevent_duplicates)
+        {
+            return $limit;
+        }
+
+        return min(200, $limit + count($used_topic_ids) + 15);
     }
 
     protected function get_readable_source_forum_ids()

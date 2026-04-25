@@ -110,6 +110,7 @@ class main_module
             $allow_poll_guest_vote = (int) $request->variable('forumportal_allow_poll_guest_vote', 1);
             $show_notices = (int) $request->variable('forumportal_show_notices', 1);
             $show_hero_excerpt = (int) $request->variable('forumportal_show_hero_excerpt', 1);
+            $prevent_duplicate_topics = (int) $request->variable('forumportal_prevent_duplicate_topics', 1);
             $custom_html = html_entity_decode((string) $request->variable('forumportal_custom_html', '', true), ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $custom_html_title = trim((string) $request->variable('forumportal_custom_html_title', '', true));
             $custom_html_position = (string) $request->variable('forumportal_custom_html_position', 'top');
@@ -190,6 +191,7 @@ class main_module
                 set_config('forumportal_allow_poll_guest_vote', $allow_poll_guest_vote);
                 set_config('forumportal_show_notices', $show_notices);
                 set_config('forumportal_show_hero_excerpt', $show_hero_excerpt);
+                set_config('forumportal_prevent_duplicate_topics', $prevent_duplicate_topics);
                 set_config('forumportal_custom_html_title', $custom_html_title);
                 set_config('forumportal_custom_html_position', $custom_html_position);
 
@@ -274,6 +276,7 @@ class main_module
             'S_FORUMPORTAL_ALLOW_POLL_GUEST_VOTE'=> $this->config_bool($config, 'forumportal_allow_poll_guest_vote', true),
             'S_FORUMPORTAL_SHOW_NOTICES'         => $this->config_bool($config, 'forumportal_show_notices', true),
             'S_FORUMPORTAL_SHOW_HERO_EXCERPT'    => $this->config_bool($config, 'forumportal_show_hero_excerpt', true),
+            'S_FORUMPORTAL_PREVENT_DUPLICATE_TOPICS' => $this->config_bool($config, 'forumportal_prevent_duplicate_topics', true),
             'FORUMPORTAL_CUSTOM_HTML'            => $custom_html,
             'FORUMPORTAL_CUSTOM_HTML_TITLE'      => isset($config['forumportal_custom_html_title']) ? (string) $config['forumportal_custom_html_title'] : '',
             'S_FORUMPORTAL_HTML_TOP'             => (!isset($config['forumportal_custom_html_position']) || (string) $config['forumportal_custom_html_position'] !== 'bottom'),
