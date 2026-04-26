@@ -369,3 +369,82 @@
 	border-bottom: 0;
 }
 
+
+
+/* v1.2.2: practical reviewer feedback polish. */
+
+/* Dates are now shown only in the author/meta line, avoiding duplicated date boxes. */
+.forumportal-page .forumportal-story__date {
+	display: none;
+}
+
+/* Keep title links consistent with the phpBB/ProSilver link color in integrated mode. */
+.forumportal-page--visual-prosilver .forumportal-story__title a,
+.forumportal-page--visual-prosilver .forumportal-hero__title a,
+.forumportal-page--visual-prosilver .forumportal-card__title a {
+	color: #105289 !important;
+}
+
+/* Make sidebar rows behave as one clear clickable block. */
+.forumportal-sidebar .forumportal-sidebar__block-link {
+	display: block;
+	margin: 0 -8px;
+	padding: 7px 8px;
+	box-sizing: border-box;
+	color: inherit !important;
+	text-decoration: none !important;
+}
+
+.forumportal-sidebar .forumportal-sidebar__block-link:hover,
+.forumportal-sidebar .forumportal-sidebar__block-link:focus {
+	background: rgba(16, 82, 137, .09);
+	color: inherit !important;
+	text-decoration: none !important;
+	outline: 0;
+}
+
+.forumportal-sidebar .forumportal-sidebar__block-link:hover .forumportal-sidebar__block-title,
+.forumportal-sidebar .forumportal-sidebar__block-link:focus .forumportal-sidebar__block-title {
+	text-decoration: underline;
+}
+
+.forumportal-sidebar__block-title {
+	display: block;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+.forumportal-sidebar .forumportal-sidebar__block-link .forumportal-headlines__meta,
+.forumportal-sidebar .forumportal-sidebar__block-link .forumportal-mostread__meta,
+.forumportal-sidebar .forumportal-sidebar__block-link .forumportal-mostcommented__meta,
+.forumportal-sidebar .forumportal-sidebar__block-link .forumportal-notices__meta {
+	margin-top: 4px;
+	text-decoration: none !important;
+}
+
+.forumportal-sidebar .forumportal-notices__type {
+	display: inline-flex;
+	margin: 0 0 5px;
+}
+
+.forumportal-custom-links__link,
+.forumportal-sidebar .forumportal-custom-links__link {
+	font-weight: 700;
+}
+
+/* A little more breathing room for rows whose entire content is clickable. */
+.forumportal-headlines__item,
+.forumportal-mostread__item,
+.forumportal-mostcommented__item,
+.forumportal-notices__item,
+.forumportal-custom-links__item {
+	padding-bottom: 8px;
+}
+
+.forumportal-headlines__item:last-child,
+.forumportal-mostread__item:last-child,
+.forumportal-mostcommented__item:last-child,
+.forumportal-notices__item:last-child,
+.forumportal-custom-links__item:last-child {
+	padding-bottom: 0;
+}

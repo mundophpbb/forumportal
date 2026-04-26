@@ -61,14 +61,7 @@
 				</div>
 				<div class="forumportal-stream<!-- IF S_FORUMPORTAL_POSTS_LAYOUT_GRID2 --> forumportal-stream--grid2<!-- ELSE --> forumportal-stream--list<!-- ENDIF -->">
 					<!-- BEGIN topics -->
-					<article class="forumportal-story<!-- IF topics.S_FEATURED --> forumportal-story--featured<!-- ENDIF --><!-- IF not S_FORUMPORTAL_SHOW_DATE --> forumportal-story--no-date<!-- ENDIF --><!-- IF topics.IMAGE --> forumportal-story--has-image<!-- ELSE --> forumportal-story--no-image<!-- ENDIF --><!-- IF S_FORUMPORTAL_STORY_ICON_NONE or (S_FORUMPORTAL_STORY_ICON_TOPIC and not topics.TOPIC_ICON) --> forumportal-story--no-icon<!-- ENDIF -->">
-						<!-- IF S_FORUMPORTAL_SHOW_DATE -->
-						<div class="forumportal-story__date" aria-hidden="true">
-							<span class="forumportal-story__day">{topics.DATE_DAY}</span>
-							<span class="forumportal-story__month">{topics.DATE_MONTH}</span>
-							<span class="forumportal-story__year">{topics.DATE_YEAR}</span>
-						</div>
-						<!-- ENDIF -->
+					<article class="forumportal-story forumportal-story--no-date<!-- IF topics.S_FEATURED --> forumportal-story--featured<!-- ENDIF --><!-- IF topics.IMAGE --> forumportal-story--has-image<!-- ELSE --> forumportal-story--no-image<!-- ENDIF --><!-- IF S_FORUMPORTAL_STORY_ICON_NONE or (S_FORUMPORTAL_STORY_ICON_TOPIC and not topics.TOPIC_ICON) --> forumportal-story--no-icon<!-- ENDIF -->">
 						<!-- IF topics.IMAGE -->
 						<div class="forumportal-story__media">
 							<a href="{topics.U_VIEW_TOPIC}">
@@ -117,9 +110,11 @@
 					<ul class="forumportal-notices">
 						<!-- BEGIN notices -->
 						<li class="forumportal-notices__item">
-							<span class="forumportal-notices__type">{notices.TYPE}</span>
-							<a class="forumportal-notices__link" href="{notices.U_VIEW_TOPIC}">{notices.TITLE}</a>
-							<!-- IF S_FORUMPORTAL_SHOW_DATE --><span class="forumportal-notices__meta">{notices.DATE}</span><!-- ENDIF -->
+							<a class="forumportal-notices__link forumportal-sidebar__block-link" href="{notices.U_VIEW_TOPIC}">
+								<span class="forumportal-notices__type">{notices.TYPE}</span>
+								<span class="forumportal-sidebar__block-title">{notices.TITLE}</span>
+								<!-- IF S_FORUMPORTAL_SHOW_DATE --><span class="forumportal-notices__meta">{notices.DATE}</span><!-- ENDIF -->
+							</a>
 						</li>
 						<!-- END notices -->
 					</ul>
@@ -132,8 +127,10 @@
 					<ul class="forumportal-headlines">
 						<!-- BEGIN headlines -->
 						<li class="forumportal-headlines__item<!-- IF headlines.S_FEATURED --> forumportal-headlines__item--featured<!-- ENDIF -->">
-							<a class="forumportal-headlines__link" href="{headlines.U_VIEW_TOPIC}">{headlines.TITLE}</a>
-							<!-- IF S_FORUMPORTAL_SHOW_DATE --><span class="forumportal-headlines__meta">{headlines.DATE}</span><!-- ENDIF -->
+							<a class="forumportal-headlines__link forumportal-sidebar__block-link" href="{headlines.U_VIEW_TOPIC}">
+								<span class="forumportal-sidebar__block-title">{headlines.TITLE}</span>
+								<!-- IF S_FORUMPORTAL_SHOW_DATE --><span class="forumportal-headlines__meta">{headlines.DATE}</span><!-- ENDIF -->
+							</a>
 						</li>
 						<!-- END headlines -->
 					</ul>
@@ -215,8 +212,10 @@
 					<ol class="forumportal-mostread">
 						<!-- BEGIN most_read -->
 						<li class="forumportal-mostread__item<!-- IF most_read.S_FEATURED --> forumportal-mostread__item--featured<!-- ENDIF -->">
-							<a class="forumportal-mostread__link" href="{most_read.U_VIEW_TOPIC}">{most_read.TITLE}</a>
-							<!-- IF S_FORUMPORTAL_SHOW_VIEWS or S_FORUMPORTAL_SHOW_DATE --><span class="forumportal-mostread__meta"><!-- IF S_FORUMPORTAL_SHOW_VIEWS -->{L_FORUMPORTAL_STATS_VIEWS}{L_COLON} {most_read.VIEWS}<!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_VIEWS and S_FORUMPORTAL_SHOW_DATE --> &bull; <!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_DATE -->{most_read.DATE}<!-- ENDIF --></span><!-- ENDIF -->
+							<a class="forumportal-mostread__link forumportal-sidebar__block-link" href="{most_read.U_VIEW_TOPIC}">
+								<span class="forumportal-sidebar__block-title">{most_read.TITLE}</span>
+								<!-- IF S_FORUMPORTAL_SHOW_VIEWS or S_FORUMPORTAL_SHOW_DATE --><span class="forumportal-mostread__meta"><!-- IF S_FORUMPORTAL_SHOW_VIEWS -->{L_FORUMPORTAL_STATS_VIEWS}{L_COLON} {most_read.VIEWS}<!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_VIEWS and S_FORUMPORTAL_SHOW_DATE --> &bull; <!-- ENDIF --><!-- IF S_FORUMPORTAL_SHOW_DATE -->{most_read.DATE}<!-- ENDIF --></span><!-- ENDIF -->
+							</a>
 						</li>
 						<!-- END most_read -->
 					</ol>
@@ -231,8 +230,10 @@
 					<ol class="forumportal-mostread forumportal-mostcommented">
 						<!-- BEGIN most_commented -->
 						<li class="forumportal-mostread__item forumportal-mostcommented__item<!-- IF most_commented.S_FEATURED --> forumportal-mostread__item--featured forumportal-mostcommented__item--featured<!-- ENDIF -->">
-							<a class="forumportal-mostread__link forumportal-mostcommented__link" href="{most_commented.U_VIEW_TOPIC}">{most_commented.TITLE}</a>
-							<!-- IF S_FORUMPORTAL_SHOW_DATE or most_commented.COMMENTS --><span class="forumportal-mostread__meta forumportal-mostcommented__meta">{L_FORUMPORTAL_STATS_COMMENTS}{L_COLON} {most_commented.COMMENTS}<!-- IF S_FORUMPORTAL_SHOW_DATE --> &bull; {most_commented.DATE}<!-- ENDIF --></span><!-- ENDIF -->
+							<a class="forumportal-mostread__link forumportal-mostcommented__link forumportal-sidebar__block-link" href="{most_commented.U_VIEW_TOPIC}">
+								<span class="forumportal-sidebar__block-title">{most_commented.TITLE}</span>
+								<!-- IF S_FORUMPORTAL_SHOW_DATE or most_commented.COMMENTS --><span class="forumportal-mostread__meta forumportal-mostcommented__meta">{L_FORUMPORTAL_STATS_COMMENTS}{L_COLON} {most_commented.COMMENTS}<!-- IF S_FORUMPORTAL_SHOW_DATE --> &bull; {most_commented.DATE}<!-- ENDIF --></span><!-- ENDIF -->
+							</a>
 						</li>
 						<!-- END most_commented -->
 					</ol>

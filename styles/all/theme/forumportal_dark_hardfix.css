@@ -167,3 +167,233 @@ html:has(link[href*="/styles/" i][href*="/theme/stylesheet.css" i][href*="carbon
 	border-color: #31465a !important;
 	color: #d7e0e8 !important;
 }
+
+
+/* v1.2.2: sidebar, poll and pagination contrast hardfix for detected or forced dark modes. */
+.forumportal-page--dark-force,
+.forumportal-page--detected-dark,
+html[class*="dark" i] .forumportal-page--dark-auto,
+html[data-theme*="dark" i] .forumportal-page--dark-auto,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto,
+body[class*="dark" i] .forumportal-page--dark-auto,
+body[data-theme*="dark" i] .forumportal-page--dark-auto,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto,
+body.phpbb-dark .forumportal-page--dark-auto {
+	--forumportal-dark-bg: #101820;
+	--forumportal-dark-panel: #172331;
+	--forumportal-dark-panel-soft: #1d2b3a;
+	--forumportal-dark-border: #31465a;
+	--forumportal-dark-text: #d7e0e8;
+	--forumportal-dark-muted: #b8c7d6;
+	--forumportal-dark-link: #6fb5ff;
+	--forumportal-dark-poll: #ff6f91;
+}
+
+.forumportal-page--dark-force .forumportal-sidecard,
+.forumportal-page--detected-dark .forumportal-sidecard,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-sidecard {
+	background: var(--forumportal-dark-panel) !important;
+	border-color: var(--forumportal-dark-border) !important;
+	color: var(--forumportal-dark-text) !important;
+}
+
+.forumportal-page--dark-force .forumportal-sidecard__title,
+.forumportal-page--detected-dark .forumportal-sidecard__title,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard__title,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard__title,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard__title,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard__title,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard__title,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard__title,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-sidecard__title,
+.forumportal-page--dark-force .forumportal-sidebar__block-title,
+.forumportal-page--detected-dark .forumportal-sidebar__block-title,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-title,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-title,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-title,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-title,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-title,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-title,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-sidebar__block-title {
+	color: #eef4f8 !important;
+}
+
+.forumportal-page--dark-force .forumportal-sidebar a,
+.forumportal-page--detected-dark .forumportal-sidebar a,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar a,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar a,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar a,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar a,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar a,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar a,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-sidebar a {
+	color: var(--forumportal-dark-link) !important;
+}
+
+.forumportal-page--dark-force .forumportal-card__stats,
+.forumportal-page--dark-force .forumportal-headlines__meta,
+.forumportal-page--dark-force .forumportal-mostread__meta,
+.forumportal-page--dark-force .forumportal-mostcommented__meta,
+.forumportal-page--dark-force .forumportal-notices__meta,
+.forumportal-page--dark-force .forumportal-contributors__meta,
+.forumportal-page--dark-force .forumportal-sidecard__period,
+.forumportal-page--dark-force .forumportal-poll__status,
+.forumportal-page--dark-force .forumportal-poll__hint,
+.forumportal-page--dark-force .forumportal-poll__total,
+.forumportal-page--dark-force .forumportal-poll__result,
+.forumportal-page--detected-dark .forumportal-card__stats,
+.forumportal-page--detected-dark .forumportal-headlines__meta,
+.forumportal-page--detected-dark .forumportal-mostread__meta,
+.forumportal-page--detected-dark .forumportal-mostcommented__meta,
+.forumportal-page--detected-dark .forumportal-notices__meta,
+.forumportal-page--detected-dark .forumportal-contributors__meta,
+.forumportal-page--detected-dark .forumportal-sidecard__period,
+.forumportal-page--detected-dark .forumportal-poll__status,
+.forumportal-page--detected-dark .forumportal-poll__hint,
+.forumportal-page--detected-dark .forumportal-poll__total,
+.forumportal-page--detected-dark .forumportal-poll__result,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-card__stats,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-headlines__meta,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-mostread__meta,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-mostcommented__meta,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-notices__meta,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-contributors__meta,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard__period,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__status,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__hint,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__total,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__result,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-card__stats,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-headlines__meta,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-mostread__meta,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-mostcommented__meta,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-notices__meta,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-contributors__meta,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidecard__period,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__status,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__hint,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__total,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__result,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-card__stats,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-headlines__meta,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-mostread__meta,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-mostcommented__meta,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-notices__meta,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-contributors__meta,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-sidecard__period,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-poll__status,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-poll__hint,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-poll__total,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-poll__result {
+	background: var(--forumportal-dark-panel-soft) !important;
+	border-color: var(--forumportal-dark-border) !important;
+	color: var(--forumportal-dark-muted) !important;
+}
+
+.forumportal-page--dark-force .forumportal-sidebar__block-link:hover,
+.forumportal-page--dark-force .forumportal-sidebar__block-link:focus,
+.forumportal-page--detected-dark .forumportal-sidebar__block-link:hover,
+.forumportal-page--detected-dark .forumportal-sidebar__block-link:focus,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-link:hover,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-link:focus,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-link:hover,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-sidebar__block-link:focus,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-sidebar__block-link:hover,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-sidebar__block-link:focus {
+	background: rgba(111, 181, 255, .12) !important;
+}
+
+.forumportal-page--dark-force .forumportal-poll,
+.forumportal-page--dark-force .forumportal-poll__option,
+.forumportal-page--dark-force .forumportal-pagination__links a,
+.forumportal-page--detected-dark .forumportal-poll,
+.forumportal-page--detected-dark .forumportal-poll__option,
+.forumportal-page--detected-dark .forumportal-pagination__links a,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__option,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__links a,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__option,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__links a,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-poll,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-poll__option,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-pagination__links a {
+	background: var(--forumportal-dark-panel-soft) !important;
+	border-color: var(--forumportal-dark-border) !important;
+	color: var(--forumportal-dark-text) !important;
+}
+
+.forumportal-page--dark-force .forumportal-poll__question,
+.forumportal-page--detected-dark .forumportal-poll__question,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__question,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__question,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-poll__question {
+	background: rgba(255, 111, 145, .11) !important;
+	border-left-color: var(--forumportal-dark-poll) !important;
+	color: #eef4f8 !important;
+}
+
+.forumportal-page--dark-force .forumportal-poll__bar,
+.forumportal-page--detected-dark .forumportal-poll__bar,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__bar,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__bar,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-poll__bar {
+	background: rgba(255, 255, 255, .08) !important;
+	border-color: rgba(255, 111, 145, .28) !important;
+}
+
+.forumportal-page--dark-force .forumportal-poll__bar-fill,
+.forumportal-page--detected-dark .forumportal-poll__bar-fill,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__bar-fill,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-poll__bar-fill,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-poll__bar-fill {
+	background: var(--forumportal-dark-poll) !important;
+	opacity: .95 !important;
+}
+
+.forumportal-page--dark-force .forumportal-pagination__summary,
+.forumportal-page--detected-dark .forumportal-pagination__summary,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__summary,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__summary,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-pagination__summary {
+	color: var(--forumportal-dark-muted) !important;
+}
+
+.forumportal-page--dark-force .forumportal-pagination__links strong,
+.forumportal-page--detected-dark .forumportal-pagination__links strong,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__links strong,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__links strong,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-pagination__links strong {
+	background: var(--forumportal-dark-link) !important;
+	border-color: var(--forumportal-dark-link) !important;
+	color: #08131f !important;
+}
+
+.forumportal-page--dark-force .forumportal-pagination__links a:hover,
+.forumportal-page--dark-force .forumportal-pagination__links a:focus,
+.forumportal-page--detected-dark .forumportal-pagination__links a:hover,
+.forumportal-page--detected-dark .forumportal-pagination__links a:focus,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__links a:hover,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__links a:focus,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__links a:hover,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-pagination__links a:focus,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-pagination__links a:hover,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-pagination__links a:focus {
+	background: rgba(111, 181, 255, .16) !important;
+	border-color: var(--forumportal-dark-link) !important;
+	color: #eef4f8 !important;
+}
+
+.forumportal-page--dark-force .forumportal-stream--grid2 .forumportal-story__media,
+.forumportal-page--detected-dark .forumportal-stream--grid2 .forumportal-story__media,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story__media,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story__media,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story__media {
+	background: #0f1924 !important;
+}

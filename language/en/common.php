@@ -64,6 +64,19 @@ $lang = array_merge($lang, array(
     'FORUMPORTAL_CUSTOM_BLOCK'            => 'Custom block',
     'FORUMPORTAL_CUSTOM_LINKS'           => 'Custom links',
 
+    'FORUMPORTAL_MONTH_SHORT_1'          => 'Jan',
+    'FORUMPORTAL_MONTH_SHORT_2'          => 'Feb',
+    'FORUMPORTAL_MONTH_SHORT_3'          => 'Mar',
+    'FORUMPORTAL_MONTH_SHORT_4'          => 'Apr',
+    'FORUMPORTAL_MONTH_SHORT_5'          => 'May',
+    'FORUMPORTAL_MONTH_SHORT_6'          => 'Jun',
+    'FORUMPORTAL_MONTH_SHORT_7'          => 'Jul',
+    'FORUMPORTAL_MONTH_SHORT_8'          => 'Aug',
+    'FORUMPORTAL_MONTH_SHORT_9'          => 'Sep',
+    'FORUMPORTAL_MONTH_SHORT_10'         => 'Oct',
+    'FORUMPORTAL_MONTH_SHORT_11'         => 'Nov',
+    'FORUMPORTAL_MONTH_SHORT_12'         => 'Dec',
+
     'ACL_CAT_FORUMPORTAL'                => 'Forum Portal',
     'ACL_F_FORUMPORTAL_PUBLISH'          => 'Can publish topics on the portal and edit portal data in the first post options',
     'ACL_M_FORUMPORTAL_EDIT'             => 'Can edit portal publication data in the first post options',
@@ -89,6 +102,14 @@ $lang = array_merge($lang, array(
     'FORUMPORTAL_POLL_ERROR_GUESTS_DISABLED'=> 'Guest voting from the portal is disabled.',
     'FORUMPORTAL_POLL_ERROR_NO_PERMISSION'=> 'You do not have permission to vote in this poll.',
     'FORUMPORTAL_POLL_ERROR_UNAVAILABLE'  => 'The poll is not available right now.',
+
+
+    'FORUMPORTAL_QUICK_ACTIONS'           => 'Portal actions',
+    'FORUMPORTAL_PUBLISH_TO_PORTAL'       => 'Publish on portal',
+    'FORUMPORTAL_REMOVE_FROM_PORTAL'      => 'Remove from portal',
+    'FORUMPORTAL_FEATURE_TOPIC'           => 'Feature on portal',
+    'FORUMPORTAL_UNFEATURE_TOPIC'         => 'Remove portal feature',
+    'FORUMPORTAL_EDIT_PORTAL_DATA'        => 'Edit portal data',
 
     'FORUMPORTAL_NAV_FORUM'               => 'Forum',
 

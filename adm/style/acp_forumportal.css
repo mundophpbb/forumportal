@@ -1,25 +1,49 @@
+.forumportal-acp-layout {
+	display: grid;
+	grid-template-columns: minmax(170px, 220px) minmax(0, 1fr);
+	gap: 14px;
+	align-items: start;
+}
+
+.forumportal-acp-menu {
+	position: sticky;
+	top: 10px;
+	z-index: 2;
+}
+
+.forumportal-acp-menu-title {
+	margin: 0 0 6px;
+	padding: 8px 10px;
+	border: 1px solid #c7d2df;
+	background: #e9f1f8;
+	color: #105289;
+	font-weight: 700;
+}
+
+.forumportal-acp-content {
+	min-width: 0;
+}
+
 .forumportal-acp-tabs {
-	margin: 0 0 14px;
-	padding: 10px 10px 4px;
+	margin: 0;
+	padding: 8px;
 	border: 1px solid #c7d2df;
 	background: #f5f7fa;
 }
 
-.forumportal-acp-tabs::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
 .forumportal-acp-tab {
-	display: inline-block;
-	margin: 0 6px 6px 0;
-	padding: 7px 11px;
+	display: block;
+	margin: 0 0 6px;
+	padding: 8px 10px;
 	border: 1px solid #b7c6d8;
 	background: #fff;
 	color: #105289;
 	font-weight: 700;
 	text-decoration: none;
+}
+
+.forumportal-acp-tab:last-child {
+	margin-bottom: 0;
 }
 
 .forumportal-acp-tab:hover,
@@ -31,6 +55,24 @@
 
 .forumportal-acp-section {
 	scroll-margin-top: 12px;
+}
+
+.forumportal-acp-section:target {
+	border-color: #105289;
+	box-shadow: inset 3px 0 0 #105289;
+}
+
+.forumportal-acp-note {
+	clear: both;
+	margin: 12px 0;
+	padding: 10px 12px;
+	border: 1px solid #c7d2df;
+	background: #f8fbff;
+	color: #333;
+}
+
+.forumportal-acp-note p {
+	margin: 4px 0 0;
 }
 
 .forumportal-acp-section > p {
@@ -48,6 +90,28 @@
 	border: 0;
 	border-top: 1px solid #d9e0e8;
 	margin: 12px 0;
+}
+
+@media (max-width: 900px) {
+	.forumportal-acp-layout {
+		display: block;
+	}
+
+	.forumportal-acp-menu {
+		position: static;
+		margin-bottom: 14px;
+	}
+
+	.forumportal-acp-tabs::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+
+	.forumportal-acp-tab {
+		display: inline-block;
+		margin: 0 6px 6px 0;
+	}
 }
 
 @media (max-width: 700px) {

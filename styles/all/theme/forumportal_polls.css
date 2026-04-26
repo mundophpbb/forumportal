@@ -285,3 +285,79 @@
 	color: #555;
 }
 
+
+
+/* v1.2.2: stronger ProSilver-native poll color and clearer separation between multiple polls. */
+.forumportal-sidecard--polls {
+	border-top-color: var(--forumportal-poll-color, #bc2a4d);
+}
+
+.forumportal-polls {
+	gap: 12px;
+}
+
+.forumportal-poll {
+	padding: 11px 12px 12px;
+	border: 1px solid rgba(188, 42, 77, .18);
+	background: rgba(188, 42, 77, .025);
+	box-sizing: border-box;
+}
+
+.forumportal-poll + .forumportal-poll {
+	margin-top: 0;
+	padding-top: 11px;
+	border-top: 1px solid rgba(188, 42, 77, .18);
+}
+
+.forumportal-poll__title {
+	border-bottom-color: rgba(188, 42, 77, .18);
+}
+
+.forumportal-poll__question {
+	border-left-color: var(--forumportal-poll-color, #bc2a4d);
+	background: rgba(188, 42, 77, .06);
+}
+
+.forumportal-poll__status {
+	border-color: rgba(188, 42, 77, .22);
+	background: rgba(188, 42, 77, .07);
+	color: var(--forumportal-poll-color, #bc2a4d);
+}
+
+.forumportal-poll__option {
+	border-color: rgba(188, 42, 77, .16);
+	background: rgba(255, 255, 255, .80);
+}
+
+.forumportal-poll__option:hover {
+	border-color: rgba(188, 42, 77, .36);
+	background: rgba(188, 42, 77, .045);
+}
+
+.forumportal-poll__option--voted {
+	border-left-color: var(--forumportal-poll-color, #bc2a4d);
+	background: rgba(188, 42, 77, .075);
+}
+
+.forumportal-poll__bar {
+	border-color: rgba(188, 42, 77, .18);
+	background: rgba(188, 42, 77, .08);
+}
+
+.forumportal-poll__bar-fill {
+	background: var(--forumportal-poll-color, #bc2a4d);
+	opacity: .9;
+}
+
+.forumportal-poll__submit {
+	border-color: var(--forumportal-poll-color, #bc2a4d);
+	background: var(--forumportal-poll-color, #bc2a4d);
+	color: #ffffff;
+}
+
+.forumportal-poll__submit:hover,
+.forumportal-poll__submit:focus {
+	border-color: #8f1f3a;
+	background: #8f1f3a;
+	color: #ffffff;
+}

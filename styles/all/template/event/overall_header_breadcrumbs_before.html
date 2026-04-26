@@ -1,5 +1,5 @@
 <li data-last-responsive="true" class="forumportal-nav-standard forumportal-nav-standard--portal">
-	<a href="{{ U_FORUMPORTAL }}" title="{FORUMPORTAL_NAV_TITLE}" role="menuitem">
+	<a class="forumportal-nav-button" href="{{ U_FORUMPORTAL }}" title="{FORUMPORTAL_NAV_TITLE}" role="menuitem"<!-- IF S_FORUMPORTAL_HOME_ENABLED --> data-forumportal-forum-index-url="{{ U_FORUM_INDEX_BYPASS|e('html_attr') }}"<!-- ENDIF -->>
 		<i class="icon fa-bullhorn fa-fw" aria-hidden="true"></i><span>{FORUMPORTAL_NAV_TITLE}</span>
 	</a>
 </li>

@@ -189,6 +189,7 @@ class main
             '{NAV_TITLE}'    => $nav_title,
         ));
         $start = max(0, (int) $this->request->variable('start', 0));
+        $noindex_paginated = $this->config_bool('forumportal_noindex_paginated', true);
 
         $has_topics = false;
         $has_hero_topic = false;
@@ -354,7 +355,10 @@ class main
         }
 
         $poll_message = $this->handle_poll_vote($source_forum_ids);
-        $polls = $show_polls ? $this->get_poll_topics($source_forum_ids, $polls_limit, $polls_days, $poll_topic_id, $allow_poll_vote, $used_topic_ids, $prevent_duplicate_topics) : array();
+        // Polls are sidebar widgets and may legitimately point to a topic that is also
+        // displayed as a latest/highlighted topic. Do not let duplicate-topic
+        // filtering hide the entire poll block.
+        $polls = $show_polls ? $this->get_poll_topics($source_forum_ids, $polls_limit, $polls_days, $poll_topic_id, $allow_poll_vote, $used_topic_ids, false) : array();
         foreach ($polls as $poll)
         {
             $poll_options = isset($poll['OPTIONS']) ? $poll['OPTIONS'] : array();
@@ -467,6 +471,7 @@ class main
             'FORUMPORTAL_NAV_TITLE'          => $nav_title,
             'S_HAS_FIXED_HEADLINE'           => $use_fixed_hero,
             'S_FORUMPORTAL_PAGE'             => true,
+            'S_FORUMPORTAL_NOINDEX_ROBOTS'   => ($noindex_paginated && $start > 0),
         ));
 
         $event = new \phpbb\event\data(array(
@@ -649,17 +654,27 @@ class main
     {
         $timestamp = (int) $timestamp;
         $month_number = (int) $this->user->format_date($timestamp, 'n');
-        $user_lang = isset($this->user->data['user_lang']) ? strtolower((string) $this->user->data['user_lang']) : '';
-        $months = (strpos($user_lang, 'pt') === 0)
-            ? array(1 => 'Jan', 2 => 'Fev', 3 => 'Mar', 4 => 'Abr', 5 => 'Mai', 6 => 'Jun', 7 => 'Jul', 8 => 'Ago', 9 => 'Set', 10 => 'Out', 11 => 'Nov', 12 => 'Dez')
-            : array(1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr', 5 => 'May', 6 => 'Jun', 7 => 'Jul', 8 => 'Aug', 9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec');
 
         return array(
             'DATE'  => $this->format_portal_date($timestamp),
             'DAY'   => $this->user->format_date($timestamp, 'd'),
-            'MONTH' => isset($months[$month_number]) ? $months[$month_number] : $this->user->format_date($timestamp, 'M'),
+            'MONTH' => $this->get_portal_month_short($month_number, $timestamp),
             'YEAR'  => $this->user->format_date($timestamp, 'Y'),
         );
+    }
+
+    protected function get_portal_month_short($month_number, $timestamp)
+    {
+        $month_number = (int) $month_number;
+        $key = 'FORUMPORTAL_MONTH_SHORT_' . $month_number;
+        $translated = $this->user->lang($key);
+
+        if ($translated !== '' && $translated !== $key)
+        {
+            return $translated;
+        }
+
+        return $this->user->format_date((int) $timestamp, 'M');
     }
 
     protected function sanitize_hex_color($value, $fallback)

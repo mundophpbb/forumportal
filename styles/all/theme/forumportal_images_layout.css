@@ -219,3 +219,12 @@
         margin-left: 0;
     }
 }
+
+/* v1.2.2: grid thumbnails now fit inside the image frame instead of being cropped. */
+.forumportal-stream--grid2 .forumportal-story__media {
+	background: #f4f6f8;
+}
+
+.forumportal-stream--grid2 .forumportal-story__media img {
+	object-fit: contain;
+}

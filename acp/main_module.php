@@ -40,6 +40,7 @@ class main_module
             $excerpt_limit = max(80, min(1200, (int) $request->variable('forumportal_excerpt_limit', 320)));
             $enabled = (int) $request->variable('forumportal_enabled', 0);
             $home_enabled = (int) $request->variable('forumportal_home_enabled', 0);
+            $noindex_paginated = (int) $request->variable('forumportal_noindex_paginated', 1);
             $page_title = trim((string) $request->variable('forumportal_page_title', '', true));
             $nav_title = trim((string) $request->variable('forumportal_nav_title', '', true));
             $default_image = trim((string) $request->variable('forumportal_default_image', '', true));
@@ -138,6 +139,7 @@ class main_module
             {
                 set_config('forumportal_enabled', $enabled);
                 set_config('forumportal_home_enabled', $home_enabled);
+                set_config('forumportal_noindex_paginated', $noindex_paginated);
                 set_config('forumportal_source_forum', implode(',', $source_forums));
                 set_config('forumportal_auto_include_source', $auto_include_source);
                 set_config('forumportal_topics_per_page', $topics_per_page);
@@ -217,6 +219,7 @@ class main_module
             'S_ERROR'                            => !empty($errors),
             'S_FORUMPORTAL_ENABLED'              => (int) $config['forumportal_enabled'],
             'S_FORUMPORTAL_HOME_ENABLED'         => (int) $config['forumportal_home_enabled'],
+            'S_FORUMPORTAL_NOINDEX_PAGINATED'    => $this->config_bool($config, 'forumportal_noindex_paginated', true),
             'S_FORUMPORTAL_AUTO_INCLUDE_SOURCE'  => $this->config_bool($config, 'forumportal_auto_include_source', false),
             'FORUMPORTAL_SOURCE_FORUM_OPTIONS'   => $this->build_forum_options($db, $this->parse_source_forums((string) $config['forumportal_source_forum'])),
             'FORUMPORTAL_TOPICS_PER_PAGE'        => (int) $config['forumportal_topics_per_page'],

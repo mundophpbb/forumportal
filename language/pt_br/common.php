@@ -64,6 +64,19 @@ $lang = array_merge($lang, array(
     'FORUMPORTAL_CUSTOM_BLOCK'            => 'Bloco personalizado',
     'FORUMPORTAL_CUSTOM_LINKS'           => 'Links personalizados',
 
+    'FORUMPORTAL_MONTH_SHORT_1'          => 'Jan',
+    'FORUMPORTAL_MONTH_SHORT_2'          => 'Fev',
+    'FORUMPORTAL_MONTH_SHORT_3'          => 'Mar',
+    'FORUMPORTAL_MONTH_SHORT_4'          => 'Abr',
+    'FORUMPORTAL_MONTH_SHORT_5'          => 'Mai',
+    'FORUMPORTAL_MONTH_SHORT_6'          => 'Jun',
+    'FORUMPORTAL_MONTH_SHORT_7'          => 'Jul',
+    'FORUMPORTAL_MONTH_SHORT_8'          => 'Ago',
+    'FORUMPORTAL_MONTH_SHORT_9'          => 'Set',
+    'FORUMPORTAL_MONTH_SHORT_10'         => 'Out',
+    'FORUMPORTAL_MONTH_SHORT_11'         => 'Nov',
+    'FORUMPORTAL_MONTH_SHORT_12'         => 'Dez',
+
     'ACL_CAT_FORUMPORTAL'                => 'Forum Portal',
     'ACL_F_FORUMPORTAL_PUBLISH'          => 'Pode publicar tópicos no portal e editar os dados do portal nas Opções da primeira mensagem',
     'ACL_M_FORUMPORTAL_EDIT'             => 'Pode editar a publicação no portal nas Opções da primeira mensagem',
@@ -89,6 +102,14 @@ $lang = array_merge($lang, array(
     'FORUMPORTAL_POLL_ERROR_GUESTS_DISABLED'=> 'O voto de convidados pelo portal está desativado.',
     'FORUMPORTAL_POLL_ERROR_NO_PERMISSION'=> 'Você não tem permissão para votar nesta enquete.',
     'FORUMPORTAL_POLL_ERROR_UNAVAILABLE'  => 'A enquete não está disponível no momento.',
+
+
+    'FORUMPORTAL_QUICK_ACTIONS'           => 'Ações do portal',
+    'FORUMPORTAL_PUBLISH_TO_PORTAL'       => 'Publicar no portal',
+    'FORUMPORTAL_REMOVE_FROM_PORTAL'      => 'Remover do portal',
+    'FORUMPORTAL_FEATURE_TOPIC'           => 'Destacar no portal',
+    'FORUMPORTAL_UNFEATURE_TOPIC'         => 'Remover destaque do portal',
+    'FORUMPORTAL_EDIT_PORTAL_DATA'        => 'Editar dados do portal',
 
     'FORUMPORTAL_NAV_FORUM'               => 'Fórum',
 

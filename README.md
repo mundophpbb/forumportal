@@ -11,6 +11,8 @@ A proposta é permitir que uma comunidade phpBB tenha uma página inicial mais e
 - Rota pública `/portal`.
 - Opção para ativar/desativar o portal pelo ACP.
 - Opção para usar o portal como página inicial.
+- Opção SEO para aplicar `noindex,follow` nas páginas paginadas do portal.
+- Correção v1.2.4: o bloco de enquetes não é mais ocultado pela proteção contra tópicos duplicados.
 - Seleção do fórum de origem do conteúdo.
 - Publicações em formato editorial com título, autor, data, resumo, imagem e botão **Leia mais**.
 - Opção no formulário de postagem para publicar ou não o tópico no portal.
@@ -165,6 +167,42 @@ Ao atualizar a extensão:
 - Adicionados idiomas `pt_br` e `en`.
 - Adicionado hook `mundophpbb_forumportal_after_content` em `portal_body.html` para integração com blocos extras.
 
+### Ajustes após novo feedback
+
+- Adicionado modo de ícone das publicações: megafone padrão, ícone do tópico do phpBB ou nenhum ícone.
+- Quando o modo “ícone do tópico” estiver ativo, tópicos sem ícone não exibem megafone.
+- O link **Abrir fórum** agora tem aparência de botão.
+- Adicionadas cores configuráveis para os botões de navegação **Portal** e **Fórum**.
+- Adicionado botão **Fórum** na navegação quando o portal estiver configurado como página inicial.
+- A barra superior do portal passa a usar a cor configurada do Portal.
+- Barras de resultado das enquetes passam a usar o vermelho padrão do ProSilver.
+- Melhorado o espaçamento de etiquetas, metadados e valores destacados na lateral.
+- Removida a repetição de “Últimas notícias” dentro de cada card de publicação; o título fica apenas na seção.
+
 ## Observações
 
 Esta extensão foi construída para evoluir sem alterar o core do phpBB. Algumas opções visuais são intencionalmente configuráveis para permitir dois caminhos: um portal com identidade editorial própria ou um portal mais integrado ao ProSilver.
+
+- Navigation color correction: Portal and Board index now follow the active phpBB style; only the Open forum button has its own color setting.
+
+### v1.2.5 - Layout / Portal CSS polish
+
+- Alinha melhor a barra do Portal com a largura útil do conteúdo.
+- Reduz espaçamentos laterais excessivos em estilos phpBB mais largos.
+- Mantém o portal responsivo sem forçar uma largura fixa interna.
+
+### v1.2.7 - Release cleanup / JS externo
+
+- Removido JavaScript inline de `overall_header_head_append.html`.
+- Adicionado `forumportal_home_breadcrumb.js` para manter o ajuste do breadcrumb quando o portal é usado como página inicial.
+- Mantido o retorno seguro ao índice real do fórum com `forumportal_bypass=1`.
+- Pacote preparado para nova rodada de feedback público.
+
+## Portal URL and `app.php`
+
+Forum Portal uses phpBB's routing system and does not force clean URLs at extension level. When phpBB URL rewriting is enabled in the ACP and the web server is configured correctly, the portal route may be displayed without `app.php`. Otherwise, `app.php/portal` is the safe and expected phpBB route.
+
+### Version 1.2.9
+
+- Month abbreviations used by the portal date badge now come from language files instead of being hardcoded in PHP.
+- This allows translators to localize month names properly for additional languages.

@@ -20,3 +20,58 @@
 .forumportal-nav-standard span {
 	vertical-align: middle;
 }
+
+
+/* v1.2.2: make the portal shortcut read as an action button, not only as breadcrumb text. */
+.forumportal-nav-standard--portal > a.forumportal-nav-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	min-height: 24px;
+	padding: 3px 9px;
+	border: 1px solid rgba(16, 82, 137, .35);
+	border-radius: 0;
+	background: rgba(16, 82, 137, .08);
+	color: inherit;
+	font-weight: 700;
+	line-height: 1.2;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+.forumportal-nav-standard--portal > a.forumportal-nav-button:hover,
+.forumportal-nav-standard--portal > a.forumportal-nav-button:focus {
+	border-color: rgba(16, 82, 137, .65);
+	background: rgba(16, 82, 137, .14);
+	color: inherit;
+	text-decoration: none;
+}
+
+html[class*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+html[data-theme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+html[data-color-scheme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body[class*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body[data-theme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body[data-color-scheme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body.phpbb-dark .forumportal-nav-standard--portal > a.forumportal-nav-button {
+	border-color: rgba(111, 181, 255, .45);
+	background: rgba(111, 181, 255, .12);
+	color: #eef4f8;
+}
+
+
+/* Viewtopic portal action buttons: safe fallback if enabled by permissions/workflow. */
+.forumportal-post-actions-label {
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .03em;
+	text-transform: uppercase;
+	opacity: .75;
+}
+
+.post-buttons .forumportal-post-action--active,
+.post-buttons .forumportal-post-action--active:hover {
+	border-color: #bc2a4d;
+	color: #bc2a4d;
+}

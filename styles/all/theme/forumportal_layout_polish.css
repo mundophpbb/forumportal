@@ -1,0 +1,80 @@
+/* v1.2.5: layout/spacing polish for reviewer feedback.
+   Keeps the portal aligned with the active phpBB wrapper while making the
+   Portal header bar and the content grid use the same usable width. */
+#wrap .forumportal-page,
+.forumportal-page {
+    overflow-x: hidden;
+}
+
+#wrap .forumportal-page .forumportal-shell,
+.forumportal-page .forumportal-shell {
+    width: 100%;
+    max-width: none;
+    padding-left: clamp(8px, 1.35vw, 16px);
+    padding-right: clamp(8px, 1.35vw, 16px);
+    box-sizing: border-box;
+}
+
+.forumportal-page .forumportal-topbar,
+.forumportal-page .forumportal-layout,
+.forumportal-page .forumportal-main,
+.forumportal-page .forumportal-sidebar,
+.forumportal-page .forumportal-lead,
+.forumportal-page .forumportal-stream,
+.forumportal-page .forumportal-bottombar,
+.forumportal-page .forumportal-custom-header,
+.forumportal-page .forumportal-custom-html {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* In the portal/editorial skin the PORTAL heading now behaves like a real
+   block header, not a visually narrower floating strip. */
+.forumportal-page--visual-editorial .forumportal-topbar {
+    padding-left: 14px;
+    padding-right: 14px;
+    border: 1px solid #d9dde1;
+    border-top: 4px solid #224f78;
+    background: #ffffff;
+}
+
+.forumportal-page--visual-editorial .forumportal-topbar__actions,
+.forumportal-page--visual-prosilver .forumportal-topbar__actions {
+    padding-right: 0;
+}
+
+/* Keep the sidebar useful, but do not let it become too narrow or too wide
+   when the board style uses a wider wrapper than ProSilver. */
+@media (min-width: 981px) {
+    .forumportal-page .forumportal-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(270px, 300px);
+        gap: clamp(18px, 2vw, 26px);
+    }
+
+    .forumportal-page .forumportal-layout--no-sidebar {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 980px) {
+    #wrap .forumportal-page .forumportal-shell,
+    .forumportal-page .forumportal-shell {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .forumportal-page--visual-editorial .forumportal-topbar,
+    .forumportal-page--visual-prosilver .forumportal-topbar {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+@media (max-width: 700px) {
+    .forumportal-page--visual-editorial .forumportal-topbar,
+    .forumportal-page--visual-prosilver .forumportal-topbar {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

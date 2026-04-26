@@ -12,16 +12,21 @@
 <!-- ENDIF -->
 
 <form id="acp_forumportal" method="post" action="{U_ACTION}">
-	<div class="forumportal-acp-tabs" role="navigation" aria-label="{L_ACP_FORUMPORTAL_ACP_SECTIONS}">
-		<a class="forumportal-acp-tab" href="#forumportal-general">{L_ACP_FORUMPORTAL_TAB_GENERAL}</a>
-		<a class="forumportal-acp-tab" href="#forumportal-content">{L_ACP_FORUMPORTAL_TAB_CONTENT}</a>
-		<a class="forumportal-acp-tab" href="#forumportal-visual">{L_ACP_FORUMPORTAL_TAB_VISUAL}</a>
-		<a class="forumportal-acp-tab" href="#forumportal-sidebar">{L_ACP_FORUMPORTAL_TAB_BLOCKS}</a>
-		<a class="forumportal-acp-tab" href="#forumportal-polls">{L_ACP_FORUMPORTAL_TAB_POLLS}</a>
-		<a class="forumportal-acp-tab" href="#forumportal-custom-html">{L_ACP_FORUMPORTAL_TAB_HTML}</a>
-		<a class="forumportal-acp-tab" href="#forumportal-custom-links">{L_ACP_FORUMPORTAL_TAB_LINKS}</a>
-	</div>
+	<div class="forumportal-acp-layout">
+		<aside class="forumportal-acp-menu" aria-label="{L_ACP_FORUMPORTAL_ACP_SECTIONS}">
+			<div class="forumportal-acp-menu-title">{L_ACP_FORUMPORTAL_ACP_SECTIONS}</div>
+			<nav class="forumportal-acp-tabs" role="navigation">
+				<a class="forumportal-acp-tab" href="#forumportal-general">{L_ACP_FORUMPORTAL_TAB_GENERAL}</a>
+				<a class="forumportal-acp-tab" href="#forumportal-content">{L_ACP_FORUMPORTAL_TAB_CONTENT}</a>
+				<a class="forumportal-acp-tab" href="#forumportal-visual">{L_ACP_FORUMPORTAL_TAB_VISUAL}</a>
+				<a class="forumportal-acp-tab" href="#forumportal-sidebar">{L_ACP_FORUMPORTAL_TAB_BLOCKS}</a>
+				<a class="forumportal-acp-tab" href="#forumportal-polls">{L_ACP_FORUMPORTAL_TAB_POLLS}</a>
+				<a class="forumportal-acp-tab" href="#forumportal-custom-html">{L_ACP_FORUMPORTAL_TAB_HTML}</a>
+				<a class="forumportal-acp-tab" href="#forumportal-custom-links">{L_ACP_FORUMPORTAL_TAB_LINKS}</a>
+			</nav>
+		</aside>
 
+		<div class="forumportal-acp-content">
 	<fieldset id="forumportal-general" class="forumportal-acp-section">
 		<legend>{L_ACP_FORUMPORTAL_GENERAL}</legend>
 		<p>{L_ACP_FORUMPORTAL_GENERAL_EXPLAIN}</p>
@@ -39,6 +44,17 @@
 				<label><input type="radio" class="radio" name="forumportal_home_enabled" value="0"<!-- IF not S_FORUMPORTAL_HOME_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 			</dd>
 		</dl>
+		<dl>
+			<dt><label for="forumportal_noindex_paginated">{L_ACP_FORUMPORTAL_NOINDEX_PAGINATED}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_NOINDEX_PAGINATED_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="forumportal_noindex_paginated" value="1"<!-- IF S_FORUMPORTAL_NOINDEX_PAGINATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forumportal_noindex_paginated" value="0"<!-- IF not S_FORUMPORTAL_NOINDEX_PAGINATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+		<div class="forumportal-acp-note">
+			<strong>{L_ACP_FORUMPORTAL_URL_REWRITE_NOTE}</strong>
+			<p>{L_ACP_FORUMPORTAL_URL_REWRITE_NOTE_EXPLAIN}</p>
+		</div>
 		<dl>
 			<dt><label for="forumportal_source_forum">{L_ACP_FORUMPORTAL_SOURCE_FORUM}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_SOURCE_FORUM_EXPLAIN}</span></dt>
 			<dd>
@@ -391,6 +407,8 @@
 		<input class="button2" type="submit" name="sync_existing" value="{L_ACP_FORUMPORTAL_SYNC_EXISTING}" />
 		{S_FORM_TOKEN}
 	</fieldset>
+		</div>
+	</div>
 </form>
 
 <!-- INCLUDE overall_footer.html -->
