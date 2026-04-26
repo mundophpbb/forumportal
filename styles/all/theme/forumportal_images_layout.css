@@ -220,11 +220,12 @@
     }
 }
 
-/* v1.2.2: grid thumbnails now fit inside the image frame instead of being cropped. */
+/* v1.2.11: grid media fills the card frame consistently. */
 .forumportal-stream--grid2 .forumportal-story__media {
 	background: #f4f6f8;
 }
 
 .forumportal-stream--grid2 .forumportal-story__media img {
-	object-fit: contain;
+	object-fit: cover;
+	object-position: center center;
 }

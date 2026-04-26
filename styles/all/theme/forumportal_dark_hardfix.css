@@ -397,3 +397,55 @@ body[class*="dark" i] .forumportal-page--dark-auto .forumportal-stream--grid2 .f
 body.phpbb-dark .forumportal-page--dark-auto .forumportal-stream--grid2 .forumportal-story__media {
 	background: #0f1924 !important;
 }
+
+
+/* v1.2.11: promoted topic dark contrast polish. */
+.forumportal-page--dark-force .forumportal-hero,
+.forumportal-page--detected-dark .forumportal-hero,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-hero,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-hero,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-hero,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-hero,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-hero {
+	border-color: var(--forumportal-dark-border) !important;
+	color: var(--forumportal-dark-text) !important;
+}
+
+.forumportal-page--dark-force .forumportal-hero__title a,
+.forumportal-page--detected-dark .forumportal-hero__title a,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero__title a,
+html[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-hero__title a,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-hero__title a,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero__title a,
+body[data-theme*="dark" i] .forumportal-page--dark-auto .forumportal-hero__title a,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto .forumportal-hero__title a,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-hero__title a {
+	color: var(--forumportal-dark-link) !important;
+}
+
+.forumportal-page--dark-force .forumportal-hero__kicker,
+.forumportal-page--dark-force .forumportal-hero__excerpt,
+.forumportal-page--dark-force .forumportal-hero .forumportal-card__meta,
+.forumportal-page--dark-force .forumportal-hero .forumportal-card__stats,
+.forumportal-page--detected-dark .forumportal-hero__kicker,
+.forumportal-page--detected-dark .forumportal-hero__excerpt,
+.forumportal-page--detected-dark .forumportal-hero .forumportal-card__meta,
+.forumportal-page--detected-dark .forumportal-hero .forumportal-card__stats,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero__kicker,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero__excerpt,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero .forumportal-card__meta,
+html[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero .forumportal-card__stats,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero__kicker,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero__excerpt,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero .forumportal-card__meta,
+body[class*="dark" i] .forumportal-page--dark-auto .forumportal-hero .forumportal-card__stats,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-hero__kicker,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-hero__excerpt,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-hero .forumportal-card__meta,
+body.phpbb-dark .forumportal-page--dark-auto .forumportal-hero .forumportal-card__stats {
+	background: transparent !important;
+	border-color: transparent !important;
+	color: var(--forumportal-dark-muted) !important;
+}

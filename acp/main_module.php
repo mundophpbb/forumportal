@@ -99,6 +99,11 @@ class main_module
             $polls_limit = max(1, min(5, (int) $request->variable('forumportal_polls_limit', 1)));
             $polls_days = max(0, min(3650, (int) $request->variable('forumportal_polls_days', 0)));
             $poll_topic_id = max(0, (int) $request->variable('forumportal_poll_topic_id', 0));
+            $polls_mode = (string) $request->variable('forumportal_polls_mode', 'recent');
+            if (!in_array($polls_mode, array('recent', 'random'), true))
+            {
+                $polls_mode = 'recent';
+            }
             $notices_limit = max(1, min(15, (int) $request->variable('forumportal_notices_limit', 5)));
             $show_author = (int) $request->variable('forumportal_show_author', 1);
             $show_date = (int) $request->variable('forumportal_show_date', 1);
@@ -182,6 +187,7 @@ class main_module
                 set_config('forumportal_polls_limit', $polls_limit);
                 set_config('forumportal_polls_days', $polls_days);
                 set_config('forumportal_poll_topic_id', $poll_topic_id);
+                set_config('forumportal_polls_mode', $polls_mode);
                 set_config('forumportal_notices_limit', $notices_limit);
                 set_config('forumportal_show_author', $show_author);
                 set_config('forumportal_show_date', $show_date);
@@ -269,6 +275,8 @@ class main_module
             'FORUMPORTAL_POLLS_LIMIT'            => isset($config['forumportal_polls_limit']) ? (int) $config['forumportal_polls_limit'] : 1,
             'FORUMPORTAL_POLLS_DAYS'             => isset($config['forumportal_polls_days']) ? (int) $config['forumportal_polls_days'] : 0,
             'FORUMPORTAL_POLL_TOPIC_ID'          => isset($config['forumportal_poll_topic_id']) ? (int) $config['forumportal_poll_topic_id'] : 0,
+            'S_FORUMPORTAL_POLLS_MODE_RECENT'   => (!isset($config['forumportal_polls_mode']) || (string) $config['forumportal_polls_mode'] === 'recent'),
+            'S_FORUMPORTAL_POLLS_MODE_RANDOM'   => (isset($config['forumportal_polls_mode']) && (string) $config['forumportal_polls_mode'] === 'random'),
             'FORUMPORTAL_NOTICES_LIMIT'          => isset($config['forumportal_notices_limit']) ? (int) $config['forumportal_notices_limit'] : 5,
             'S_FORUMPORTAL_SHOW_AUTHOR'          => $this->config_bool($config, 'forumportal_show_author', true),
             'S_FORUMPORTAL_SHOW_DATE'            => $this->config_bool($config, 'forumportal_show_date', true),

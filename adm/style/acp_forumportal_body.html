@@ -352,6 +352,13 @@
 			<dd><input type="number" id="forumportal_poll_topic_id" name="forumportal_poll_topic_id" value="{FORUMPORTAL_POLL_TOPIC_ID}" min="0" /></dd>
 		</dl>
 		<dl>
+			<dt><label for="forumportal_polls_mode_recent">{L_ACP_FORUMPORTAL_POLLS_MODE}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_POLLS_MODE_EXPLAIN}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" id="forumportal_polls_mode_recent" name="forumportal_polls_mode" value="recent"<!-- IF S_FORUMPORTAL_POLLS_MODE_RECENT --> checked="checked"<!-- ENDIF --> /> {L_ACP_FORUMPORTAL_POLLS_MODE_RECENT}</label><br>
+				<label><input type="radio" class="radio" name="forumportal_polls_mode" value="random"<!-- IF S_FORUMPORTAL_POLLS_MODE_RANDOM --> checked="checked"<!-- ENDIF --> /> {L_ACP_FORUMPORTAL_POLLS_MODE_RANDOM}</label>
+			</dd>
+		</dl>
+		<dl>
 			<dt><label for="forumportal_block_order_polls">{L_ACP_FORUMPORTAL_ORDER_POLLS}{L_COLON}</label><br><span>{L_ACP_FORUMPORTAL_ORDER_FIELD_EXPLAIN}</span></dt>
 			<dd><input type="number" id="forumportal_block_order_polls" name="forumportal_block_order_polls" value="{FORUMPORTAL_BLOCK_ORDER_POLLS}" min="1" max="99" /></dd>
 		</dl>

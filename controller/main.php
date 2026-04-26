@@ -217,6 +217,7 @@ class main
         $polls_limit = max(1, min(5, (int) (isset($this->config['forumportal_polls_limit']) ? $this->config['forumportal_polls_limit'] : 1)));
         $polls_days = max(0, min(3650, (int) (isset($this->config['forumportal_polls_days']) ? $this->config['forumportal_polls_days'] : 0)));
         $poll_topic_id = max(0, (int) (isset($this->config['forumportal_poll_topic_id']) ? $this->config['forumportal_poll_topic_id'] : 0));
+        $polls_mode = (isset($this->config['forumportal_polls_mode']) && (string) $this->config['forumportal_polls_mode'] === 'random') ? 'random' : 'recent';
         $notices_limit = max(1, min(15, (int) (isset($this->config['forumportal_notices_limit']) ? $this->config['forumportal_notices_limit'] : 5)));
         $show_author = $this->config_bool('forumportal_show_author', true);
         $show_date = $this->config_bool('forumportal_show_date', true);
@@ -364,7 +365,7 @@ class main
         // Polls are sidebar widgets and may legitimately point to a topic that is also
         // displayed as a latest/highlighted topic. Do not let duplicate-topic
         // filtering hide the entire poll block.
-        $polls = $show_polls ? $this->get_poll_topics($source_forum_ids, $polls_limit, $polls_days, $poll_topic_id, $allow_poll_vote, $used_topic_ids, false) : array();
+        $polls = $show_polls ? $this->get_poll_topics($source_forum_ids, $polls_limit, $polls_days, $poll_topic_id, $allow_poll_vote, $used_topic_ids, false, $polls_mode) : array();
         foreach ($polls as $poll)
         {
             $poll_options = isset($poll['OPTIONS']) ? $poll['OPTIONS'] : array();
@@ -1284,12 +1285,13 @@ class main
         return $this->user->lang(!empty($existing_vote_ids) ? 'FORUMPORTAL_POLL_CHANGED' : 'FORUMPORTAL_POLL_VOTED');
     }
 
-    protected function get_poll_topics(array $forum_ids, $limit, $days, $fixed_topic_id, $allow_vote, array &$used_topic_ids, $prevent_duplicates = false)
+    protected function get_poll_topics(array $forum_ids, $limit, $days, $fixed_topic_id, $allow_vote, array &$used_topic_ids, $prevent_duplicates = false, $mode = 'recent')
     {
         $forum_ids = $this->normalise_forum_ids($forum_ids);
         $limit = max(1, (int) $limit);
         $days = max(0, (int) $days);
         $fixed_topic_id = max(0, (int) $fixed_topic_id);
+        $mode = ((string) $mode === 'random') ? 'random' : 'recent';
         $polls = array();
         $block_topic_ids = array();
 
@@ -1300,6 +1302,7 @@ class main
 
         $time_sql = ($days > 0 && $fixed_topic_id === 0) ? ' AND t.poll_start >= ' . (time() - ($days * 86400)) : '';
         $fixed_sql = ($fixed_topic_id > 0) ? ' AND t.topic_id = ' . $fixed_topic_id : '';
+        $order_sql = ($mode === 'random' && $fixed_topic_id === 0 && method_exists($this->db, 'sql_random')) ? $this->db->sql_random() : 't.poll_start DESC, t.topic_time DESC';
 
         $sql = 'SELECT t.topic_id, t.forum_id, t.topic_title, t.poll_title, t.poll_start, t.poll_length, t.poll_max_options, t.poll_vote_change, t.topic_status, f.forum_status
             FROM ' . TOPICS_TABLE . ' t
@@ -1310,7 +1313,7 @@ class main
                 AND t.topic_moved_id = 0' . "
                 AND t.poll_title <> ''
                 AND t.poll_start > 0" . $fixed_sql . $time_sql . '
-            ORDER BY t.poll_start DESC, t.topic_time DESC';
+            ORDER BY ' . $order_sql;
         $result = $this->db->sql_query_limit($sql, $this->get_duplicate_aware_query_limit($limit, $used_topic_ids, $prevent_duplicates));
 
         $topic_ids = array();

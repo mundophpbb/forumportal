@@ -506,3 +506,36 @@ body[class*="dark" i] .forumportal-sidebar .forumportal-sidecard__period,
 .forumportal-page--dark-force .forumportal-sidebar .forumportal-sidecard__period {
 	color: rgba(235, 242, 248, .68);
 }
+
+
+/* v1.2.11: final editorial hero polish.
+   Keep the promoted topic hierarchy consistent and prevent small labels/meta from
+   visually fighting the title. */
+.forumportal-page .forumportal-hero__kicker,
+.forumportal-page .forumportal-hero .forumportal-card__meta,
+.forumportal-page .forumportal-hero .forumportal-card__stats {
+	font-size: .9em;
+	font-weight: 400;
+	letter-spacing: normal;
+	text-transform: none;
+	color: #6b7580;
+}
+
+.forumportal-page .forumportal-hero__title {
+	font-size: clamp(1.85em, 3vw, 2.35em);
+	line-height: 1.08;
+}
+
+.forumportal-page .forumportal-hero__excerpt {
+	font-size: 1em;
+	line-height: 1.65;
+	color: #2e3943;
+}
+
+.forumportal-page--font-forum .forumportal-hero__kicker,
+.forumportal-page--font-forum .forumportal-hero__title,
+.forumportal-page--font-forum .forumportal-hero__excerpt,
+.forumportal-page--font-forum .forumportal-hero .forumportal-card__meta,
+.forumportal-page--font-forum .forumportal-hero .forumportal-card__stats {
+	font-family: inherit;
+}
