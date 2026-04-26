@@ -43,6 +43,7 @@ class main_module
             $noindex_paginated = (int) $request->variable('forumportal_noindex_paginated', 1);
             $page_title = trim((string) $request->variable('forumportal_page_title', '', true));
             $nav_title = trim((string) $request->variable('forumportal_nav_title', '', true));
+            $meta_description = $this->clean_meta_description($request->variable('forumportal_meta_description', '', true));
             $default_image = trim((string) $request->variable('forumportal_default_image', '', true));
             $fixed_topic_id = max(0, (int) $request->variable('forumportal_fixed_topic_id', 0));
             $date_format = trim((string) $request->variable('forumportal_date_format', '', true));
@@ -146,6 +147,7 @@ class main_module
                 set_config('forumportal_excerpt_limit', $excerpt_limit);
                 set_config('forumportal_page_title', $page_title);
                 set_config('forumportal_nav_title', $nav_title);
+                set_config('forumportal_meta_description', $meta_description);
                 set_config('forumportal_default_image', $default_image);
                 set_config('forumportal_fixed_topic_id', $fixed_topic_id);
                 set_config('forumportal_date_format', $date_format);
@@ -226,6 +228,7 @@ class main_module
             'FORUMPORTAL_EXCERPT_LIMIT'          => (int) $config['forumportal_excerpt_limit'],
             'FORUMPORTAL_PAGE_TITLE'             => (string) $config['forumportal_page_title'],
             'FORUMPORTAL_NAV_TITLE'              => (string) $config['forumportal_nav_title'],
+            'FORUMPORTAL_META_DESCRIPTION'       => isset($config['forumportal_meta_description']) ? (string) $config['forumportal_meta_description'] : '',
             'FORUMPORTAL_DEFAULT_IMAGE'          => (string) $config['forumportal_default_image'],
             'FORUMPORTAL_FIXED_TOPIC_ID'         => isset($config['forumportal_fixed_topic_id']) ? (int) $config['forumportal_fixed_topic_id'] : 0,
             'FORUMPORTAL_DATE_FORMAT_OPTIONS'    => $this->build_date_format_options(isset($config['forumportal_date_format']) ? (string) $config['forumportal_date_format'] : '', $user),
@@ -330,6 +333,20 @@ class main_module
         return $options;
     }
 
+
+    protected function clean_meta_description($value)
+    {
+        $value = trim((string) $value);
+        $value = strip_tags($value);
+        $value = preg_replace('/\s+/u', ' ', $value);
+
+        if (function_exists('utf8_substr'))
+        {
+            return utf8_substr($value, 0, 320);
+        }
+
+        return substr($value, 0, 320);
+    }
 
     protected function sanitize_hex_color($value, $fallback)
     {

@@ -2,6 +2,10 @@
 <meta name="robots" content="noindex,follow">
 <!-- ENDIF -->
 
+<!-- IF S_FORUMPORTAL_META_DESCRIPTION -->
+<meta name="description" content="{{ FORUMPORTAL_META_DESCRIPTION|e('html_attr') }}">
+<!-- ENDIF -->
+
 {% INCLUDECSS '@mundophpbb_forumportal/forumportal_nav.css' %}
 <!-- IF S_FORUMPORTAL_PAGE or S_FORUMPORTAL_FIELDS -->
 {% INCLUDECSS '@mundophpbb_forumportal/forumportal_typography.css' %}

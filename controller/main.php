@@ -123,6 +123,12 @@ class main
             $nav_title = $this->user->lang('FORUMPORTAL_DEFAULT_NAV_TITLE');
         }
 
+        $meta_description = '';
+        if (isset($this->config['forumportal_meta_description']))
+        {
+            $meta_description = $this->clean_meta_description($this->config['forumportal_meta_description']);
+        }
+
         $per_page = max(1, min(50, (int) $this->config['forumportal_topics_per_page']));
         $excerpt_limit = max(80, min(1200, (int) $this->config['forumportal_excerpt_limit']));
         $default_image = trim((string) $this->config['forumportal_default_image']);
@@ -469,6 +475,8 @@ class main
             'U_FORUM_INDEX_BYPASS'           => append_sid($this->phpbb_root_path . 'index.' . $this->php_ext, 'forumportal_bypass=1'),
             'U_INDEX'                        => append_sid($this->phpbb_root_path . 'index.' . $this->php_ext, 'forumportal_bypass=1'),
             'FORUMPORTAL_NAV_TITLE'          => $nav_title,
+            'FORUMPORTAL_META_DESCRIPTION'    => $meta_description,
+            'S_FORUMPORTAL_META_DESCRIPTION'  => ($meta_description !== ''),
             'S_HAS_FIXED_HEADLINE'           => $use_fixed_hero,
             'S_FORUMPORTAL_PAGE'             => true,
             'S_FORUMPORTAL_NOINDEX_ROBOTS'   => ($noindex_paginated && $start > 0),
@@ -482,6 +490,20 @@ class main
         return $this->helper->render('portal_body.html', $page_title);
     }
 
+
+    protected function clean_meta_description($value)
+    {
+        $value = trim((string) $value);
+        $value = strip_tags($value);
+        $value = preg_replace('/\s+/u', ' ', $value);
+
+        if (function_exists('utf8_substr'))
+        {
+            return utf8_substr($value, 0, 320);
+        }
+
+        return substr($value, 0, 320);
+    }
 
 
     protected function get_fixed_hero_topic(array $forum_ids, $topic_id, $excerpt_limit, $default_image)

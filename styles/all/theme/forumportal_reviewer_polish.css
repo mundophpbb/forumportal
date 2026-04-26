@@ -448,3 +448,61 @@
 .forumportal-custom-links__item:last-child {
 	padding-bottom: 0;
 }
+
+
+/* v1.2.10: make sidebar secondary metadata lighter than titles. */
+.forumportal-sidebar .forumportal-headlines__meta,
+.forumportal-sidebar .forumportal-mostread__meta,
+.forumportal-sidebar .forumportal-mostcommented__meta,
+.forumportal-sidebar .forumportal-notices__meta,
+.forumportal-sidebar .forumportal-contributors__meta,
+.forumportal-sidebar .forumportal-card__stats {
+	display: inline;
+	padding: 0;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	color: #777;
+	font-weight: 400;
+	line-height: 1.35;
+}
+
+.forumportal-sidebar .forumportal-sidebar__block-link .forumportal-headlines__meta,
+.forumportal-sidebar .forumportal-sidebar__block-link .forumportal-mostread__meta,
+.forumportal-sidebar .forumportal-sidebar__block-link .forumportal-mostcommented__meta,
+.forumportal-sidebar .forumportal-sidebar__block-link .forumportal-notices__meta {
+	display: block;
+	margin-top: 3px;
+	color: #777;
+	font-weight: 400;
+	text-decoration: none !important;
+}
+
+.forumportal-sidebar .forumportal-sidecard__period {
+	padding: 0;
+	background: transparent;
+	border: 0;
+	color: #777;
+	font-weight: 400;
+}
+
+html[class*="dark" i] .forumportal-sidebar .forumportal-headlines__meta,
+html[class*="dark" i] .forumportal-sidebar .forumportal-mostread__meta,
+html[class*="dark" i] .forumportal-sidebar .forumportal-mostcommented__meta,
+html[class*="dark" i] .forumportal-sidebar .forumportal-notices__meta,
+html[class*="dark" i] .forumportal-sidebar .forumportal-contributors__meta,
+html[class*="dark" i] .forumportal-sidebar .forumportal-sidecard__period,
+body[class*="dark" i] .forumportal-sidebar .forumportal-headlines__meta,
+body[class*="dark" i] .forumportal-sidebar .forumportal-mostread__meta,
+body[class*="dark" i] .forumportal-sidebar .forumportal-mostcommented__meta,
+body[class*="dark" i] .forumportal-sidebar .forumportal-notices__meta,
+body[class*="dark" i] .forumportal-sidebar .forumportal-contributors__meta,
+body[class*="dark" i] .forumportal-sidebar .forumportal-sidecard__period,
+.forumportal-page--dark-force .forumportal-sidebar .forumportal-headlines__meta,
+.forumportal-page--dark-force .forumportal-sidebar .forumportal-mostread__meta,
+.forumportal-page--dark-force .forumportal-sidebar .forumportal-mostcommented__meta,
+.forumportal-page--dark-force .forumportal-sidebar .forumportal-notices__meta,
+.forumportal-page--dark-force .forumportal-sidebar .forumportal-contributors__meta,
+.forumportal-page--dark-force .forumportal-sidebar .forumportal-sidecard__period {
+	color: rgba(235, 242, 248, .68);
+}

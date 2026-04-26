@@ -22,30 +22,35 @@
 }
 
 
-/* v1.2.2: make the portal shortcut read as an action button, not only as breadcrumb text. */
+/* v1.2.10: keep the breadcrumb Portal shortcut visually consistent with the portal "Open forum" button. */
 .forumportal-nav-standard--portal > a.forumportal-nav-button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 5px;
-	min-height: 24px;
-	padding: 3px 9px;
-	border: 1px solid rgba(16, 82, 137, .35);
-	border-radius: 0;
-	background: rgba(16, 82, 137, .08);
-	color: inherit;
+	gap: 6px;
+	min-height: 28px;
+	padding: 5px 12px;
+	border: 1px solid #105289;
+	border-radius: 6px;
+	background: #105289;
+	color: #ffffff !important;
 	font-weight: 700;
 	line-height: 1.2;
-	text-decoration: none;
+	text-decoration: none !important;
 	box-sizing: border-box;
+}
+
+.forumportal-nav-standard--portal > a.forumportal-nav-button .icon {
+	color: inherit;
 }
 
 .forumportal-nav-standard--portal > a.forumportal-nav-button:hover,
 .forumportal-nav-standard--portal > a.forumportal-nav-button:focus {
-	border-color: rgba(16, 82, 137, .65);
-	background: rgba(16, 82, 137, .14);
-	color: inherit;
-	text-decoration: none;
+	border-color: #105289;
+	background: #105289;
+	color: #ffffff !important;
+	filter: brightness(.95);
+	text-decoration: none !important;
 }
 
 html[class*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
@@ -55,9 +60,9 @@ body[class*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-butt
 body[data-theme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
 body[data-color-scheme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
 body.phpbb-dark .forumportal-nav-standard--portal > a.forumportal-nav-button {
-	border-color: rgba(111, 181, 255, .45);
-	background: rgba(111, 181, 255, .12);
-	color: #eef4f8;
+	border-color: #105289;
+	background: #105289;
+	color: #ffffff !important;
 }
 
 

@@ -12,6 +12,7 @@ A proposta é permitir que uma comunidade phpBB tenha uma página inicial mais e
 - Opção para ativar/desativar o portal pelo ACP.
 - Opção para usar o portal como página inicial.
 - Opção SEO para aplicar `noindex,follow` nas páginas paginadas do portal.
+- Campo ACP para definir uma meta description personalizada da página do portal.
 - Correção v1.2.4: o bloco de enquetes não é mais ocultado pela proteção contra tópicos duplicados.
 - Seleção do fórum de origem do conteúdo.
 - Publicações em formato editorial com título, autor, data, resumo, imagem e botão **Leia mais**.
@@ -206,3 +207,12 @@ Forum Portal uses phpBB's routing system and does not force clean URLs at extens
 
 - Month abbreviations used by the portal date badge now come from language files instead of being hardcoded in PHP.
 - This allows translators to localize month names properly for additional languages.
+
+
+### v1.2.10 - Final visual and SEO polish
+
+- Metadados da sidebar (datas, comentários, visualizações e períodos) foram suavizados para não competir visualmente com os títulos.
+- O botão/link do Portal na navegação foi ajustado para ficar mais coerente com o botão azul "Abrir fórum".
+- Adicionado campo no ACP para meta description personalizada do portal.
+- Quando preenchida, a página do portal exibe `<meta name="description">` com o texto configurado.
+- A extensão continua respeitando o sistema de rotas do phpBB e não força URLs sem `app.php`.
