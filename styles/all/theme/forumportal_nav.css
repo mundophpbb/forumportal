@@ -6,9 +6,10 @@
 
 /* Final polish: keep these links visually native to phpBB while aligning the icon cleanly. */
 .forumportal-nav-standard > a {
-	display: inline-flex;
-	align-items: center;
-	gap: 4px;
+    display: inline-flex;
+    align-items: center;
+    /* gap: 4px; */
+    font-weight: bold;
 }
 
 .forumportal-nav-standard .icon {

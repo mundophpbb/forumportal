@@ -1,0 +1,97 @@
+/* v1022: keep the central content blocks visually aligned with the sidebar blocks.
+   Uses shared variables instead of fixed one-off colors, so ProSilver, editorial,
+   automatic dark mode and forced dark mode can all override the same base safely. */
+.forumportal-page {
+	--forumportal-block-bg: #ffffff;
+	--forumportal-block-border: #d9dde1;
+	--forumportal-block-text: inherit;
+	--forumportal-block-accent: #224f78;
+}
+
+.forumportal-page--visual-prosilver {
+	--forumportal-block-bg: #ecf3f7;
+	--forumportal-block-border: #c7d5df;
+	--forumportal-block-text: #333333;
+	--forumportal-block-accent: #105289;
+}
+
+.forumportal-page--dark-force,
+.forumportal-page--detected-dark,
+html[class*="dark" i] .forumportal-page--dark-auto,
+html[data-theme*="dark" i] .forumportal-page--dark-auto,
+html[data-color-scheme*="dark" i] .forumportal-page--dark-auto,
+body[class*="dark" i] .forumportal-page--dark-auto,
+body[data-theme*="dark" i] .forumportal-page--dark-auto,
+body[data-color-scheme*="dark" i] .forumportal-page--dark-auto,
+body.phpbb-dark .forumportal-page--dark-auto {
+	--forumportal-block-bg: #172331;
+	--forumportal-block-border: #31465a;
+	--forumportal-block-text: #d7e0e8;
+	--forumportal-block-accent: #6fb5ff;
+}
+
+.forumportal-page .forumportal-card,
+.forumportal-page .forumportal-custom-html:not(.forumportal-custom-html--sidebar),
+.forumportal-page .forumportal-hero,
+.forumportal-page .forumportal-stream--list .forumportal-story,
+.forumportal-page .forumportal-stream--grid2 .forumportal-story {
+	border-color: var(--forumportal-block-border);
+	background: var(--forumportal-block-bg);
+	color: var(--forumportal-block-text);
+}
+
+.forumportal-page .forumportal-hero {
+	padding: 14px;
+	border: 1px solid var(--forumportal-block-border);
+}
+
+.forumportal-page .forumportal-hero--featured {
+	border-top: 3px solid var(--forumportal-block-accent);
+}
+
+.forumportal-page .forumportal-stream--list {
+	gap: 12px;
+}
+
+.forumportal-page .forumportal-stream--list .forumportal-story {
+	padding: 14px;
+	border: 1px solid var(--forumportal-block-border);
+}
+
+.forumportal-page .forumportal-stream--list .forumportal-story:first-child,
+.forumportal-page .forumportal-stream--list .forumportal-story--featured:first-child {
+	padding-top: 14px;
+}
+
+.forumportal-page .forumportal-stream--list .forumportal-story--featured {
+	padding-left: 14px;
+	border-left: 4px solid var(--forumportal-block-accent);
+}
+
+.forumportal-page .forumportal-card--featured {
+	border-top-color: var(--forumportal-block-accent);
+}
+
+.forumportal-page .forumportal-stream--grid2 .forumportal-story--featured {
+	border-top-width: 3px;
+	border-top-color: var(--forumportal-block-accent);
+	border-left-width: 1px;
+	border-left-color: var(--forumportal-block-border);
+}
+
+.forumportal-page .forumportal-story__date,
+.forumportal-page .forumportal-story__icon {
+	border-color: var(--forumportal-block-border);
+}
+
+@media (max-width: 700px) {
+	.forumportal-page .forumportal-hero,
+	.forumportal-page .forumportal-stream--list .forumportal-story {
+		padding: 12px;
+	}
+
+	.forumportal-page .forumportal-stream--list .forumportal-story:first-child,
+	.forumportal-page .forumportal-stream--list .forumportal-story--featured:first-child {
+		padding-top: 12px;
+	}
+}
