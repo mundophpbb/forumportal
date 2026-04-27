@@ -539,3 +539,72 @@ body[class*="dark" i] .forumportal-sidebar .forumportal-sidecard__period,
 .forumportal-page--font-forum .forumportal-hero .forumportal-card__stats {
 	font-family: inherit;
 }
+
+
+/* v1.2.13: final color and editorial refinements from late feedback. */
+.forumportal-page {
+	--forumportal-poll-color: #d31141;
+}
+
+.forumportal-page .forumportal-poll__bar-fill {
+	opacity: .92;
+}
+
+.forumportal-page:not(.forumportal-page--dark-force) .forumportal-poll__submit:hover,
+.forumportal-page:not(.forumportal-page--dark-force) .forumportal-poll__submit:focus {
+	border-color: #ab0f34 !important;
+	background: #ab0f34 !important;
+}
+
+.forumportal-page .forumportal-hero__title,
+.forumportal-page .forumportal-hero__title a {
+	font-weight: 700;
+}
+
+.forumportal-page .forumportal-hero__excerpt {
+	font-size: 1em;
+	line-height: 1.62;
+	font-weight: 700;
+}
+
+.forumportal-page--visual-prosilver .forumportal-story__title a,
+.forumportal-page--visual-prosilver .forumportal-hero__title a,
+.forumportal-page--visual-prosilver .forumportal-card__title a,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-headlines__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostread__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostcommented__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-title {
+	color: var(--forumportal-poll-color, #d31141) !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-story__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-hero__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-card__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-headlines__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostread__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostcommented__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover .forumportal-sidebar__block-title,
+.forumportal-page--visual-prosilver .forumportal-story__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-hero__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-card__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-headlines__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostread__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostcommented__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus {
+	color: var(--forumportal-poll-color, #d31141) !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus {
+	background: rgba(211, 17, 65, .08);
+}
