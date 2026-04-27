@@ -378,11 +378,11 @@
 	display: none;
 }
 
-/* Keep title links consistent with the phpBB/ProSilver link color in integrated mode. */
+/* Keep topic title links from forcing their own colour; let the active style/title container decide. */
 .forumportal-page--visual-prosilver .forumportal-story__title a,
 .forumportal-page--visual-prosilver .forumportal-hero__title a,
 .forumportal-page--visual-prosilver .forumportal-card__title a {
-	color: #105289 !important;
+	color: inherit !important;
 }
 
 /* Make sidebar rows behave as one clear clickable block. */
@@ -543,7 +543,7 @@ body.dark .forumportal-sidebar .forumportal-sidecard__period,
 
 /* v1.2.13: final color and editorial refinements from late feedback. */
 .forumportal-page {
-	--forumportal-poll-color: #d31141;
+/*	--forumportal-poll-color: #d31141; */
 }
 
 .forumportal-page .forumportal-poll__bar-fill {
@@ -599,12 +599,47 @@ body.dark .forumportal-sidebar .forumportal-sidecard__period,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__link:focus,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:focus,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus {
-	color: var(--forumportal-poll-color, #d31141) !important;
+	color: inherit !important;
 }
 
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:hover,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus {
-	background: rgba(211, 17, 65, .08);
+	background: rgba(16, 82, 137, .08);
+}
+
+/* Local polish: remove forced title-link colour and keep block hover neutral. */
+.forumportal-page--visual-prosilver .forumportal-story__title a,
+.forumportal-page--visual-prosilver .forumportal-hero__title a,
+.forumportal-page--visual-prosilver .forumportal-card__title a {
+	color: inherit !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-story__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-hero__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-card__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-story__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-hero__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-card__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-headlines__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostread__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostcommented__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-headlines__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostread__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostcommented__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus {
+	color: inherit !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus {
+	background: rgba(16, 82, 137, .08) !important;
 }
