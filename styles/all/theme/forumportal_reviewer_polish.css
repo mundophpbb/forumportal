@@ -577,7 +577,7 @@ body.dark .forumportal-sidebar .forumportal-sidecard__period,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-title {
-	color: var(--forumportal-poll-color, #d31141) !important;
+/*	color: var(--forumportal-poll-color, #d31141) !important; */
 }
 
 .forumportal-page--visual-prosilver .forumportal-story__title a:hover,
