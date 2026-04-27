@@ -271,18 +271,23 @@ class listener implements EventSubscriberInterface
         $can_publish = $this->auth->acl_get('f_forumportal_publish', $forum_id) || $this->auth->acl_get('m_forumportal_edit', $forum_id);
         $can_feature = $this->auth->acl_get('m_forumportal_feature', $forum_id);
 
+        $is_first_post_action = ($mode === 'post' || ($mode === 'edit' && $post_id > 0 && $topic_first_post_id > 0 && $post_id === $topic_first_post_id));
+
+        if (!$is_first_post_action || $topic_id <= 0)
+        {
+            return;
+        }
+
         if (!$can_publish && !$can_feature)
         {
-            return;
-        }
+            // When auto include is enabled, topics without an explicit row are shown on the portal.
+            // Users without portal permissions must create a disabled override row, otherwise their
+            // newly-created topic would be pulled into the portal automatically.
+            if ($this->is_auto_include_enabled() && $mode === 'post')
+            {
+                $this->save_disabled_portal_override($topic_id);
+            }
 
-        if (!($mode === 'post' || ($mode === 'edit' && $post_id > 0 && $topic_first_post_id > 0 && $post_id === $topic_first_post_id)))
-        {
-            return;
-        }
-
-        if ($topic_id <= 0)
-        {
             return;
         }
 
@@ -385,6 +390,35 @@ class listener implements EventSubscriberInterface
         }
 
         return array_values($forum_ids);
+    }
+
+
+    protected function save_disabled_portal_override($topic_id)
+    {
+        $existing = $this->get_portal_topic_row($topic_id);
+
+        $sql_ary = array(
+            'topic_id'        => (int) $topic_id,
+            'portal_enabled'  => 0,
+            'portal_image'    => '',
+            'portal_excerpt'  => '',
+            'portal_featured' => 0,
+            'portal_order'    => 0,
+            'portal_updated'  => time(),
+        );
+
+        if ($existing)
+        {
+            $sql = 'UPDATE ' . $this->portal_topics_table . '
+                SET ' . $this->db->sql_build_array('UPDATE', $sql_ary) . '
+                WHERE topic_id = ' . (int) $topic_id;
+            $this->db->sql_query($sql);
+        }
+        else
+        {
+            $sql = 'INSERT INTO ' . $this->portal_topics_table . ' ' . $this->db->sql_build_array('INSERT', $sql_ary);
+            $this->db->sql_query($sql);
+        }
     }
 
     protected function get_portal_topic_row($topic_id)
