@@ -63,7 +63,7 @@ class main_module
                 $posts_layout = 'list';
             }
             $dark_compat_mode = (string) $request->variable('forumportal_dark_compat_mode', 'auto');
-            if (!in_array($dark_compat_mode, array('auto', 'force'), true))
+            if (!in_array($dark_compat_mode, array('auto', 'force', 'off'), true))
             {
                 $dark_compat_mode = 'auto';
             }
@@ -246,6 +246,7 @@ class main_module
             'S_FORUMPORTAL_POSTS_LAYOUT_GRID2'=> (isset($config['forumportal_posts_layout']) && (string) $config['forumportal_posts_layout'] === 'grid2'),
             'S_FORUMPORTAL_DARK_COMPAT_AUTO'   => (!isset($config['forumportal_dark_compat_mode']) || (string) $config['forumportal_dark_compat_mode'] === 'auto'),
             'S_FORUMPORTAL_DARK_COMPAT_FORCE'  => (isset($config['forumportal_dark_compat_mode']) && (string) $config['forumportal_dark_compat_mode'] === 'force'),
+            'S_FORUMPORTAL_DARK_COMPAT_OFF'    => (isset($config['forumportal_dark_compat_mode']) && (string) $config['forumportal_dark_compat_mode'] === 'off'),
             'S_FORUMPORTAL_STORY_ICON_MEGAPHONE' => (!isset($config['forumportal_story_icon_mode']) || (string) $config['forumportal_story_icon_mode'] === 'megaphone'),
             'S_FORUMPORTAL_STORY_ICON_TOPIC'   => (isset($config['forumportal_story_icon_mode']) && (string) $config['forumportal_story_icon_mode'] === 'topic'),
             'S_FORUMPORTAL_STORY_ICON_NONE'    => (isset($config['forumportal_story_icon_mode']) && (string) $config['forumportal_story_icon_mode'] === 'none'),

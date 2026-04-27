@@ -1,21 +1,21 @@
 /* Better readability when dark-theme extensions override backgrounds. */
-html[class*="dark"] .forumportal-alert,
-body[class*="dark"] .forumportal-alert,
-[data-theme*="dark"] .forumportal-alert {
+html.dark .forumportal-alert,
+body.dark .forumportal-alert,
+[data-theme="dark" i] .forumportal-alert {
 	background: rgba(255, 255, 255, 0.08);
 	border-color: rgba(255, 255, 255, 0.35);
 }
 
-html[class*="dark"] .forumportal-poll__option,
-body[class*="dark"] .forumportal-poll__option,
-[data-theme*="dark"] .forumportal-poll__option {
+html.dark .forumportal-poll__option,
+body.dark .forumportal-poll__option,
+[data-theme="dark" i] .forumportal-poll__option {
 	background: rgba(255, 255, 255, 0.06);
 	border-color: rgba(255, 255, 255, 0.14);
 }
 
-html[class*="dark"] .forumportal-poll__bar,
-body[class*="dark"] .forumportal-poll__bar,
-[data-theme*="dark"] .forumportal-poll__bar {
+html.dark .forumportal-poll__bar,
+body.dark .forumportal-poll__bar,
+[data-theme="dark" i] .forumportal-poll__bar {
 	background: rgba(255, 255, 255, 0.16);
 }
 

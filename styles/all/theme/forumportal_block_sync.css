@@ -17,12 +17,12 @@
 
 .forumportal-page--dark-force,
 .forumportal-page--detected-dark,
-html[class*="dark" i] .forumportal-page--dark-auto,
-html[data-theme*="dark" i] .forumportal-page--dark-auto,
-html[data-color-scheme*="dark" i] .forumportal-page--dark-auto,
-body[class*="dark" i] .forumportal-page--dark-auto,
-body[data-theme*="dark" i] .forumportal-page--dark-auto,
-body[data-color-scheme*="dark" i] .forumportal-page--dark-auto,
+html.dark .forumportal-page--dark-auto,
+html[data-theme="dark" i] .forumportal-page--dark-auto,
+html[data-color-scheme="dark" i] .forumportal-page--dark-auto,
+body.dark .forumportal-page--dark-auto,
+body[data-theme="dark" i] .forumportal-page--dark-auto,
+body[data-color-scheme="dark" i] .forumportal-page--dark-auto,
 body.phpbb-dark .forumportal-page--dark-auto {
 	--forumportal-block-bg: #172331;
 	--forumportal-block-border: #31465a;

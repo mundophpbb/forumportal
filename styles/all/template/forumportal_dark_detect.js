@@ -1,13 +1,24 @@
 /* Forum Portal dark-theme detector.
- * v1022: ignores Forum Portal's own dark CSS files when detecting the active phpBB style.
- * Adds a portal-only class when the surrounding phpBB style is visually dark.
+ * v1.2.14: only accepts explicit dark-mode tokens/attributes.
+ * It must not treat arbitrary class names such as "darkchocolate" as dark mode.
  */
 (function () {
 	'use strict';
 
 	var DARK_CLASS = 'forumportal-page--detected-dark';
 	var TRANSPARENT = /rgba?\(\s*0\s*,\s*0\s*,\s*0\s*(?:,\s*0\s*)?\)|transparent/i;
-	var DARK_WORDS = /(?:^|[\W_-])(dark|black|night|midnight|slate|carbon)(?:$|[\W_-])/i;
+	var DARK_TOKENS = {
+		'dark': true,
+		'dark-mode': true,
+		'darkmode': true,
+		'phpbb-dark': true,
+		'color-scheme-dark': true,
+		'theme-dark': true,
+		'black': true,
+		'night': true,
+		'midnight': true,
+		'carbon': true
+	};
 
 	function parseRgb(value) {
 		var match, alpha;
@@ -33,47 +44,82 @@
 		return (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]) / 255;
 	}
 
-	function isDarkToken(value) {
-		return !!(value && DARK_WORDS.test(String(value).toLowerCase()));
+	function normaliseToken(value) {
+		return String(value || '').trim().toLowerCase();
 	}
 
-	function getBoardStyleTokens() {
-		var tokens = [];
+	function isDarkToken(value) {
+		return !!DARK_TOKENS[normaliseToken(value)];
+	}
+
+	function hasDarkClass(element) {
+		if (!element || !element.classList) {
+			return false;
+		}
+
+		return Array.prototype.some.call(element.classList, function (className) {
+			return isDarkToken(className);
+		});
+	}
+
+	function hasDarkDataAttribute(element) {
+		var value;
+
+		if (!element) {
+			return false;
+		}
+
+		value = normaliseToken(element.getAttribute('data-theme'));
+		if (isDarkToken(value)) {
+			return true;
+		}
+
+		value = normaliseToken(element.getAttribute('data-color-scheme'));
+		return isDarkToken(value);
+	}
+
+	function styleNameLooksDark(styleName) {
+		var parts;
+
+		styleName = normaliseToken(styleName);
+		if (!styleName) {
+			return false;
+		}
+
+		/* Split style identifiers into real tokens. This allows names such as
+		   "my_style_dark" or "theme-dark", but not "darkchocolate". */
+		parts = styleName.split(/[^a-z0-9]+/);
+		return parts.some(isDarkToken);
+	}
+
+	function hasDarkBoardStyleName() {
+		var darkStyle = false;
 
 		Array.prototype.forEach.call(document.querySelectorAll('link[href]'), function (link) {
 			var rawHref = link.getAttribute('href') || '';
 			var href = rawHref.split('#')[0].split('?')[0].toLowerCase();
 			var match;
 
-			/* Do not let this extension's own filenames such as forumportal_dark_auto.css
-			   force ProSilver into dark mode. Only the active board style should count. */
-			if (!href || href.indexOf('/ext/') !== -1 || href.indexOf('forumportal_') !== -1) {
+			if (darkStyle || !href || href.indexOf('/ext/') !== -1 || href.indexOf('forumportal_') !== -1) {
 				return;
 			}
 
 			match = href.match(/(?:^|\/)styles\/([^\/]+)\/theme\//i);
-			if (match && match[1]) {
-				tokens.push(match[1]);
-				tokens.push(href);
+			if (match && match[1] && styleNameLooksDark(match[1])) {
+				darkStyle = true;
 			}
 		});
 
-		return tokens.join(' ');
+		return darkStyle;
 	}
 
 	function hasDarkMarker() {
 		var root = document.documentElement;
 		var body = document.body;
-		var markerHaystack = [
-			root.className || '',
-			body ? body.className || '' : '',
-			root.getAttribute('data-theme') || '',
-			root.getAttribute('data-color-scheme') || '',
-			body ? body.getAttribute('data-theme') || '' : '',
-			body ? body.getAttribute('data-color-scheme') || '' : ''
-		].join(' ');
 
-		return isDarkToken(markerHaystack) || isDarkToken(getBoardStyleTokens());
+		return hasDarkClass(root) || hasDarkClass(body) ||
+			hasDarkDataAttribute(root) || hasDarkDataAttribute(body) ||
+			hasDarkBoardStyleName();
 	}
 
 	function firstVisibleBackground(elements) {

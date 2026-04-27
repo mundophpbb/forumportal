@@ -154,7 +154,11 @@ class main
         $typography_style = (isset($this->config['forumportal_typography_style']) && (string) $this->config['forumportal_typography_style'] === 'forum') ? 'forum' : 'portal';
         $visual_mode = (isset($this->config['forumportal_visual_mode']) && (string) $this->config['forumportal_visual_mode'] === 'prosilver') ? 'prosilver' : 'editorial';
         $posts_layout = (isset($this->config['forumportal_posts_layout']) && (string) $this->config['forumportal_posts_layout'] === 'grid2') ? 'grid2' : 'list';
-        $dark_compat_mode = (isset($this->config['forumportal_dark_compat_mode']) && (string) $this->config['forumportal_dark_compat_mode'] === 'force') ? 'force' : 'auto';
+        $dark_compat_mode = isset($this->config['forumportal_dark_compat_mode']) ? (string) $this->config['forumportal_dark_compat_mode'] : 'auto';
+        if (!in_array($dark_compat_mode, array('auto', 'force', 'off'), true))
+        {
+            $dark_compat_mode = 'auto';
+        }
         $story_icon_mode = isset($this->config['forumportal_story_icon_mode']) ? (string) $this->config['forumportal_story_icon_mode'] : 'megaphone';
         if (!in_array($story_icon_mode, array('megaphone', 'topic', 'none'), true))
         {
@@ -447,6 +451,7 @@ class main
             'S_FORUMPORTAL_POSTS_LAYOUT_GRID2'=> ($posts_layout === 'grid2'),
             'S_FORUMPORTAL_DARK_COMPAT_AUTO'  => ($dark_compat_mode === 'auto'),
             'S_FORUMPORTAL_DARK_COMPAT_FORCE' => ($dark_compat_mode === 'force'),
+            'S_FORUMPORTAL_DARK_COMPAT_OFF'   => ($dark_compat_mode === 'off'),
             'S_FORUMPORTAL_STORY_ICON_MEGAPHONE' => ($story_icon_mode === 'megaphone'),
             'S_FORUMPORTAL_STORY_ICON_TOPIC'  => ($story_icon_mode === 'topic'),
             'S_FORUMPORTAL_STORY_ICON_NONE'   => ($story_icon_mode === 'none'),

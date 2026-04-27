@@ -53,12 +53,12 @@
 	text-decoration: none !important;
 }
 
-html[class*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
-html[data-theme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
-html[data-color-scheme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
-body[class*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
-body[data-theme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
-body[data-color-scheme*="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+html.dark .forumportal-nav-standard--portal > a.forumportal-nav-button,
+html[data-theme="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+html[data-color-scheme="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body.dark .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body[data-theme="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body[data-color-scheme="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
 body.phpbb-dark .forumportal-nav-standard--portal > a.forumportal-nav-button {
 	border-color: #105289;
 	background: #105289;
