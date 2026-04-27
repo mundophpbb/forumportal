@@ -143,67 +143,67 @@ class main_module
 
             if (!$errors)
             {
-                set_config('forumportal_enabled', $enabled);
-                set_config('forumportal_home_enabled', $home_enabled);
-                set_config('forumportal_noindex_paginated', $noindex_paginated);
-                set_config('forumportal_source_forum', implode(',', $source_forums));
-                set_config('forumportal_auto_include_source', $auto_include_source);
-                set_config('forumportal_topics_per_page', $topics_per_page);
-                set_config('forumportal_excerpt_limit', $excerpt_limit);
-                set_config('forumportal_page_title', $page_title);
-                set_config('forumportal_nav_title', $nav_title);
-                set_config('forumportal_meta_description', $meta_description);
-                set_config('forumportal_default_image', $default_image);
-                set_config('forumportal_fixed_topic_id', $fixed_topic_id);
-                set_config('forumportal_date_format', $date_format);
-                set_config('forumportal_typography_style', $typography_style);
-                set_config('forumportal_visual_mode', $visual_mode);
-                set_config('forumportal_posts_layout', $posts_layout);
-                set_config('forumportal_dark_compat_mode', $dark_compat_mode);
-                set_config('forumportal_story_icon_mode', $story_icon_mode);
-                set_config('forumportal_open_forum_color', $open_forum_color);
-                set_config('forumportal_block_order_notices', $block_order_notices);
-                set_config('forumportal_block_order_headlines', $block_order_headlines);
-                set_config('forumportal_block_order_top_contributors', $block_order_top_contributors);
-                set_config('forumportal_block_order_polls', $block_order_polls);
-                set_config('forumportal_block_order_most_read', $block_order_most_read);
-                set_config('forumportal_block_order_most_commented', $block_order_most_commented);
-                set_config('forumportal_block_order_custom_html', $block_order_custom_html);
-                set_config('forumportal_show_custom_links', $show_custom_links);
-                set_config('forumportal_block_order_custom_links', $block_order_custom_links);
-                set_config('forumportal_custom_links_title', $custom_links_title);
-                set_config('forumportal_header_mode', $header_mode);
-                set_config('forumportal_header_image', $header_image);
-                set_config('forumportal_header_title', $header_title);
-                set_config('forumportal_header_subtitle', $header_subtitle);
-                set_config('forumportal_header_height', $header_height);
-                set_config('forumportal_headlines_limit', $headlines_limit);
-                set_config('forumportal_most_read_limit', $most_read_limit);
-                set_config('forumportal_most_commented_limit', $most_commented_limit);
-                set_config('forumportal_most_read_days', $most_read_days);
-                set_config('forumportal_most_commented_days', $most_commented_days);
-                set_config('forumportal_top_contributors_limit', $top_contributors_limit);
-                set_config('forumportal_top_contributors_days', $top_contributors_days);
-                set_config('forumportal_polls_limit', $polls_limit);
-                set_config('forumportal_polls_days', $polls_days);
-                set_config('forumportal_poll_topic_id', $poll_topic_id);
-                set_config('forumportal_polls_mode', $polls_mode);
-                set_config('forumportal_notices_limit', $notices_limit);
-                set_config('forumportal_show_author', $show_author);
-                set_config('forumportal_show_date', $show_date);
-                set_config('forumportal_show_views', $show_views);
-                set_config('forumportal_show_headlines', $show_headlines);
-                set_config('forumportal_show_most_read', $show_most_read);
-                set_config('forumportal_show_most_commented', $show_most_commented);
-                set_config('forumportal_show_top_contributors', $show_top_contributors);
-                set_config('forumportal_show_polls', $show_polls);
-                set_config('forumportal_allow_poll_vote', $allow_poll_vote);
-                set_config('forumportal_allow_poll_guest_vote', $allow_poll_guest_vote);
-                set_config('forumportal_show_notices', $show_notices);
-                set_config('forumportal_show_hero_excerpt', $show_hero_excerpt);
-                set_config('forumportal_prevent_duplicate_topics', $prevent_duplicate_topics);
-                set_config('forumportal_custom_html_title', $custom_html_title);
-                set_config('forumportal_custom_html_position', $custom_html_position);
+                $config->set('forumportal_enabled', $enabled);
+                $config->set('forumportal_home_enabled', $home_enabled);
+                $config->set('forumportal_noindex_paginated', $noindex_paginated);
+                $config->set('forumportal_source_forum', implode(',', $source_forums));
+                $config->set('forumportal_auto_include_source', $auto_include_source);
+                $config->set('forumportal_topics_per_page', $topics_per_page);
+                $config->set('forumportal_excerpt_limit', $excerpt_limit);
+                $config->set('forumportal_page_title', $page_title);
+                $config->set('forumportal_nav_title', $nav_title);
+                $config->set('forumportal_meta_description', $meta_description);
+                $config->set('forumportal_default_image', $default_image);
+                $config->set('forumportal_fixed_topic_id', $fixed_topic_id);
+                $config->set('forumportal_date_format', $date_format);
+                $config->set('forumportal_typography_style', $typography_style);
+                $config->set('forumportal_visual_mode', $visual_mode);
+                $config->set('forumportal_posts_layout', $posts_layout);
+                $config->set('forumportal_dark_compat_mode', $dark_compat_mode);
+                $config->set('forumportal_story_icon_mode', $story_icon_mode);
+                $config->set('forumportal_open_forum_color', $open_forum_color);
+                $config->set('forumportal_block_order_notices', $block_order_notices);
+                $config->set('forumportal_block_order_headlines', $block_order_headlines);
+                $config->set('forumportal_block_order_top_contributors', $block_order_top_contributors);
+                $config->set('forumportal_block_order_polls', $block_order_polls);
+                $config->set('forumportal_block_order_most_read', $block_order_most_read);
+                $config->set('forumportal_block_order_most_commented', $block_order_most_commented);
+                $config->set('forumportal_block_order_custom_html', $block_order_custom_html);
+                $config->set('forumportal_show_custom_links', $show_custom_links);
+                $config->set('forumportal_block_order_custom_links', $block_order_custom_links);
+                $config->set('forumportal_custom_links_title', $custom_links_title);
+                $config->set('forumportal_header_mode', $header_mode);
+                $config->set('forumportal_header_image', $header_image);
+                $config->set('forumportal_header_title', $header_title);
+                $config->set('forumportal_header_subtitle', $header_subtitle);
+                $config->set('forumportal_header_height', $header_height);
+                $config->set('forumportal_headlines_limit', $headlines_limit);
+                $config->set('forumportal_most_read_limit', $most_read_limit);
+                $config->set('forumportal_most_commented_limit', $most_commented_limit);
+                $config->set('forumportal_most_read_days', $most_read_days);
+                $config->set('forumportal_most_commented_days', $most_commented_days);
+                $config->set('forumportal_top_contributors_limit', $top_contributors_limit);
+                $config->set('forumportal_top_contributors_days', $top_contributors_days);
+                $config->set('forumportal_polls_limit', $polls_limit);
+                $config->set('forumportal_polls_days', $polls_days);
+                $config->set('forumportal_poll_topic_id', $poll_topic_id);
+                $config->set('forumportal_polls_mode', $polls_mode);
+                $config->set('forumportal_notices_limit', $notices_limit);
+                $config->set('forumportal_show_author', $show_author);
+                $config->set('forumportal_show_date', $show_date);
+                $config->set('forumportal_show_views', $show_views);
+                $config->set('forumportal_show_headlines', $show_headlines);
+                $config->set('forumportal_show_most_read', $show_most_read);
+                $config->set('forumportal_show_most_commented', $show_most_commented);
+                $config->set('forumportal_show_top_contributors', $show_top_contributors);
+                $config->set('forumportal_show_polls', $show_polls);
+                $config->set('forumportal_allow_poll_vote', $allow_poll_vote);
+                $config->set('forumportal_allow_poll_guest_vote', $allow_poll_guest_vote);
+                $config->set('forumportal_show_notices', $show_notices);
+                $config->set('forumportal_show_hero_excerpt', $show_hero_excerpt);
+                $config->set('forumportal_prevent_duplicate_topics', $prevent_duplicate_topics);
+                $config->set('forumportal_custom_html_title', $custom_html_title);
+                $config->set('forumportal_custom_html_position', $custom_html_position);
 
                 $this->save_custom_html($db, $table_prefix, $custom_html);
                 $this->save_custom_links($db, $table_prefix, $custom_links);
@@ -314,7 +314,7 @@ class main_module
             $formats = $user->lang['dateformats'];
         }
 
-        $options .= '<option value=""' . ($current_format === '' ? ' selected="selected"' : '') . '>' . htmlspecialchars($user->lang('ACP_FORUMPORTAL_DATE_FORMAT_DEFAULT')) . '</option>';
+        $options .= '<option value=""' . ($current_format === '' ? ' selected="selected"' : '') . '>' . utf8_htmlspecialchars($user->lang('ACP_FORUMPORTAL_DATE_FORMAT_DEFAULT')) . '</option>';
 
         foreach ($formats as $key => $value)
         {
@@ -331,12 +331,12 @@ class main_module
 
             $selected = ($current_format === $format) ? ' selected="selected"' : '';
             $label = ($example !== '') ? ($format . ' — ' . $example) : $format;
-            $options .= '<option value="' . htmlspecialchars($format) . '"' . $selected . '>' . htmlspecialchars($label) . '</option>';
+            $options .= '<option value="' . utf8_htmlspecialchars($format) . '"' . $selected . '>' . utf8_htmlspecialchars($label) . '</option>';
         }
 
         if ($current_format !== '' && !in_array($current_format, $formats, true))
         {
-            $options .= '<option value="' . htmlspecialchars($current_format) . '" selected="selected">' . htmlspecialchars($current_format . ' — ' . $user->lang('ACP_FORUMPORTAL_DATE_FORMAT_CUSTOM')) . '</option>';
+            $options .= '<option value="' . utf8_htmlspecialchars($current_format) . '" selected="selected">' . utf8_htmlspecialchars($current_format . ' — ' . $user->lang('ACP_FORUMPORTAL_DATE_FORMAT_CUSTOM')) . '</option>';
         }
 
         return $options;
@@ -396,7 +396,7 @@ class main_module
             }
 
             $forum_id = (int) $row['forum_id'];
-            $options .= '<option value="' . $forum_id . '"' . (isset($selected_lookup[$forum_id]) ? ' selected="selected"' : '') . '>' . htmlspecialchars($row['forum_name']) . '</option>';
+            $options .= '<option value="' . $forum_id . '"' . (isset($selected_lookup[$forum_id]) ? ' selected="selected"' : '') . '>' . utf8_htmlspecialchars($row['forum_name']) . '</option>';
         }
         $db->sql_freeresult($result);
 

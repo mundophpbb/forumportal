@@ -106,7 +106,7 @@ class main
             include_once($this->phpbb_root_path . 'includes/functions_content.' . $this->php_ext);
         }
 
-        if (!function_exists('phpbb_get_user_avatar') && !function_exists('get_user_avatar'))
+        if (!function_exists('phpbb_get_avatar'))
         {
             include_once($this->phpbb_root_path . 'includes/functions_display.' . $this->php_ext);
         }
@@ -488,10 +488,18 @@ class main
             'S_FORUMPORTAL_NOINDEX_ROBOTS'   => ($noindex_paginated && $start > 0),
         ));
 
+        /**
+         * Allow extensions to modify the Forum Portal page data before the portal template is rendered.
+         *
+         * @event mundophpbb.forumportal.controller_before_render
+         * @var string page_title The portal page title.
+         * @since 1.2.15
+         */
         $event = new \phpbb\event\data(array(
             'page_title' => $page_title,
         ));
         $this->dispatcher->dispatch('mundophpbb.forumportal.controller_before_render', $event);
+        $page_title = $event['page_title'];
 
         return $this->helper->render('portal_body.html', $page_title);
     }
@@ -533,7 +541,7 @@ class main
                 INNER JOIN ' . USERS_TABLE . ' u
                     ON u.user_id = t.topic_poster
                 ' . $this->get_portal_topic_join_sql() . '
-                WHERE t.topic_id = ' . $topic_id . '
+                WHERE t.topic_id = ' . (int) $topic_id . '
                     AND ' . $this->db->sql_in_set('t.forum_id', $forum_ids) . '
                     AND t.topic_visibility = ' . ITEM_APPROVED . '
                     AND ' . $this->get_portal_topic_visibility_sql();
@@ -617,7 +625,7 @@ class main
 
             $sql = 'SELECT icons_url, icons_width, icons_height
                 FROM ' . ICONS_TABLE . '
-                WHERE icons_id = ' . $icon_id;
+                WHERE icons_id = ' . (int) $icon_id;
             $result = $this->db->sql_query_limit($sql, 1);
             $row = $this->db->sql_fetchrow($result);
             $this->db->sql_freeresult($result);
@@ -639,7 +647,7 @@ class main
                     $size .= ' height="' . $height . '"';
                 }
 
-                $this->topic_icon_cache[$icon_id] = '<img src="' . htmlspecialchars($src, ENT_COMPAT, 'UTF-8') . '"' . $size . ' alt="" loading="lazy" />';
+                $this->topic_icon_cache[$icon_id] = '<img src="' . utf8_htmlspecialchars($src, ENT_COMPAT, 'UTF-8') . '"' . $size . ' alt="" loading="lazy" />';
             }
         }
 
@@ -660,19 +668,16 @@ class main
 
         $alt = isset($row['username']) ? (string) $row['username'] : 'USER_AVATAR';
 
-        if (function_exists('phpbb_get_user_avatar'))
-        {
-            return phpbb_get_user_avatar(array(
-                'avatar'        => $avatar,
-                'avatar_type'   => $avatar_type,
-                'avatar_width'  => $avatar_width,
-                'avatar_height' => $avatar_height,
-            ), $alt, false, true);
-        }
+        $avatar_row = array(
+            'avatar'        => $avatar,
+            'avatar_type'   => $avatar_type,
+            'avatar_width'  => $avatar_width,
+            'avatar_height' => $avatar_height,
+        );
 
-        if (function_exists('get_user_avatar'))
+        if (function_exists('phpbb_get_avatar'))
         {
-            return get_user_avatar($avatar, $avatar_type, $avatar_width, $avatar_height, $alt, false, true);
+            return phpbb_get_avatar($avatar_row, $alt, false);
         }
 
         return '';
@@ -929,7 +934,7 @@ class main
         $start = ($page - 1) * (int) $per_page;
         $url = ($start > 0) ? ($base_url . '?start=' . $start) : $base_url;
 
-        return '<a href="' . htmlspecialchars($url) . '">' . $page . '</a>';
+        return '<a href="' . utf8_htmlspecialchars($url) . '">' . $page . '</a>';
     }
 
     protected function build_page_number($total_items, $per_page, $start)
@@ -1189,7 +1194,7 @@ class main
             FROM ' . TOPICS_TABLE . ' t
             INNER JOIN ' . FORUMS_TABLE . ' f
                 ON f.forum_id = t.forum_id
-            WHERE t.topic_id = ' . $topic_id . '
+            WHERE t.topic_id = ' . (int) $topic_id . '
                 AND ' . $this->db->sql_in_set('t.forum_id', $forum_ids) . '
                 AND t.topic_visibility = ' . ITEM_APPROVED . '
                 AND t.topic_moved_id = 0' . "
@@ -1252,14 +1257,28 @@ class main
             {
                 $sql = 'UPDATE ' . POLL_OPTIONS_TABLE . '
                     SET poll_option_total = CASE WHEN poll_option_total > 0 THEN poll_option_total - 1 ELSE 0 END
-                    WHERE topic_id = ' . $topic_id . '
+                    WHERE topic_id = ' . (int) $topic_id . '
                         AND poll_option_id = ' . (int) $old_option_id;
                 $this->db->sql_query($sql);
             }
 
-            $sql = 'DELETE FROM ' . POLL_VOTES_TABLE . '
-                WHERE topic_id = ' . $topic_id . '
-                    AND ' . $this->get_poll_voter_sql();
+            $anonymous_id = defined('ANONYMOUS') ? (int) ANONYMOUS : 1;
+            $user_id = (int) $this->user->data['user_id'];
+
+            if ($user_id !== $anonymous_id)
+            {
+                $sql = 'DELETE FROM ' . POLL_VOTES_TABLE . '
+                    WHERE topic_id = ' . (int) $topic_id . '
+                        AND vote_user_id = ' . (int) $user_id;
+            }
+            else
+            {
+                $sql = 'DELETE FROM ' . POLL_VOTES_TABLE . '
+                    WHERE topic_id = ' . (int) $topic_id . '
+                        AND vote_user_id = ' . (int) $anonymous_id . "
+                        AND vote_user_ip = '" . $this->db->sql_escape((string) $this->user->ip) . "'";
+            }
+
             $this->db->sql_query($sql);
         }
 
@@ -1267,7 +1286,7 @@ class main
         {
             $sql = 'UPDATE ' . POLL_OPTIONS_TABLE . '
                 SET poll_option_total = poll_option_total + 1
-                WHERE topic_id = ' . $topic_id . '
+                WHERE topic_id = ' . (int) $topic_id . '
                     AND poll_option_id = ' . (int) $option_id;
             $this->db->sql_query($sql);
 
@@ -1466,10 +1485,25 @@ class main
             return $vote_ids;
         }
 
-        $sql = 'SELECT poll_option_id
-            FROM ' . POLL_VOTES_TABLE . '
-            WHERE topic_id = ' . (int) $topic_id . '
-                AND ' . $this->get_poll_voter_sql();
+        $anonymous_id = defined('ANONYMOUS') ? (int) ANONYMOUS : 1;
+        $user_id = (int) $this->user->data['user_id'];
+
+        if ($user_id !== $anonymous_id)
+        {
+            $sql = 'SELECT poll_option_id
+                FROM ' . POLL_VOTES_TABLE . '
+                WHERE topic_id = ' . (int) $topic_id . '
+                    AND vote_user_id = ' . (int) $user_id;
+        }
+        else
+        {
+            $sql = 'SELECT poll_option_id
+                FROM ' . POLL_VOTES_TABLE . '
+                WHERE topic_id = ' . (int) $topic_id . '
+                    AND vote_user_id = ' . (int) $anonymous_id . "
+                    AND vote_user_ip = '" . $this->db->sql_escape((string) $this->user->ip) . "'";
+        }
+
         $result = $this->db->sql_query($sql);
 
         while ($row = $this->db->sql_fetchrow($result))
@@ -1508,19 +1542,6 @@ class main
         return (int) $status === 1;
     }
 
-    protected function get_poll_voter_sql()
-    {
-        $anonymous_id = defined('ANONYMOUS') ? (int) ANONYMOUS : 1;
-        $user_id = (int) $this->user->data['user_id'];
-
-        if ($user_id !== $anonymous_id)
-        {
-            return 'vote_user_id = ' . $user_id;
-        }
-
-        return "vote_user_id = " . $anonymous_id . " AND vote_user_ip = '" . $this->db->sql_escape((string) $this->user->ip) . "'";
-    }
-
     protected function normalise_poll_option_ids($option_ids)
     {
         if (!is_array($option_ids))
@@ -1552,7 +1573,7 @@ class main
             $text = censor_text($text);
         }
 
-        return htmlspecialchars($text, ENT_COMPAT, 'UTF-8');
+        return utf8_htmlspecialchars($text, ENT_COMPAT, 'UTF-8');
     }
 
     protected function build_period_label($days)

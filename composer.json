@@ -3,7 +3,7 @@
   "type": "phpbb-extension",
   "description": "Transforma um fórum específico em uma página portal estilo revista para phpBB.",
   "homepage": "https://mundophpbb.com",
-  "version": "1.2.14",
+  "version": "1.2.16",
   "keywords": [
     "phpbb",
     "portal",
@@ -11,7 +11,7 @@
     "magazine",
     "homepage"
   ],
-  "license": "GPL-2.0-or-later",
+  "license": "GPL-2.0-only",
   "authors": [
     {
       "name": "Mundo phpBB",
