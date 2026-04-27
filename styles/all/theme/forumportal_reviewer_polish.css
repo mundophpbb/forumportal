@@ -643,3 +643,41 @@ body.dark .forumportal-sidebar .forumportal-sidecard__period,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus {
 	background: rgba(16, 82, 137, .08) !important;
 }
+
+/* Local fix: clean sidebar hover layering in ProSilver visual mode.
+   Keep normal title/link colours inherited, use one light hover background only,
+   and apply the phpBB/prosilver red only to the title text on hover/focus. */
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-headlines__item:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostread__item:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostcommented__item:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__item:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-contributors__item:hover {
+	background: transparent !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a {
+	color: inherit !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:focus {
+	background: rgba(16, 82, 137, .08) !important;
+	color: inherit !important;
+	text-decoration: none !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover .forumportal-sidebar__block-title,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus .forumportal-sidebar__block-title,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:focus {
+	color: #bc2a4d !important;
+	text-decoration: underline !important;
+}
