@@ -644,21 +644,56 @@ body.dark .forumportal-sidebar .forumportal-sidecard__period,
 	background: rgba(16, 82, 137, .08) !important;
 }
 
-/* Local fix: clean sidebar hover layering in ProSilver visual mode.
-   Keep normal title/link colours inherited, use one light hover background only,
-   and apply the phpBB/prosilver red only to the title text on hover/focus. */
+/* Optional future visual polish: keep sidebar hover as a single, lighter layer.
+   This preserves the current link colour behavior while avoiding the darker/double background effect. */
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-headlines__item:hover,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostread__item:hover,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostcommented__item:hover,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__item:hover,
-.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-contributors__item:hover {
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__item:hover {
 	background: transparent !important;
 }
 
-.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link,
-.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link,
-.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a {
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus {
+	background: #f7fbff !important;
 	color: inherit !important;
+	text-decoration: none !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover .forumportal-sidebar__block-title,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus .forumportal-sidebar__block-title {
+	color: inherit !important;
+	text-decoration: underline;
+}
+
+
+/* Future maintenance CSS cleanup: one predictable hover layer for ProSilver-style view.
+   - Parent sidebar rows stay transparent to avoid double background layers.
+   - The clickable block receives one light hover background.
+   - Links keep the normal style colour by default.
+   - Only hover/focus states use the phpBB/prosilver red highlight. */
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-headlines__item:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostread__item:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostcommented__item:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__item:hover,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__item:hover {
+	background: transparent !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-headlines__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostread__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-mostcommented__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-notices__link,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link,
+.forumportal-page--visual-prosilver .forumportal-story__title a,
+.forumportal-page--visual-prosilver .forumportal-hero__title a,
+.forumportal-page--visual-prosilver .forumportal-card__title a {
+	color: inherit !important;
+	text-decoration: none !important;
 }
 
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover,
@@ -667,9 +702,10 @@ body.dark .forumportal-sidebar .forumportal-sidecard__period,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:hover,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:focus {
-	background: rgba(16, 82, 137, .08) !important;
+	background: #f7fbff !important;
 	color: inherit !important;
 	text-decoration: none !important;
+	outline: 0;
 }
 
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover .forumportal-sidebar__block-title,
@@ -677,7 +713,25 @@ body.dark .forumportal-sidebar .forumportal-sidecard__period,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:hover,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-custom-links__link:focus,
 .forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:hover,
-.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:focus {
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-poll__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-story__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-story__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-hero__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-hero__title a:focus,
+.forumportal-page--visual-prosilver .forumportal-card__title a:hover,
+.forumportal-page--visual-prosilver .forumportal-card__title a:focus {
 	color: #bc2a4d !important;
 	text-decoration: underline !important;
+}
+
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover .forumportal-headlines__meta,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus .forumportal-headlines__meta,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover .forumportal-mostread__meta,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus .forumportal-mostread__meta,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover .forumportal-mostcommented__meta,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus .forumportal-mostcommented__meta,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:hover .forumportal-notices__meta,
+.forumportal-page--visual-prosilver .forumportal-sidebar .forumportal-sidebar__block-link:focus .forumportal-notices__meta {
+	color: #777 !important;
+	text-decoration: none !important;
 }
