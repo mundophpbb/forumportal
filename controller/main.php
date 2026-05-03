@@ -278,6 +278,11 @@ class main
         }
 
         $query_limit = $per_page + (($start === 0 && $use_fixed_hero) ? 1 : 0) + 10;
+        // The hero topic consumes one item from the first paginated page.
+        // Without this adjustment, /portal can show hero + $per_page cards,
+        // while /portal?start=$per_page starts from an item already visible
+        // on the first page.
+        $topic_cards_limit = ($use_hero_layout && $start === 0) ? max(0, $per_page - 1) : $per_page;
         $topic_cards_assigned = 0;
         $main_topic_ids = array();
 
@@ -312,7 +317,7 @@ class main
                 continue;
             }
 
-            if ($topic_cards_assigned >= $per_page)
+            if ($topic_cards_assigned >= $topic_cards_limit)
             {
                 break;
             }
