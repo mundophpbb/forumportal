@@ -1,0 +1,32 @@
+<!-- IF S_FORUMPORTAL_NOINDEX_ROBOTS -->
+<meta name="robots" content="noindex,follow">
+<!-- ENDIF -->
+
+<!-- IF S_FORUMPORTAL_META_DESCRIPTION -->
+<meta name="description" content="{FORUMPORTAL_META_DESCRIPTION}">
+<!-- ENDIF -->
+
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_nav.css' %}
+<!-- IF S_FORUMPORTAL_PAGE or S_FORUMPORTAL_FIELDS -->
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_typography.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_header.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_feedback.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_images_layout.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_dark_auto.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_contributors.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_polls.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_theme_compat.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_visual_modes.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_reviewer_polish.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_dark_force.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_responsive.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_block_sync.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_layout_polish.css' %}
+{% INCLUDECSS '@mundophpbb_forumportal/forumportal_dark_hardfix.css' %}
+{% INCLUDEJS '@mundophpbb_forumportal/forumportal_dark_detect.js' %}
+<!-- ENDIF -->
+
+<!-- IF S_FORUMPORTAL_HOME_ENABLED -->
+{% INCLUDEJS '@mundophpbb_forumportal/forumportal_home_breadcrumb.js' %}
+<!-- ENDIF -->

@@ -1,0 +1,82 @@
+/* Forum Portal breadcrumb link intentionally follows the active phpBB style.
+	The Open forum button is styled inside forumportal_reviewer_polish.css. */
+.forumportal-nav-standard .icon {
+	color: inherit;
+}
+
+/* Final polish: keep these links visually native to phpBB while aligning the icon cleanly. */
+.forumportal-nav-standard > a {
+	display: inline-flex;
+	align-items: center;
+	/* gap: 4px; */
+	font-weight: bold;
+}
+
+.forumportal-nav-standard .icon {
+	line-height: 1;
+	vertical-align: middle;
+}
+
+.forumportal-nav-standard span {
+	vertical-align: middle;
+}
+
+
+/* v1.2.10: keep the breadcrumb Portal shortcut visually consistent with the portal "Open forum" button. */
+.forumportal-nav-standard--portal > a.forumportal-nav-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-height: 28px;
+	padding: 5px 12px;
+	border: 1px solid #105289;
+	border-radius: 6px;
+	background: #105289;
+	color: #ffffff !important;
+	font-weight: 700;
+	line-height: 1.2;
+	text-decoration: none !important;
+	box-sizing: border-box;
+}
+
+.forumportal-nav-standard--portal > a.forumportal-nav-button .icon {
+	color: inherit;
+}
+
+.forumportal-nav-standard--portal > a.forumportal-nav-button:hover,
+.forumportal-nav-standard--portal > a.forumportal-nav-button:focus {
+	border-color: #105289;
+	background: #105289;
+	color: #ffffff !important;
+	filter: brightness(.95);
+	text-decoration: none !important;
+}
+
+html.dark .forumportal-nav-standard--portal > a.forumportal-nav-button,
+html[data-theme="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+html[data-color-scheme="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body.dark .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body[data-theme="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body[data-color-scheme="dark" i] .forumportal-nav-standard--portal > a.forumportal-nav-button,
+body.phpbb-dark .forumportal-nav-standard--portal > a.forumportal-nav-button {
+	border-color: #105289;
+	background: #105289;
+	color: #ffffff !important;
+}
+
+
+/* Viewtopic portal action buttons: safe fallback if enabled by permissions/workflow. */
+.forumportal-post-actions-label {
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .03em;
+	text-transform: uppercase;
+	opacity: .75;
+}
+
+.post-buttons .forumportal-post-action--active,
+.post-buttons .forumportal-post-action--active:hover {
+	border-color: #bc2a4d;
+	color: #bc2a4d;
+}

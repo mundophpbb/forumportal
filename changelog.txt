@@ -1,0 +1,310 @@
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_visual_modes.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_typography.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_theme_compat.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_reviewer_polish.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_responsive.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_polls.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_nav.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_layout_polish.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_images_layout.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_header.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_feedback.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_dark_hardfix.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_dark_force.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_dark_auto.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_contributors.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal_block_sync.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/theme/forumportal.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/template/portal_body.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/template/event/viewtopic_body_post_buttons_before.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/template/event/posting_editor_options_prepend.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/template/event/overall_header_stylesheets_after.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/template/event/overall_header_head_append.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em styles/all/template/event/overall_header_breadcrumbs_before.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1022_random_polls.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1021_meta_description.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1020_seo_noindex_paginated.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1019_prevent_duplicate_topics.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1018_custom_links_panel.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1017_separate_button_colors.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1016_reviewer_nav_icons.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1015_posts_layout_images.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1014_poll_permission_review.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1013_visual_mode.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1012_headlines_visibility_mobile.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1011_sidebar_order.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1010_dark_compat_mode.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1009_custom_header.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1008_typography_style.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1007_poll_portal.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1006_top_contributors.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1005_feedback_tuning.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1004_auto_include_source.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1003_custom_html_storage.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1002_portal_order.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1001_acl_quickactions.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em migrations/v1000_initial.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em language/pt_br/info_acp_forumportal.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em language/pt_br/common.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em language/pl/info_acp_forumportal.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em language/pl/common.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em language/en/info_acp_forumportal.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em language/en/common.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em ext.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em event/listener.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em controller/main.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_visual_modes.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_typography.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_theme_compat.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_reviewer_polish.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_responsive.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_polls.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_nav.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_images_layout.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_header.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_feedback.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_dark_force.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_dark_auto.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal_contributors.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/theme/forumportal.css (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/template/portal_body.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/template/event/viewtopic_body_post_buttons_before.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/template/event/posting_editor_options_prepend.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/template/event/overall_header_stylesheets_after.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/template/event/overall_header_head_append.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em all/template/event/overall_header_breadcrumbs_before.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em adm/style/acp_forumportal_body.html (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em acp/main_module.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:53] Validador phpBB: correções seguras aplicadas em acp/main_info.php (line-ending-crlf).
+----------------------------------------
+[24/11/2026 21:52] Importação de ZIP: 1 arquivo(s) novo(s), 8 atualizado(s)
+----------------------------------------
+Version 1.2.28
+- Restyle the ACP with the Download Center palette, horizontal tabs and settings cards.
+
+Version 1.2.27
+- Add the native phpBB logout button to the top of the portal sidebar for signed-in users.
+
+Version 1.2.26
+- Show the guest login form even when no portal source forums are readable.
+
+Version 1.2.25
+- Add the native phpBB login form as the first portal sidebar block for guests.
+
+Version 1.2.24
+- Preserve the Birthday Balloons ACP preview when the portal is the board home.
+- Apply the optional Revolution Appearance palette and typography to the portal.
+
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1022_random_polls.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1021_meta_description.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1020_seo_noindex_paginated.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1019_prevent_duplicate_topics.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1018_custom_links_panel.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1017_separate_button_colors.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1016_reviewer_nav_icons.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1015_posts_layout_images.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1014_poll_permission_review.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1013_visual_mode.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1012_headlines_visibility_mobile.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1011_sidebar_order.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1010_dark_compat_mode.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1009_custom_header.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1008_typography_style.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1007_poll_portal.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1006_top_contributors.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1005_feedback_tuning.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1004_auto_include_source.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1003_custom_html_storage.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1002_portal_order.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1001_acl_quickactions.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em migrations/v1000_initial.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em language/pt_br/info_acp_forumportal.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em language/pt_br/common.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em language/pl/info_acp_forumportal.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em language/pl/common.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em language/en/info_acp_forumportal.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em language/en/common.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em event/listener.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em controller/main.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em composer.json (coding-indent-tabs-json).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em acp/main_module.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:06] Validador phpBB: correções seguras aplicadas em acp/main_info.php (coding-indent-tabs-php).
+----------------------------------------
+[12/11/2026 01:05] Importação de ZIP: 72 arquivo(s) novo(s), 13 atualizado(s)
+----------------------------------------
+[12/11/2026 00:46] Importação de ZIP: 0 arquivo(s) novo(s), 1 atualizado(s)
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em migrations/v1007_poll_portal.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em migrations/v1006_top_contributors.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em migrations/v1005_feedback_tuning.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em migrations/v1004_auto_include_source.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em migrations/v1003_custom_html_storage.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em migrations/v1002_portal_order.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em migrations/v1001_acl_quickactions.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em migrations/v1000_initial.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em event/listener.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em controller/main.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em composer.json (coding-indent-tabs-json).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em acp/main_module.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Validador phpBB: correções seguras aplicadas em acp/main_info.php (coding-indent-tabs-php).
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): migrations/v1007_poll_portal.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): migrations/v1006_top_contributors.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): migrations/v1005_feedback_tuning.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): migrations/v1004_auto_include_source.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): migrations/v1003_custom_html_storage.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): migrations/v1002_portal_order.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): migrations/v1001_acl_quickactions.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): migrations/v1000_initial.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): event/listener.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): controller/main.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): config/services.yml
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): config/routing.yml
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): acp/main_module.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): acp/main_info.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): license.txt
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): ext.php
+----------------------------------------
+[11/11/2026 20:53] Novo arquivo (Upload): composer.json
+----------------------------------------
+==================================================
+PROJETO CRIADO EM 11/11/2026 20:52
+==================================================
+
